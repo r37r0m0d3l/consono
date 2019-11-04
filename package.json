@@ -1,0 +1,34 @@
+{
+  "name": "consono",
+  "version": "0.0.1",
+  "description": "Dumps information about a variable",
+  "main": "index.js",
+  "scripts": {
+    "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- consono.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r37r0m0d3l/consono.git"
+  },
+  "keywords": [
+    "console",
+    "debug",
+    "echo",
+    "log",
+    "print",
+    "variable"
+  ],
+  "author": "Anton Trofimenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/r37r0m0d3l/consono/issues"
+  },
+  "homepage": "https://github.com/r37r0m0d3l/consono#readme",
+  "devDependencies": {
+    "eslint": "6.6.0",
+    "eslint-config-prettier": "6.5.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "prettier": "1.18.2",
+    "terser": "4.3.9"
+  }
+}
