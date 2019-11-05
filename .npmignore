@@ -3,6 +3,7 @@
 /.eslintrc.json
 /.gitattributes
 /.gitignore
+/.idea
 /.npmignore
 /.npmrc
 /.nvmrc
@@ -10,7 +11,6 @@
 /.prettierrc
 /consono.js
 /LICENSE
-/README.md
 /README.md
 /temp
 /test

@@ -1,6 +1,6 @@
 {
   "name": "consono",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Dumps information about a variable",
   "main": "index.js",
   "scripts": {
