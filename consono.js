@@ -366,7 +366,7 @@ class Consono {
         }
         break;
     }
-    return `${type}${type.length ? (value.length ? " • " : "") : ""}${value}`;
+    return `${type}${type.length ? " • " : ""}${value}`;
   }
   formatArguments(value) {
     return ["arguments", this.toPrintable(value)];

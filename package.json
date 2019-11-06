@@ -1,9 +1,10 @@
 {
   "name": "consono",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Dumps information about a variable",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "build": "npm run compile",
     "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- consono.js"
   },
@@ -29,6 +30,7 @@
     "eslint": "6.6.0",
     "eslint-config-prettier": "6.5.0",
     "eslint-plugin-prettier": "3.1.1",
+    "jest": "24.9.0",
     "prettier": "1.18.2",
     "terser": "4.3.9"
   }
