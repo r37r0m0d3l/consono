@@ -3,8 +3,8 @@ Consono
 
 Dumps information about a variable.
 
-[![Version](http://img.shields.io/npm/v/fallback-local-storage.svg)](https://www.npmjs.org/package/consono)
-[![Build Status](https://travis-ci.org/r37r0m0d3l/fallback-local-storage.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/consono)
+[![Version](http://img.shields.io/npm/v/consono.svg)](https://www.npmjs.org/package/consono)
+[![Build Status](https://travis-ci.org/r37r0m0d3l/consono.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/consono)
 
 ## Installation
 
