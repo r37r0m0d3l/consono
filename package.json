@@ -1,9 +1,10 @@
 {
   "name": "consono",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Dumps information about a variable",
   "main": "index.js",
   "scripts": {
+    "build": "npm run compile",
     "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- consono.js"
   },
   "repository": {
