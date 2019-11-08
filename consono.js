@@ -136,12 +136,24 @@ function getType(value) {
 }
 
 class Consono {
+  /**
+   * @public
+   * @param {object=} options
+   */
   constructor(options = {}) {
+    this.setOptions(options);
+  }
+  /**
+   * @public
+   * @param {object=} options
+   */
+  setOptions(options = {}) {
     const opts = {
       ...{
         arrayMaxElements: 99,
         assignSymbol: "→",
         clear: false,
+        console: true,
         depth: 20,
         exit: false,
         indent: "ˑˑ",
@@ -153,17 +165,28 @@ class Consono {
       },
       ...options,
     };
-    this.depth = opts.depth;
-    this.indentType = opts.indent;
-    this.indent = this.indentType.repeat(opts.indentPad);
     this.arrayMaxElements = opts.arrayMaxElements;
     this.arrow = opts.assignSymbol;
+    this.clear = opts.clear;
+    this.console = opts.console;
+    this.currentDepth = 0;
+    this.depth = opts.depth;
+    this.exit = opts.exit;
+    this.indentType = opts.indent;
+    this.indent = this.indentType.repeat(opts.indentPad);
     this.objectMaxProps = opts.objectMaxProps;
     this.quotesEnd = opts.quotesEnd;
     this.quotesStart = opts.quotesStart;
     this.stringMaxLength = opts.stringMaxLength;
-    this.currentDepth = 0;
   }
+  /**
+   * @protected
+   * @param {*} value
+   * @param {string=} indent
+   * @param {boolean|string=true} describe
+   * @param {string=""} subType
+   * @returns {string}
+   */
   toPrintable(value, indent = "", describe = true, subType = "") {
     let print = "";
     let startsWith = "";
@@ -249,6 +272,13 @@ class Consono {
     }
     return `${startsWith}${print}${endsWith}`;
   }
+  /**
+   * @protected
+   * @param {string} indent
+   * @param {*} originalValue
+   * @param {boolean|string=true} describe
+   * @returns {string}
+   */
   formatValue(indent, originalValue, describe = true) {
     let value = "";
     let type = getType(originalValue);
@@ -368,25 +398,62 @@ class Consono {
     }
     return `${type}${type.length ? " • " : ""}${value}`;
   }
+  /**
+   * @protected
+   * @param {arguments} value
+   * @returns {[string, string]}
+   */
   formatArguments(value) {
     return ["arguments", this.toPrintable(value)];
   }
+  /**
+   * @protected
+   * @param {BigInteger} value
+   * @returns {[string, string]}
+   */
   formatBigInt(value) {
     return ["number bigint", value];
   }
+  /**
+   * @protected
+   * @param {boolean} value
+   * @returns {[string, string]}
+   */
   formatBoolean(value) {
-    return ["boolean", value];
+    return ["boolean", `${value}`];
   }
+  /**
+   * @protected
+   * @param {string} tag
+   * @param {buffer} value
+   * @returns {[string, string]}
+   */
   formatBuffer(tag, value) {
     const type = TAG_ARRAY_BUFFER ? "array buffer" : "array buffer shared";
     return [type, `bytes: ${value.byteLength}`];
   }
+  /**
+   * @protected
+   * @param {Date} value
+   * @returns {[string, string]}
+   */
   formatDate(value) {
     return ["date", value.toISOString() + " • " + value.toString()];
   }
+  /**
+   * @protected
+   * @param {Error} value
+   * @returns {[string, *]}
+   */
   formatError(value) {
     return [`error ${getClass(value)}`, value.message];
   }
+  /**
+   * @protected
+   * @param {string} tag
+   * @param {Function} value
+   * @returns {[string, string]}
+   */
   formatFunction(tag, value) {
     let type = "function";
     switch (tag) {
@@ -410,21 +477,47 @@ class Consono {
         .shift() + ") {…}";
     return [type, source];
   }
+  /**
+   * @protected
+   * @param {GeneratorFunction} value
+   * @returns {[string, string]}
+   */
   formatGenerator(value) {
     return ["generator", "Generator {…}"];
   }
+  /**
+   * @protected
+   * @param {string} tag
+   * @param {global|window} value
+   * @param {string} indent
+   * @returns {[string, string]}
+   */
   formatGlobal(tag, value, indent) {
     return [
       `global ${tag === TAG_WINDOW ? "window" : "this"}`,
       this.toPrintable({ ...value }, `${indent}${this.indent}`),
     ];
   }
+  /**
+   * @protected
+   * @param {Map} value
+   * @returns {[string, string]}
+   */
   formatMap(value) {
     return ["map", this.toPrintable(value)];
   }
+  /**
+   * @protected
+   * @returns {[string, string]}
+   */
   formatNull() {
     return ["empty", "null"];
   }
+  /**
+   * @protected
+   * @param {number} value
+   * @returns {[string, string]}
+   */
   formatNumber(value) {
     let type = "";
     if (Number.isFinite(value)) {
@@ -439,17 +532,37 @@ class Consono {
         type += " negative infinity";
       }
     }
-    return [type, value];
+    return [type, `${value}`];
   }
+  /**
+   * @protected
+   * @param {Promise} value
+   * @returns {[string, string]}
+   */
   formatPromise(value) {
     return ["promise", "Promise {…}"];
   }
+  /**
+   * @protected
+   * @param {RegExp} value
+   * @returns {[string, string]}
+   */
   formatRegexp(value) {
     return [`regexp ${value.flags}`, `${value}`];
   }
+  /**
+   * @protected
+   * @param {Set} value
+   * @returns {[string,string]}
+   */
   formatSet(value) {
     return ["set", this.toPrintable(value)];
   }
+  /**
+   * @protected
+   * @param {string} text
+   * @returns {[string, string]}
+   */
   formatString(text) {
     const stringAsArray = [...text];
     const stringSize = stringAsArray.length;
@@ -464,19 +577,39 @@ class Consono {
     }
     let value = "";
     if (stringLength === stringSize) {
-      value = `${`"${printString || text}"`} (length=${stringLength})`;
+      value = `${`"${printString || text}"`} (length=${stringLength}`;
     } else {
-      value = `${`"${printString || text}"`} (length=${stringLength}, symbols=${stringSize})`;
+      value = `${`"${printString || text}"`} (length=${stringLength}, symbols=${stringSize}`;
+    }
+    if (stringSize > this.stringMaxLength) {
+      value = `${value}, shown=${this.stringMaxLength})`;
+    } else {
+      value = `${value})`;
     }
     clearString(printString);
     return ["string", value];
   }
+  /**
+   * @protected
+   * @param {Symbol} value
+   * @returns {[string, string]}
+   */
   formatSymbol(value) {
     return ["symbol", value.toString()];
   }
+  /**
+   * @protected
+   * @returns {[string, string]}
+   */
   formatUndefined() {
     return ["empty", "undefined"];
   }
+  /**
+   * @protected
+   * @param {string} tag
+   * @param {WeakMap|WeakSet} value
+   * @returns {[string,string]}
+   */
   formatWeak(tag, value) {
     if (tag === TAG_WEAK_MAP) {
       return ["map weak", ""];
@@ -484,6 +617,14 @@ class Consono {
       return ["set weak", ""];
     }
   }
+  /**
+   * @protected
+   * @param paramType
+   * @param {string} indent
+   * @param {number|string} key
+   * @param {*} value
+   * @returns {string}
+   */
   formatAssign(paramType, indent, key, value) {
     let keyPart;
     if (paramType === "map") {
@@ -497,8 +638,59 @@ class Consono {
     }
     return `${indent}${this.indent}${keyPart} ${this.arrow} ${value},\n`;
   }
+  /**
+   * @public
+   * @param {*} any
+   * @returns {undefined|string}
+   */
+  log(any) {
+    if (this.console) {
+      if (this.clear) {
+        clearCli();
+      }
+      console.log(this.toPrintable(any));
+      if (this.exit) {
+        processExit();
+      }
+    } else {
+      return this.toPrintable(any);
+    }
+  }
 }
 
+/**
+ * @public
+ * @param {boolean|object} options
+ * @returns {undefined|string}
+ */
+Consono.factory = function factory(options = true) {
+  const opts = { console: true };
+  if (typeof options === "boolean") {
+    opts.console = options;
+  } else if (options && typeof options === "object") {
+    Object.assign(opts, options);
+  }
+  const instance = new Consono(options);
+  return function consono(any) {
+    if (opts.console) {
+      if (opts.clear) {
+        clearCli();
+      }
+      console.log(instance.toPrintable(any));
+      if (opts.exit) {
+        processExit();
+      }
+    } else {
+      return instance.toPrintable(any);
+    }
+  };
+};
+
+/**
+ * @param {*} any
+ * @param {boolean|object} options
+ * @returns {undefined|string}
+ */
 function consono(any, options = true) {
   const opts = { console: true };
   if (typeof options === "boolean") {
@@ -521,3 +713,7 @@ function consono(any, options = true) {
 }
 
 module.exports.default = consono;
+
+module.exports.consono = consono;
+
+module.exports.Consono = Consono;

@@ -1,7 +1,7 @@
 {
   "name": "consono",
-  "version": "0.0.7",
-  "description": "Dumps information about a variable",
+  "version": "0.0.8",
+  "description": "Better variable inspector for JavaScript",
   "main": "index.js",
   "scripts": {
     "test": "jest",
