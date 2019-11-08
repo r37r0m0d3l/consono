@@ -1,8 +1,8 @@
-const consono = require("../consono.js").default;
+const { consono } = require("../consono.js");
 
 describe("Test collection", () => {
   //#region Value properties
-  consono(globalThis);
+  consono(global || globalThis);
   consono(Infinity);
   consono(Number.POSITIVE_INFINITY);
   consono(Number.NEGATIVE_INFINITY);
