@@ -26,7 +26,7 @@ const { consono } = require("consono");
 ## Options
 
 ```js
-const { Consono } = require("./consono");
+const { Consono } = require("consono");
 const options = {
   clear: true,
   quotesEnd: `”`,
@@ -84,6 +84,10 @@ consono("Some variable", defaultOptions);
 ```
 
 All possible outputs - [try it.](https://npm.runkit.com/consono)
+
+## Examples
+
+![consono](docs/readme/001.png?raw=true "Undefined & NULL")
 
 ## I need help with:
 

@@ -1,3 +1,5 @@
+const chalk = require("chalk");
+
 const TAG_ARGUMENTS = "[object Arguments]";
 const TAG_ARRAY = "[object Array]";
 const TAG_ARRAY_BUFFER = "[object ArrayBuffer]";
@@ -135,6 +137,39 @@ function getType(value) {
   return type;
 }
 
+class Theme {
+  constructor() {
+    this.cli = new chalk.Instance({ level: 3 });
+  }
+  out(value, red = 255, green = 255, blue = 255) {
+    return this.cli.rgb(red, green, blue)(value.toString());
+  }
+  argument(value) {
+    return this.out(value, 253, 151, 31);
+  }
+  boolean(value) {
+    return this.out(value, 174, 129, 255);
+  }
+  comment(value) {
+    return this.out(value, 117, 113, 94);
+  }
+  keyword(value) {
+    return this.out(value, 249, 38, 114);
+  }
+  string(value) {
+    return this.out(value, 166, 226, 46);
+  }
+  number(value) {
+    return this.out(value, 174, 129, 255);
+  }
+  property(value) {
+    return this.out(value, 102, 217, 239);
+  }
+  name(value) {
+    return this.out(value, 230, 219, 116);
+  }
+}
+
 class Consono {
   /**
    * @public
@@ -142,6 +177,7 @@ class Consono {
    */
   constructor(options = {}) {
     this.setOptions(options);
+    this.cli = new Theme();
   }
   /**
    * @public
@@ -195,7 +231,9 @@ class Consono {
     const type = getType(value);
     switch (type) {
       case "array":
-        startsWith = `array${subType.length ? ` ${subType}` : ""} (elements=${value.length}) [\n`;
+        startsWith = `${this.cli.keyword("array")}${
+          subType.length ? ` ${this.cli.keyword(subType)}` : ""
+        } (${this.cli.argument("elements")}=${this.cli.number(value.length)}) [\n`;
         endsWith = `${indent}]`;
         iterationLimit = this.arrayMaxElements;
         break;
@@ -203,7 +241,9 @@ class Consono {
         const origObject = value;
         value = deCycle(value);
         if (describe === true) {
-          startsWith = `object ${getClass(origObject)} (props=${objSize(value)}) {\n`;
+          startsWith = `${this.cli.keyword("object")} ${this.cli.keyword(getClass(origObject))} (${this.cli.argument(
+            "props",
+          )}=${this.cli.number(objSize(value))}) {\n`;
           endsWith = `${indent}}`;
         } else {
           startsWith = `(\n`;
@@ -212,17 +252,19 @@ class Consono {
         iterationLimit = this.objectMaxProps;
         break;
       case "arguments":
-        startsWith = `arguments (arity=${value.length}) [\n`;
+        startsWith = `${this.cli.keyword("arguments")} (${this.cli.argument("arity")}=${this.cli.number(
+          value.length,
+        )}) [\n`;
         endsWith = `${indent}]`;
         iterationLimit = this.arrayMaxElements;
         break;
       case "set":
-        startsWith = `set (size=${value.size}) {\n`;
+        startsWith = `${this.cli.keyword("set")} (${this.cli.argument("size")}=${this.cli.number(value.size)}) {\n`;
         endsWith = `${indent}}`;
         iterationLimit = this.arrayMaxElements;
         break;
       case "map":
-        startsWith = `map (size=${value.size}) {\n`;
+        startsWith = `${this.cli.keyword("map")} (${this.cli.argument("size")}=${this.cli.number(value.size)}) {\n`;
         endsWith = `${indent}}`;
         iterationLimit = this.objectMaxProps;
         break;
@@ -377,10 +419,12 @@ class Consono {
       case "object":
         type = "";
         if (this.currentDepth === this.depth) {
-          value = `${`object ${getClass(originalValue)}`} (props=${objSize(originalValue)})`;
+          value = `${this.cli.keyword("object")} ${this.cli.keyword(getClass(originalValue))} (${this.cli.argument(
+            "props",
+          )}=${this.cli.number(objSize(originalValue))})`;
         } else {
           this.currentDepth += 1;
-          value = this.toPrintable(originalValue, `${indent}${this.indent}`, describe, subType);
+          value = this.toPrintable(originalValue, `${indent}${this.cli.comment(this.indent)}`, describe, subType);
           this.currentDepth -= 1;
         }
         break;
@@ -396,7 +440,7 @@ class Consono {
         }
         break;
     }
-    return `${type}${type.length ? " • " : ""}${value}`;
+    return `${this.cli.keyword(type)}${type.length ? this.cli.comment(" • ") : ""}${value}`;
   }
   /**
    * @protected
@@ -412,7 +456,7 @@ class Consono {
    * @returns {[string, string]}
    */
   formatBigInt(value) {
-    return ["number bigint", value];
+    return ["number bigint", this.cli.number(value)];
   }
   /**
    * @protected
@@ -420,7 +464,7 @@ class Consono {
    * @returns {[string, string]}
    */
   formatBoolean(value) {
-    return ["boolean", `${value}`];
+    return ["boolean", this.cli.boolean(value)];
   }
   /**
    * @protected
@@ -430,7 +474,7 @@ class Consono {
    */
   formatBuffer(tag, value) {
     const type = TAG_ARRAY_BUFFER ? "array buffer" : "array buffer shared";
-    return [type, `bytes: ${value.byteLength}`];
+    return [type, `(${this.cli.argument("bytes")}=${this.cli.number(value.byteLength)})`];
   }
   /**
    * @protected
@@ -438,7 +482,7 @@ class Consono {
    * @returns {[string, string]}
    */
   formatDate(value) {
-    return ["date", value.toISOString() + " • " + value.toString()];
+    return ["date", this.cli.name(value.toISOString() + " • " + value.toString())];
   }
   /**
    * @protected
@@ -446,7 +490,7 @@ class Consono {
    * @returns {[string, *]}
    */
   formatError(value) {
-    return [`error ${getClass(value)}`, value.message];
+    return [`error ${getClass(value)}`, this.cli.string(value.message)];
   }
   /**
    * @protected
@@ -466,7 +510,7 @@ class Consono {
     }
     const name = closureNameExtract(value);
     if (name.length) {
-      type = `${type} ${this.quotesStart}${name}${this.quotesEnd}`;
+      type = `${type} ${this.cli.string(this.quotesStart)}${name}${this.cli.string(this.quotesEnd)}`;
     } else {
       type = `${type} anonymous`;
     }
@@ -475,7 +519,7 @@ class Consono {
         .replace(/\n+/g, "")
         .split(")")
         .shift() + ") {…}";
-    return [type, source];
+    return [type, this.cli.argument(source)];
   }
   /**
    * @protected
@@ -483,7 +527,7 @@ class Consono {
    * @returns {[string, string]}
    */
   formatGenerator(value) {
-    return ["generator", "Generator {…}"];
+    return ["generator", this.cli.argument("Generator {…}")];
   }
   /**
    * @protected
@@ -495,7 +539,7 @@ class Consono {
   formatGlobal(tag, value, indent) {
     return [
       `global ${tag === TAG_WINDOW ? "window" : "this"}`,
-      this.toPrintable({ ...value }, `${indent}${this.indent}`),
+      this.toPrintable({ ...value }, `${indent}${this.cli.comment(this.indent)}`),
     ];
   }
   /**
@@ -511,7 +555,7 @@ class Consono {
    * @returns {[string, string]}
    */
   formatNull() {
-    return ["empty", "null"];
+    return ["empty", this.cli.string("null")];
   }
   /**
    * @protected
@@ -532,7 +576,7 @@ class Consono {
         type += " negative infinity";
       }
     }
-    return [type, `${value}`];
+    return [type, this.cli.number(value)];
   }
   /**
    * @protected
@@ -540,7 +584,7 @@ class Consono {
    * @returns {[string, string]}
    */
   formatPromise(value) {
-    return ["promise", "Promise {…}"];
+    return ["promise", this.cli.argument("Promise {…}")];
   }
   /**
    * @protected
@@ -548,7 +592,7 @@ class Consono {
    * @returns {[string, string]}
    */
   formatRegexp(value) {
-    return [`regexp ${value.flags}`, `${value}`];
+    return [`regexp ${value.flags}`, this.cli.name(value)];
   }
   /**
    * @protected
@@ -577,12 +621,20 @@ class Consono {
     }
     let value = "";
     if (stringLength === stringSize) {
-      value = `${`"${printString || text}"`} (length=${stringLength}`;
+      value = `${this.cli.string(this.quotesStart)}${this.cli.string(printString || text)}${this.cli.string(
+        this.quotesEnd,
+      )} \
+(${this.cli.argument("length")}=${this.cli.number(stringLength)}`;
     } else {
-      value = `${`"${printString || text}"`} (length=${stringLength}, symbols=${stringSize}`;
+      value = `${this.cli.string(this.quotesStart)}${this.cli.string(printString || text)}${this.cli.string(
+        this.quotesEnd,
+      )} \
+(${this.cli.argument("length")}=${this.cli.number(stringLength)}, \
+${this.cli.argument("symbols")}=${this.cli.number(stringSize)}`;
     }
     if (stringSize > this.stringMaxLength) {
-      value = `${value}, shown=${this.stringMaxLength})`;
+      value = `${value}, \
+${this.cli.argument("shown")}=${this.cli.number(this.stringMaxLength)})`;
     } else {
       value = `${value})`;
     }
@@ -602,7 +654,7 @@ class Consono {
    * @returns {[string, string]}
    */
   formatUndefined() {
-    return ["empty", "undefined"];
+    return ["empty", this.cli.string("undefined")];
   }
   /**
    * @protected
@@ -628,15 +680,15 @@ class Consono {
   formatAssign(paramType, indent, key, value) {
     let keyPart;
     if (paramType === "map") {
-      return `${indent}${this.indent}${value},\n`;
+      return `${indent}${this.cli.comment(this.indent)}${value},\n`;
     } else if (paramType === "set") {
-      return `${indent}${this.indent}${this.arrow} ${value},\n`;
+      return `${indent}${this.cli.comment(this.indent)}${this.arrow} ${value},\n`;
     } else if (isNumericKey(key) || (paramType === "array" && typeof key !== "string")) {
-      keyPart = `[${key}]`;
+      keyPart = `${this.cli.argument("[")}${this.cli.name(key)}${this.cli.argument("]")}`;
     } else {
-      keyPart = `${this.quotesStart}${key}${this.quotesEnd}`;
+      keyPart = `${this.cli.argument(this.quotesStart)}${this.cli.name(key)}${this.cli.argument(this.quotesEnd)}`;
     }
-    return `${indent}${this.indent}${keyPart} ${this.arrow} ${value},\n`;
+    return `${indent}${this.cli.comment(this.indent)}${keyPart} ${this.arrow} ${value},\n`;
   }
   /**
    * @public

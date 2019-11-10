@@ -33,5 +33,8 @@
     "jest": "24.9.0",
     "prettier": "1.18.2",
     "terser": "4.3.9"
+  },
+  "dependencies": {
+    "chalk": "3.0.0"
   }
 }
