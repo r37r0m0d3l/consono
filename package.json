@@ -1,6 +1,6 @@
 {
   "name": "consono",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Better variable inspector for JavaScript",
   "main": "index.js",
   "scripts": {

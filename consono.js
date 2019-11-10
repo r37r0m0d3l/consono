@@ -241,9 +241,16 @@ class Consono {
         const origObject = value;
         value = deCycle(value);
         if (describe === true) {
-          startsWith = `${this.cli.keyword("object")} ${this.cli.keyword(getClass(origObject))} (${this.cli.argument(
-            "props",
-          )}=${this.cli.number(objSize(value))}) {\n`;
+          const size = objSize(value);
+          let printSize = "";
+          if (size > this.objectMaxProps) {
+            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)}, ${this.cli.argument(
+              "shown",
+            )}=${this.cli.number(this.objectMaxProps)})`;
+          } else {
+            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)})`;
+          }
+          startsWith = `${this.cli.keyword("object")} ${this.cli.keyword(getClass(origObject))} ${printSize} {\n`;
           endsWith = `${indent}}`;
         } else {
           startsWith = `(\n`;
@@ -419,12 +426,20 @@ class Consono {
       case "object":
         type = "";
         if (this.currentDepth === this.depth) {
-          value = `${this.cli.keyword("object")} ${this.cli.keyword(getClass(originalValue))} (${this.cli.argument(
-            "props",
-          )}=${this.cli.number(objSize(originalValue))})`;
+          const size = objSize(originalValue);
+          let printSize = "";
+          if (size > this.objectMaxProps) {
+            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)}, ${this.cli.argument(
+              "shown",
+            )}=${this.cli.number(this.objectMaxProps)})`;
+          } else {
+            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)})`;
+          }
+          value = `${this.cli.keyword("object")} ${this.cli.keyword(getClass(originalValue))} ${printSize}`;
         } else {
           this.currentDepth += 1;
-          value = this.toPrintable(originalValue, `${indent}${this.cli.comment(this.indent)}`, describe, subType);
+          const ind = type === "array" ? `${this.cli.comment(indent)}` : `${indent}${this.cli.comment(this.indent)}`;
+          value = this.toPrintable(originalValue, ind, describe, subType);
           this.currentDepth -= 1;
         }
         break;
@@ -510,7 +525,7 @@ class Consono {
     }
     const name = closureNameExtract(value);
     if (name.length) {
-      type = `${type} ${this.cli.string(this.quotesStart)}${name}${this.cli.string(this.quotesEnd)}`;
+      type = `${type} ${this.cli.name(name)}`;
     } else {
       type = `${type} anonymous`;
     }

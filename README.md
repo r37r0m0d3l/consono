@@ -87,7 +87,126 @@ All possible outputs - [try it.](https://npm.runkit.com/consono)
 
 ## Examples
 
-![consono](docs/readme/001.png?raw=true "Undefined & NULL")
+```js
+consono(undefined);
+consono(null);
+```
+
+![consono](docs/readme/001.png?raw=true "Nil")
+
+```js
+consono(true);
+consono(false);
+```
+
+![consono](docs/readme/002.png?raw=true "Boolean")
+
+
+```js
+consono(Infinity);
+consono(Number.NEGATIVE_INFINITY);
+consono(NaN);
+consono(1);
+consono(1.5);
+consono(BigInt(9007199254740991));
+```
+
+![consono](docs/readme/003.png?raw=true "Number")
+
+```js
+consono(new Date());
+```
+
+![consono](docs/readme/004.png?raw=true "Date")
+
+```js
+consono("Hello, world 😀😁😂🤣😃😄😅😆😉😊", { stringMaxLength: 17 });
+consono(Symbol("🌈"));
+```
+
+![consono](docs/readme/005.png?raw=true "String")
+
+```js
+consono(/[0-9]+/);
+consono(/\w+/giu);
+```
+
+![consono](docs/readme/006.png?raw=true "RegExp")
+
+```js
+consono(function() {});
+consono(function helloWorld() {});
+consono(() => {});
+```
+
+![consono](docs/readme/007.png?raw=true "Function")
+
+```js
+consono(new Promise(() => {}));
+consono(async function helloWorld() {});
+consono(async () => {});
+consono(function* gen() { yield 1; });
+```
+
+![consono](docs/readme/008.png?raw=true "Async")
+
+```js
+consono([1, 2, 3]);
+consono(Int8Array.from([1, 2, 3]));
+```
+
+![consono](docs/readme/009.png?raw=true "Array")
+
+```js
+consono(new ArrayBuffer(8));
+consono(new SharedArrayBuffer(16));
+```
+
+![consono](docs/readme/010.png?raw=true "Array Buffer")
+
+```js
+consono(new Set(["a", true, { prop: 1 }]));
+consono(new Map([["first", "a"], [true, "b"]]));
+consono(new WeakMap());
+consono(new WeakSet());
+```
+
+![consono](docs/readme/011.png?raw=true "Collection")
+
+```js
+consono({});
+
+class MyClass {}
+const myClass = new MyClass();
+myClass.deeper = new MyClass();
+consono(myClass);
+```
+
+![consono](docs/readme/012.png?raw=true "Object")
+
+```js
+consono(new Error("Standard error"));
+consono(new EvalError("Unable to run this code"));
+consono(new RangeError("Must be less than 10 and greater than 0"));
+consono(new ReferenceError("This is error from try/catch"));
+consono(new SyntaxError("Not a source code"));
+consono(new TypeError("Value is not of the expected type"));
+```
+
+![consono](docs/readme/013.png?raw=true "Error")
+
+```js
+(function(a, b) { consono(arguments); })(true, false);
+```
+
+![consono](docs/readme/014.png?raw=true "Arguments")
+
+
+```js
+consono(global || globalThis, { objectMaxProps: 3 });
+```
+
+![consono](docs/readme/015.png?raw=true "Global")
 
 ## I need help with:
 
