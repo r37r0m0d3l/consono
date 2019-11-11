@@ -138,8 +138,8 @@ function getType(value) {
 }
 
 class Theme {
-  constructor() {
-    this.cli = new chalk.Instance({ level: 3 });
+  constructor(level = 3) {
+    this.cli = new chalk.Instance({ level });
   }
   out(value, red = 255, green = 255, blue = 255) {
     return this.cli.rgb(red, green, blue)(value.toString());
@@ -177,7 +177,7 @@ class Consono {
    */
   constructor(options = {}) {
     this.setOptions(options);
-    this.cli = new Theme();
+    this.cli = new Theme(this.colorize ? 3 : 0);
   }
   /**
    * @public
@@ -189,6 +189,7 @@ class Consono {
         arrayMaxElements: 99,
         assignSymbol: "→",
         clear: false,
+        colorize: false,
         console: true,
         depth: 20,
         exit: false,
@@ -204,6 +205,7 @@ class Consono {
     this.arrayMaxElements = opts.arrayMaxElements;
     this.arrow = opts.assignSymbol;
     this.clear = opts.clear;
+    this.colorize = opts.colorize;
     this.console = opts.console;
     this.currentDepth = 0;
     this.depth = opts.depth;

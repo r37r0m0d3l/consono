@@ -2,6 +2,7 @@ const consono = require("../consono.js").default;
 
 describe("Main test", () => {
   const options = {
+    colorize: false,
     console: false,
   };
   it("Booleans", () => {

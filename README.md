@@ -71,6 +71,7 @@ const defaultOptions = {
   arrayMaxElements: 99, // Maximum number of elements in array to show
   assignSymbol: "→", // Assign symbol
   clear: false, // Clear console before output
+  colorize: true, // Colorize the output
   console: true, // Return string or output to console
   depth: 20, // Default depth of object
   exit: false, // Exit on completion
