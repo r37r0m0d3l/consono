@@ -9,13 +9,12 @@
 /.nvmrc
 /.prettierignore
 /.prettierrc
+/.travis.yml
+/_config.yml
 /consono.js
+/docs/
 /LICENSE
 /README.md
 /temp
 /test
-/tes.js
-/test/
 /yarn.lock
-/test/
-/docs/

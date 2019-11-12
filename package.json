@@ -1,6 +1,6 @@
 {
   "name": "consono",
-  "version": "0.0.13",
+  "version": "1.0.0",
   "description": "Better variable inspector for JavaScript",
   "main": "index.js",
   "scripts": {
@@ -15,8 +15,11 @@
   "keywords": [
     "console",
     "debug",
+    "debugging",
     "echo",
     "log",
+    "logger",
+    "logging",
     "print",
     "variable"
   ],
@@ -36,5 +39,6 @@
   },
   "dependencies": {
     "chalk": "3.0.0"
-  }
+  },
+  "types": "./index.d.ts"
 }

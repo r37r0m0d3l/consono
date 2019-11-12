@@ -27,6 +27,24 @@ const TAG_WEAK_MAP = "[object WeakMap]";
 const TAG_WEAK_SET = "[object WeakSet]";
 const TAG_WINDOW = "[object Window]";
 
+const OPTIONS_DEFAULT = {
+  arrayMaxElements: 99,
+  assignSymbol: "→",
+  clear: false,
+  colorize: true,
+  console: true,
+  depth: 20,
+  exit: false,
+  indent: "ˑˑ",
+  indentPad: 1,
+  mapMaxEntries: 99,
+  objectMaxProps: 99,
+  quotesEnd: `"`,
+  quotesStart: `"`,
+  setMaxValues: 99,
+  stringMaxLength: 360,
+};
+
 function clearCli() {
   if ("clear" in console) {
     try {
@@ -139,7 +157,7 @@ function getType(value) {
 
 class Theme {
   constructor(level = 3) {
-    this.cli = new chalk.Instance({ level });
+    this.cli = new chalk.Instance({ level: Math.min(level, chalk.supportsColor.level) });
   }
   out(value, red = 255, green = 255, blue = 255) {
     return this.cli.rgb(red, green, blue)(value.toString());
@@ -185,21 +203,7 @@ class Consono {
    */
   setOptions(options = {}) {
     const opts = {
-      ...{
-        arrayMaxElements: 99,
-        assignSymbol: "→",
-        clear: false,
-        colorize: false,
-        console: true,
-        depth: 20,
-        exit: false,
-        indent: "ˑˑ",
-        indentPad: 1,
-        objectMaxProps: 99,
-        quotesEnd: `"`,
-        quotesStart: `"`,
-        stringMaxLength: 360,
-      },
+      ...OPTIONS_DEFAULT,
       ...options,
     };
     this.arrayMaxElements = opts.arrayMaxElements;
@@ -212,9 +216,11 @@ class Consono {
     this.exit = opts.exit;
     this.indentType = opts.indent;
     this.indent = this.indentType.repeat(opts.indentPad);
+    this.mapMaxEntries = opts.mapMaxEntries;
     this.objectMaxProps = opts.objectMaxProps;
     this.quotesEnd = opts.quotesEnd;
     this.quotesStart = opts.quotesStart;
+    this.setMaxValues = opts.setMaxValues;
     this.stringMaxLength = opts.stringMaxLength;
   }
   /**
@@ -233,9 +239,15 @@ class Consono {
     const type = getType(value);
     switch (type) {
       case "array":
-        startsWith = `${this.cli.keyword("array")}${
-          subType.length ? ` ${this.cli.keyword(subType)}` : ""
-        } (${this.cli.argument("elements")}=${this.cli.number(value.length)}) [\n`;
+        const arrLength = value.length;
+        if (arrLength > this.arrayMaxElements) {
+          startsWith = `${this.cli.keyword("array")}${subType.length ? ` ${this.cli.keyword(subType)}` : ""} \
+(${this.cli.argument("elements")}=${this.cli.number(arrLength)}, \
+${this.cli.argument("shown")}=${this.cli.number(this.arrayMaxElements)}) [\n`;
+        } else {
+          startsWith = `${this.cli.keyword("array")}${subType.length ? ` ${this.cli.keyword(subType)}` : ""} \
+(${this.cli.argument("elements")}=${this.cli.number(arrLength)}) [\n`;
+        }
         endsWith = `${indent}]`;
         iterationLimit = this.arrayMaxElements;
         break;
@@ -246,9 +258,8 @@ class Consono {
           const size = objSize(value);
           let printSize = "";
           if (size > this.objectMaxProps) {
-            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)}, ${this.cli.argument(
-              "shown",
-            )}=${this.cli.number(this.objectMaxProps)})`;
+            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)}, \
+${this.cli.argument("shown")}=${this.cli.number(this.objectMaxProps)})`;
           } else {
             printSize = `(${this.cli.argument("props")}=${this.cli.number(size)})`;
           }
@@ -261,21 +272,42 @@ class Consono {
         iterationLimit = this.objectMaxProps;
         break;
       case "arguments":
-        startsWith = `${this.cli.keyword("arguments")} (${this.cli.argument("arity")}=${this.cli.number(
-          value.length,
-        )}) [\n`;
+        const argLength = value.length;
+        if (argLength > this.arrayMaxElements) {
+          startsWith = `${this.cli.keyword("arguments")} \
+(${this.cli.argument("arity")}=${this.cli.number(argLength)}, \
+${this.cli.argument("shown")}=${this.cli.number(this.arrayMaxElements)}) [\n`;
+        } else {
+          startsWith = `${this.cli.keyword("arguments")} \
+(${this.cli.argument("arity")}=${this.cli.number(argLength)}) [\n`;
+        }
         endsWith = `${indent}]`;
         iterationLimit = this.arrayMaxElements;
         break;
       case "set":
-        startsWith = `${this.cli.keyword("set")} (${this.cli.argument("size")}=${this.cli.number(value.size)}) {\n`;
+        const setSize = value.size;
+        if (setSize > this.setMaxValues) {
+          startsWith = `${this.cli.keyword("set")} \
+(${this.cli.argument("size")}=${this.cli.number(setSize)}, \
+${this.cli.argument("shown")}=${this.cli.number(this.setMaxValues)}) {\n`;
+        } else {
+          startsWith = `${this.cli.keyword("set")} \
+(${this.cli.argument("size")}=${this.cli.number(setSize)}) {\n`;
+        }
         endsWith = `${indent}}`;
-        iterationLimit = this.arrayMaxElements;
+        iterationLimit = this.setMaxValues;
         break;
       case "map":
-        startsWith = `${this.cli.keyword("map")} (${this.cli.argument("size")}=${this.cli.number(value.size)}) {\n`;
+        const mapSize = value.size;
+        if (mapSize > this.mapMaxEntries) {
+          startsWith = `${this.cli.keyword("map")} \
+(${this.cli.argument("size")}=${this.cli.number(mapSize)}, \
+${this.cli.argument("shown")}=${this.cli.number(this.mapMaxEntries)}) {\n`;
+        } else {
+          startsWith = `${this.cli.keyword("map")} (${this.cli.argument("size")}=${this.cli.number(mapSize)}) {\n`;
+        }
         endsWith = `${indent}}`;
-        iterationLimit = this.objectMaxProps;
+        iterationLimit = this.mapMaxEntries;
         break;
       default:
         return this.formatValue(indent, value);
@@ -435,9 +467,8 @@ class Consono {
           const size = objSize(originalValue);
           let printSize = "";
           if (size > this.objectMaxProps) {
-            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)}, ${this.cli.argument(
-              "shown",
-            )}=${this.cli.number(this.objectMaxProps)})`;
+            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)}, \
+${this.cli.argument("shown")}=${this.cli.number(this.objectMaxProps)})`;
           } else {
             printSize = `(${this.cli.argument("props")}=${this.cli.number(size)})`;
           }
@@ -735,6 +766,7 @@ ${this.cli.argument("shown")}=${this.cli.number(this.stringMaxLength)})`;
 
 /**
  * @public
+ * @static
  * @param {boolean|object} options
  * @returns {undefined|string}
  */
@@ -787,8 +819,4 @@ function consono(any, options = true) {
   }
 }
 
-module.exports.default = consono;
-
-module.exports.consono = consono;
-
-module.exports.Consono = Consono;
+module.exports = { default: consono, consono, Consono, options: OPTIONS_DEFAULT };

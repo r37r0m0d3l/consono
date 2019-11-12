@@ -41,6 +41,18 @@ consono.log("Cleared before output. Different quotes. And cut to 54!");
 // string • "Cleared before output. Different quotes. And cut to 54" (length=55, shown=54)
 ```
 
+```js
+const { Consono, options } = require("consono");
+options.colorize = false;
+const consono = new Consono(options);
+consono.log("Text without colorization");
+```
+
+```js
+const { consono } = require("consono");
+console.debug(consono("Outputs a message only at the debug log level.", false));
+```
+
 ## Instance
 
 ```js
@@ -79,9 +91,11 @@ const defaultOptions = {
   depth: 20, // Default depth of object
   exit: false, // Exit on completion
   indent: "ˑˑ", // Print indentation
+  mapMaxEntries: 99, // Maximum number of entries in map to show
   objectMaxProps: 99, // Maximum number of properties in object to show
   quotesEnd: `"`, // Quote start
   quotesStart: `"`, // Quote end
+  setMaxValues: 99, // Maximum number of values in set to show
   stringMaxLength: 360, // Maximum length of string to show
 };
 consono("Some variable", defaultOptions);
