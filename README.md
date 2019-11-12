@@ -1,10 +1,13 @@
 Consono
 ===========
 
-Better variable inspector for JavaScript.
+**Better variable inspector for JavaScript.**
 
 [![Version](http://img.shields.io/npm/v/consono.svg)](https://www.npmjs.org/package/consono)
 [![Build Status](https://travis-ci.org/r37r0m0d3l/consono.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/consono)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[Consono on github.io 🡆](https://r37r0m0d3l.github.io/consono/)
 
 ## Installation
 

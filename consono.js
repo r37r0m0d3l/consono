@@ -122,8 +122,8 @@ function getClass(value) {
 }
 
 function getType(value) {
-  const tag = prototypeTag(value).toLowerCase();
-  let type = tag
+  let type = prototypeTag(value)
+    .toLowerCase()
     .split("[object ")
     .pop()
     .split("]")
@@ -418,7 +418,11 @@ class Consono {
               describe,
             );
           } else if (iterator === "Array") {
-            return this.toPrintable(Array.from(originalValue).map((e) => e[1]), indent, describe);
+            return this.toPrintable(
+              Array.from(originalValue).map((e) => e[1]),
+              indent,
+              describe,
+            );
           }
         }
         break;
@@ -490,8 +494,10 @@ class Consono {
    * @returns {[string, string]}
    */
   formatBuffer(tag, value) {
-    const type = TAG_ARRAY_BUFFER ? "array buffer" : "array buffer shared";
-    return [type, `(${this.cli.argument("bytes")}=${this.cli.number(value.byteLength)})`];
+    return [
+      TAG_ARRAY_BUFFER ? "array buffer" : "array buffer shared",
+      `(${this.cli.argument("bytes")}=${this.cli.number(value.byteLength)})`,
+    ];
   }
   /**
    * @protected
