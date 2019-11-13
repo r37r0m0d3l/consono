@@ -83,20 +83,34 @@ const variableAsString = consono({},  { console: false });
 
 ```js
 const defaultOptions = {
-  arrayMaxElements: 99, // Maximum number of elements in array to show
-  assignSymbol: "→", // Assign symbol
-  clear: false, // Clear console before output
-  colorize: true, // Colorize the output
-  console: true, // Return string or output to console
-  depth: 20, // Default depth of object
-  exit: false, // Exit on completion
-  indent: "ˑˑ", // Print indentation
-  mapMaxEntries: 99, // Maximum number of entries in map to show
-  objectMaxProps: 99, // Maximum number of properties in object to show
-  quotesEnd: `"`, // Quote start
-  quotesStart: `"`, // Quote end
-  setMaxValues: 99, // Maximum number of values in set to show
-  stringMaxLength: 360, // Maximum length of string to show
+  // Maximum number of elements in array to show
+  arrayMaxElements: 99,
+  // Assign symbol
+  assignSymbol: "→",
+  // Clear console before output
+  clear: false,
+  // Colorize the output
+  colorize: true,
+  // Return string or output to console
+  console: true,
+  // Default depth of object
+  depth: 20,
+  // Exit on completion
+  exit: false,
+  // Print indentation
+  indent: "ˑˑ",
+  // Maximum number of entries in map to show
+  mapMaxEntries: 99,
+  // Maximum number of properties in object to show
+  objectMaxProps: 99,
+  // Quote start
+  quotesEnd: `"`,
+  // Quote end
+  quotesStart: `"`,
+  // Maximum number of values in set to show
+  setMaxValues: 99,
+  // Maximum length of string to show
+  stringMaxLength: 360,
 };
 consono("Some variable", defaultOptions);
 ```
