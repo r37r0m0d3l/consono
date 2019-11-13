@@ -1,18 +1,18 @@
 export interface IConsonoOptions {
-  arrayMaxElements: number;
-  assignSymbol: string;
-  clear: boolean;
-  colorize: boolean;
-  console: boolean;
-  depth: number;
-  exit: boolean;
-  indent: string;
-  mapMaxEntries: number;
-  objectMaxProps: number;
-  quotesEnd: string;
-  quotesStart: string;
-  setMaxValues: number;
-  stringMaxLength: number;
+  arrayMaxElements?: number;
+  assignSymbol?: string;
+  clear?: boolean;
+  colorize?: boolean;
+  console?: boolean;
+  depth?: number;
+  exit?: boolean;
+  indent?: string;
+  mapMaxEntries?: number;
+  objectMaxProps?: number;
+  quotesEnd?: string;
+  quotesStart?: string;
+  setMaxValues?: number;
+  stringMaxLength?: number;
 }
 
 export default consono;
