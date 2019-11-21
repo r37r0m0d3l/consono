@@ -1,7 +1,11 @@
-#### 1.0.3 Nov 21, 2019
+#### 1.0.4 Nov 21, 2019
 
 * Add CHANGELOG
 * Sort object keys before output
+
+#### 1.0.3 Nov 21, 2019
+
+* Add theme option
 
 #### 1.0.2 Nov 13, 2019
 
