@@ -36,9 +36,27 @@ const options = {
   quotesStart: `“`,
   stringMaxLength: 54,
 };
-const consono = new Consono(options);
+const theme = "light";
+const consono = new Consono(options, theme);
 consono.log("Cleared before output. Different quotes. And cut to 54!");
 // string • "Cleared before output. Different quotes. And cut to 54" (length=55, shown=54)
+```
+
+```js
+const { Consono } = require("consono");
+const theme = {
+  argument: [253, 151, 31],
+  boolean: [174, 129, 255],
+  comment: [117, 113, 94],
+  keyword: [249, 38, 114],
+  name: [230, 219, 116],
+  number: [174, 129, 255],
+  plain: [255, 255, 255],
+  property: [102, 217, 239],
+  string: [166, 226, 46],
+};
+const consono = new Consono(null, theme);
+consono.log("Themed");
 ```
 
 ```js
@@ -56,7 +74,7 @@ console.debug(consono("Outputs a message only at the debug log level.", false));
 ## Instance
 
 ```js
-const consono = Consono.factory(options);
+const consono = Consono.factory(options, theme);
 consono("This is log function with your own options");
 ```
 

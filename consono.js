@@ -45,6 +45,30 @@ const OPTIONS_DEFAULT = {
   stringMaxLength: 360,
 };
 
+const THEME_DARK = {
+  argument: [253, 151, 31],
+  boolean: [174, 129, 255],
+  comment: [117, 113, 94],
+  keyword: [249, 38, 114],
+  name: [230, 219, 116],
+  number: [174, 129, 255],
+  plain: [255, 255, 255],
+  property: [102, 217, 239],
+  string: [166, 226, 46],
+};
+
+const THEME_LIGHT = {
+  argument: [245, 135, 31],
+  boolean: [66, 113, 174],
+  comment: [117, 113, 94],
+  keyword: [200, 40, 41],
+  name: [201, 159, 0],
+  number: [101, 67, 133],
+  plain: [0, 0, 0],
+  property: [32, 123, 129],
+  string: [113, 140, 0],
+};
+
 function clearCli() {
   if ("clear" in console) {
     try {
@@ -156,35 +180,45 @@ function getType(value) {
 }
 
 class Theme {
-  constructor(level = 3) {
+  constructor(level = 3, theme) {
     this.cli = new chalk.Instance({ level: Math.min(level, chalk.supportsColor.level) });
+    let rgb;
+    switch (true) {
+      case theme === "dark":
+        rgb = THEME_DARK;
+        break;
+      case theme === "light":
+        rgb = THEME_LIGHT;
+        break;
+      case prototypeTag(theme) === TAG_OBJECT:
+        rgb = { ...THEME_DARK, ...theme };
+        break;
+      default:
+        rgb = THEME_DARK;
+        break;
+    }
+    this.argument = this.compose(...rgb.argument);
+    this.boolean = this.compose(...rgb.boolean);
+    this.comment = this.compose(...rgb.comment);
+    this.keyword = this.compose(...rgb.keyword);
+    this.name = this.compose(...rgb.name);
+    this.number = this.compose(...rgb.number);
+    this.plain = this.compose(...rgb.plain);
+    this.property = this.compose(...rgb.property);
+    this.string = this.compose(...rgb.string);
   }
-  out(value, red = 255, green = 255, blue = 255) {
-    return this.cli.rgb(red, green, blue)(value.toString());
+  static toRGB(color) {
+    color = Number.parseInt(color.toString(), 10);
+    if (!Number.isInteger(color)) {
+      return 255;
+    }
+    return Math.min(255, Math.max(0, color));
   }
-  argument(value) {
-    return this.out(value, 253, 151, 31);
-  }
-  boolean(value) {
-    return this.out(value, 174, 129, 255);
-  }
-  comment(value) {
-    return this.out(value, 117, 113, 94);
-  }
-  keyword(value) {
-    return this.out(value, 249, 38, 114);
-  }
-  string(value) {
-    return this.out(value, 166, 226, 46);
-  }
-  number(value) {
-    return this.out(value, 174, 129, 255);
-  }
-  property(value) {
-    return this.out(value, 102, 217, 239);
-  }
-  name(value) {
-    return this.out(value, 230, 219, 116);
+  compose(red = 255, green = 255, blue = 255) {
+    red = Theme.toRGB(red);
+    green = Theme.toRGB(green);
+    blue = Theme.toRGB(blue);
+    return (value) => this.cli.rgb(red, green, blue)(value.toString());
   }
 }
 
@@ -192,16 +226,25 @@ class Consono {
   /**
    * @public
    * @param {object=} options
+   * @param {object|string=} theme
    */
-  constructor(options = {}) {
+  constructor(options = {}, theme) {
     this.setOptions(options);
-    this.cli = new Theme(this.colorize ? 3 : 0);
+    this.setTheme(theme);
+  }
+  /**
+   * @public
+   * @param {object|string=} theme
+   */
+  setTheme(theme) {
+    this.cli = new Theme(this.colorize ? 3 : 0, theme);
   }
   /**
    * @public
    * @param {object=} options
    */
   setOptions(options = {}) {
+    options = options || {};
     const opts = {
       ...OPTIONS_DEFAULT,
       ...options,
@@ -242,13 +285,17 @@ class Consono {
         const arrLength = value.length;
         if (arrLength > this.arrayMaxElements) {
           startsWith = `${this.cli.keyword("array")}${subType.length ? ` ${this.cli.keyword(subType)}` : ""} \
-(${this.cli.argument("elements")}=${this.cli.number(arrLength)}, \
-${this.cli.argument("shown")}=${this.cli.number(this.arrayMaxElements)}) [\n`;
+${this.cli.plain("(")}${this.cli.argument("elements")}${this.cli.plain("=")}\
+${this.cli.number(arrLength)}${this.cli.plain(",")} \
+${this.cli.argument("shown")}=${this.cli.number(this.arrayMaxElements)}${this.cli.plain(")")} \
+${this.cli.plain("[")}\n`;
         } else {
           startsWith = `${this.cli.keyword("array")}${subType.length ? ` ${this.cli.keyword(subType)}` : ""} \
-(${this.cli.argument("elements")}=${this.cli.number(arrLength)}) [\n`;
+${this.cli.plain("(")}${this.cli.argument("elements")}${this.cli.plain("=")}\
+${this.cli.number(arrLength)}${this.cli.plain(")")} \
+${this.cli.plain("[")}\n`;
         }
-        endsWith = `${indent}]`;
+        endsWith = `${indent}${this.cli.plain("]")}`;
         iterationLimit = this.arrayMaxElements;
         break;
       case "object":
@@ -258,16 +305,21 @@ ${this.cli.argument("shown")}=${this.cli.number(this.arrayMaxElements)}) [\n`;
           const size = objSize(value);
           let printSize = "";
           if (size > this.objectMaxProps) {
-            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)}, \
-${this.cli.argument("shown")}=${this.cli.number(this.objectMaxProps)})`;
+            printSize = `${this.cli.plain("(")}\
+${this.cli.argument("props")}${this.cli.plain("=")}${this.cli.number(size)}\
+${this.cli.plain(",")} \
+${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.objectMaxProps)}${this.cli.plain(")")}`;
           } else {
-            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)})`;
+            printSize = `${this.cli.plain("(")}\
+${this.cli.argument("props")}${this.cli.plain("=")}${this.cli.number(size)}\
+${this.cli.plain(")")}`;
           }
-          startsWith = `${this.cli.keyword("object")} ${this.cli.keyword(getClass(origObject))} ${printSize} {\n`;
-          endsWith = `${indent}}`;
+          startsWith = `${this.cli.keyword("object")} \
+${this.cli.keyword(getClass(origObject))} ${printSize} ${this.cli.plain("{")}\n`;
+          endsWith = `${indent}${this.cli.plain("}")}`;
         } else {
-          startsWith = `(\n`;
-          endsWith = `${indent})`;
+          startsWith = `${this.cli.plain("(")}\n`;
+          endsWith = `${indent}${this.cli.plain(")")}`;
         }
         iterationLimit = this.objectMaxProps;
         break;
@@ -275,24 +327,32 @@ ${this.cli.argument("shown")}=${this.cli.number(this.objectMaxProps)})`;
         const argLength = value.length;
         if (argLength > this.arrayMaxElements) {
           startsWith = `${this.cli.keyword("arguments")} \
-(${this.cli.argument("arity")}=${this.cli.number(argLength)}, \
-${this.cli.argument("shown")}=${this.cli.number(this.arrayMaxElements)}) [\n`;
+${this.cli.plain("(")}\
+${this.cli.argument("arity")}${this.cli.plain("=")}${this.cli.number(argLength)}, \
+${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.arrayMaxElements)}\
+${this.cli.plain(")")} ${this.cli.plain("[")}\n`;
         } else {
           startsWith = `${this.cli.keyword("arguments")} \
-(${this.cli.argument("arity")}=${this.cli.number(argLength)}) [\n`;
+${this.cli.plain("(")}\
+${this.cli.argument("arity")}${this.cli.plain("=")}${this.cli.number(argLength)}\
+${this.cli.plain(")")} ${this.cli.plain("[")}\n`;
         }
-        endsWith = `${indent}]`;
+        endsWith = `${indent}${this.cli.plain("]")}`;
         iterationLimit = this.arrayMaxElements;
         break;
       case "set":
         const setSize = value.size;
         if (setSize > this.setMaxValues) {
           startsWith = `${this.cli.keyword("set")} \
-(${this.cli.argument("size")}=${this.cli.number(setSize)}, \
-${this.cli.argument("shown")}=${this.cli.number(this.setMaxValues)}) {\n`;
+${this.cli.plain("(")}\
+${this.cli.argument("size")}${this.cli.plain("=")}${this.cli.number(setSize)}${this.cli.plain(",")} \
+${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.setMaxValues)}\
+${this.cli.plain(")")} ${this.cli.plain("{")}\n`;
         } else {
           startsWith = `${this.cli.keyword("set")} \
-(${this.cli.argument("size")}=${this.cli.number(setSize)}) {\n`;
+${this.cli.plain("(")}\
+${this.cli.argument("size")}${this.cli.plain("=")}${this.cli.number(setSize)}\
+${this.cli.plain(")")} ${this.cli.plain("{")}\n`;
         }
         endsWith = `${indent}}`;
         iterationLimit = this.setMaxValues;
@@ -301,12 +361,16 @@ ${this.cli.argument("shown")}=${this.cli.number(this.setMaxValues)}) {\n`;
         const mapSize = value.size;
         if (mapSize > this.mapMaxEntries) {
           startsWith = `${this.cli.keyword("map")} \
-(${this.cli.argument("size")}=${this.cli.number(mapSize)}, \
-${this.cli.argument("shown")}=${this.cli.number(this.mapMaxEntries)}) {\n`;
+${this.cli.plain("(")}\
+${this.cli.argument("size")}${this.cli.plain("=")}${this.cli.number(mapSize)}${this.cli.plain(",")} \
+${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.mapMaxEntries)}\
+${this.cli.plain(")")} ${this.cli.plain("{")}\n`;
         } else {
-          startsWith = `${this.cli.keyword("map")} (${this.cli.argument("size")}=${this.cli.number(mapSize)}) {\n`;
+          startsWith = `${this.cli.keyword("map")} ${this.cli.plain("(")}\
+${this.cli.argument("size")}${this.cli.plain("=")}${this.cli.number(mapSize)}${this.cli.plain(")")} \
+${this.cli.plain("{")}\n`;
         }
-        endsWith = `${indent}}`;
+        endsWith = `${indent}${this.cli.plain("}")}`;
         iterationLimit = this.mapMaxEntries;
         break;
       default:
@@ -467,10 +531,14 @@ ${this.cli.argument("shown")}=${this.cli.number(this.mapMaxEntries)}) {\n`;
           const size = objSize(originalValue);
           let printSize = "";
           if (size > this.objectMaxProps) {
-            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)}, \
-${this.cli.argument("shown")}=${this.cli.number(this.objectMaxProps)})`;
+            printSize = `${this.cli.plain("(")}\
+${this.cli.argument("props")}${this.cli.plain("=")}${this.cli.number(size)}${this.cli.plain(",")} \
+${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.objectMaxProps)}\
+${this.cli.plain(")")}`;
           } else {
-            printSize = `(${this.cli.argument("props")}=${this.cli.number(size)})`;
+            printSize = `${this.cli.plain("(")}\
+${this.cli.argument("props")}${this.cli.plain("=")}${this.cli.number(size)}\
+${this.cli.plain(")")}`;
           }
           value = `${this.cli.keyword("object")} ${this.cli.keyword(getClass(originalValue))} ${printSize}`;
         } else {
@@ -492,7 +560,7 @@ ${this.cli.argument("shown")}=${this.cli.number(this.objectMaxProps)})`;
         }
         break;
     }
-    return `${this.cli.keyword(type)}${type.length ? this.cli.comment(" • ") : ""}${value}`;
+    return `${this.cli.keyword(type)}${type.length ? this.cli.plain(" • ") : ""}${value}`;
   }
   /**
    * @protected
@@ -527,7 +595,9 @@ ${this.cli.argument("shown")}=${this.cli.number(this.objectMaxProps)})`;
   formatBuffer(tag, value) {
     return [
       TAG_ARRAY_BUFFER ? "array buffer" : "array buffer shared",
-      `(${this.cli.argument("bytes")}=${this.cli.number(value.byteLength)})`,
+      `${this.cli.plain("(")}\
+${this.cli.argument("bytes")}${this.cli.plain("=")}${this.cli.number(value.byteLength)}\
+${this.cli.plain(")")}`,
     ];
   }
   /**
@@ -675,22 +745,21 @@ ${this.cli.argument("shown")}=${this.cli.number(this.objectMaxProps)})`;
     }
     let value = "";
     if (stringLength === stringSize) {
-      value = `${this.cli.string(this.quotesStart)}${this.cli.string(printString || text)}${this.cli.string(
-        this.quotesEnd,
-      )} \
-(${this.cli.argument("length")}=${this.cli.number(stringLength)}`;
+      value = `${this.cli.string(this.quotesStart)}\
+${this.cli.string(printString || text)}${this.cli.string(this.quotesEnd)} \
+${this.cli.plain("(")}${this.cli.argument("length")}${this.cli.plain("=")}${this.cli.number(stringLength)}`;
     } else {
-      value = `${this.cli.string(this.quotesStart)}${this.cli.string(printString || text)}${this.cli.string(
-        this.quotesEnd,
-      )} \
-(${this.cli.argument("length")}=${this.cli.number(stringLength)}, \
-${this.cli.argument("symbols")}=${this.cli.number(stringSize)}`;
+      value = `${this.cli.string(this.quotesStart)}\
+${this.cli.string(printString || text)}${this.cli.string(this.quotesEnd)} \
+${this.cli.plain("(")}\
+${this.cli.argument("length")}${this.cli.plain("=")}${this.cli.number(stringLength)}${this.cli.plain(",")} \
+${this.cli.argument("symbols")}${this.cli.plain("=")}${this.cli.number(stringSize)}`;
     }
     if (stringSize > this.stringMaxLength) {
-      value = `${value}, \
-${this.cli.argument("shown")}=${this.cli.number(this.stringMaxLength)})`;
+      value = `${value}${this.cli.plain(",")} \
+${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.stringMaxLength)}${this.cli.plain(")")}`;
     } else {
-      value = `${value})`;
+      value = `${value}${this.cli.plain(")")}`;
     }
     clearString(printString);
     return ["string", value];
@@ -734,15 +803,18 @@ ${this.cli.argument("shown")}=${this.cli.number(this.stringMaxLength)})`;
   formatAssign(paramType, indent, key, value) {
     let keyPart;
     if (paramType === "map") {
-      return `${indent}${this.cli.comment(this.indent)}${value},\n`;
+      return `${indent}${this.cli.comment(this.indent)}${value}\
+${this.cli.plain(",")}\n`;
     } else if (paramType === "set") {
-      return `${indent}${this.cli.comment(this.indent)}${this.arrow} ${value},\n`;
+      return `${indent}${this.cli.comment(this.indent)}${this.cli.plain(this.arrow)} ${value}\
+${this.cli.plain(",")}\n`;
     } else if (isNumericKey(key) || (paramType === "array" && typeof key !== "string")) {
-      keyPart = `${this.cli.argument("[")}${this.cli.name(key)}${this.cli.argument("]")}`;
+      keyPart = `${this.cli.plain("[")}${this.cli.property(key)}${this.cli.plain("]")}`;
     } else {
-      keyPart = `${this.cli.argument(this.quotesStart)}${this.cli.name(key)}${this.cli.argument(this.quotesEnd)}`;
+      keyPart = `${this.cli.plain(this.quotesStart)}${this.cli.property(key)}${this.cli.plain(this.quotesEnd)}`;
     }
-    return `${indent}${this.cli.comment(this.indent)}${keyPart} ${this.arrow} ${value},\n`;
+    return `${indent}${this.cli.comment(this.indent)}${keyPart} ${this.cli.plain(this.arrow)} ${value}\
+${this.cli.plain(",")}\n`;
   }
   /**
    * @public
@@ -768,16 +840,17 @@ ${this.cli.argument("shown")}=${this.cli.number(this.stringMaxLength)})`;
  * @public
  * @static
  * @param {boolean|object} options
+ * @param {object|string=} theme
  * @returns {undefined|string}
  */
-Consono.factory = function factory(options = true) {
+Consono.factory = function factory(options = true, theme) {
   const opts = { console: true };
   if (typeof options === "boolean") {
     opts.console = options;
   } else if (options && typeof options === "object") {
     Object.assign(opts, options);
   }
-  const instance = new Consono(options);
+  const instance = new Consono(options, theme);
   return function consono(any) {
     if (opts.console) {
       if (opts.clear) {
@@ -796,16 +869,17 @@ Consono.factory = function factory(options = true) {
 /**
  * @param {*} any
  * @param {boolean|object} options
+ * @param {object|string=} theme
  * @returns {undefined|string}
  */
-function consono(any, options = true) {
+function consono(any, options = true, theme) {
   const opts = { console: true };
   if (typeof options === "boolean") {
     opts.console = options;
   } else if (options && typeof options === "object") {
     Object.assign(opts, options);
   }
-  const instance = new Consono(options);
+  const instance = new Consono(options, theme);
   if (opts.console) {
     if (opts.clear) {
       clearCli();

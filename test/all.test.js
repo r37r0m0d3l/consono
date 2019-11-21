@@ -51,7 +51,12 @@ describe("Test collection", () => {
 
   //#region Keyed collections
   consono(new Set(["a", true, { prop: 1 }]));
-  consono(new Map([["first", "a"], [true, "b"]]));
+  consono(
+    new Map([
+      ["first", "a"],
+      [true, "b"],
+    ]),
+  );
   consono(new WeakMap());
   consono(new WeakSet());
   //#endregion
