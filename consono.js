@@ -402,7 +402,10 @@ ${this.cli.plain("{")}\n`;
         }
         break;
       default:
-        for (const key in value) {
+        const keys = Object.keys(value)
+          .sort((alpha, beta) => alpha.localeCompare(beta))
+          .reduce((previous, current) => (previous[current] = void 0) || previous, {});
+        for (const key in keys) {
           if (!Object.prototype.hasOwnProperty.call(value, key)) {
             continue;
           }
