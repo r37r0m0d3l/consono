@@ -225,6 +225,7 @@ class Theme {
 class Consono {
   /**
    * @public
+   * @constructor
    * @param {object=} options
    * @param {object|string=} theme
    */
@@ -267,7 +268,7 @@ class Consono {
     this.stringMaxLength = opts.stringMaxLength;
   }
   /**
-   * @protected
+   * @public
    * @param {*} value
    * @param {string=} indent
    * @param {boolean|string=true} describe
@@ -821,20 +822,20 @@ ${this.cli.plain(",")}\n`;
   }
   /**
    * @public
-   * @param {*} any
+   * @param {*} variable
    * @returns {undefined|string}
    */
-  log(any) {
+  log(variable) {
     if (this.console) {
       if (this.clear) {
         clearCli();
       }
-      console.log(this.toPrintable(any));
+      console.log(this.toPrintable(variable));
       if (this.exit) {
         processExit();
       }
     } else {
-      return this.toPrintable(any);
+      return this.toPrintable(variable);
     }
   }
 }
@@ -870,12 +871,12 @@ Consono.factory = function factory(options = true, theme) {
 };
 
 /**
- * @param {*} any
+ * @param {*} variable
  * @param {boolean|object} options
  * @param {object|string=} theme
  * @returns {undefined|string}
  */
-function consono(any, options = true, theme) {
+function consono(variable, options = true, theme) {
   const opts = { console: true };
   if (typeof options === "boolean") {
     opts.console = options;
@@ -887,12 +888,12 @@ function consono(any, options = true, theme) {
     if (opts.clear) {
       clearCli();
     }
-    console.log(instance.toPrintable(any));
+    console.log(instance.toPrintable(variable));
     if (opts.exit) {
       processExit();
     }
   } else {
-    return instance.toPrintable(any);
+    return instance.toPrintable(variable);
   }
 }
 
