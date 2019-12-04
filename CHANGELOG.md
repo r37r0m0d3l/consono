@@ -1,3 +1,7 @@
+#### 1.0.6 Dec 04, 2019
+
+* ⬆️ Update .npmignore
+
 #### 1.0.5 Dec 04, 2019
 
 * 🐛 Fix minor lint errors

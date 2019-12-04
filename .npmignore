@@ -11,6 +11,7 @@
 /.prettierrc
 /.travis.yml
 /_config.yml
+/CHANGELOG.md
 /consono.js
 /docs/
 /LICENSE

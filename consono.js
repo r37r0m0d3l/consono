@@ -483,17 +483,17 @@ ${this.cli.plain("{")}\n`;
         [type, value] = this.formatSymbol(originalValue);
         break;
       case TAG_PROMISE:
-        [type, value] = this.formatPromise(originalValue);
+        [type, value] = this.formatPromise();
         break;
       case TAG_GENERATOR:
-        [type, value] = this.formatGenerator(originalValue);
+        [type, value] = this.formatGenerator();
         break;
       case TAG_ERROR:
         [type, value] = this.formatError(originalValue);
         break;
       case TAG_WEAK_SET:
       case TAG_WEAK_MAP:
-        [type, value] = this.formatWeak(tag, originalValue);
+        [type, value] = this.formatWeak(tag);
         break;
       case TAG_SET:
         [type, value] = this.formatSet(originalValue);
@@ -658,11 +658,10 @@ ${this.cli.plain(")")}`,
   }
   /**
    * @protected
-   * @param {GeneratorFunction} value
    * @returns {[string, string]}
    */
-  formatGenerator(value) {
-    return ["generator", this.cli.argument(value.name || "Generator {…}")];
+  formatGenerator() {
+    return ["generator", this.cli.argument("Generator {…}")];
   }
   /**
    * @protected
@@ -715,11 +714,10 @@ ${this.cli.plain(")")}`,
   }
   /**
    * @protected
-   * @param {Promise} value
    * @returns {[string, string]}
    */
-  formatPromise(value) {
-    return ["promise", this.cli.argument(value.name || "Promise {…}")];
+  formatPromise() {
+    return ["promise", this.cli.argument("Promise {…}")];
   }
   /**
    * @protected
@@ -793,14 +791,13 @@ ${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.string
   /**
    * @protected
    * @param {string} tag
-   * @param {WeakMap|WeakSet} value
    * @returns {[string,string]}
    */
-  formatWeak(tag, value) {
+  formatWeak(tag) {
     if (tag === TAG_WEAK_MAP) {
-      return ["map weak", value.name || ""];
+      return ["map weak", ""];
     } else {
-      return ["set weak", value.name || ""];
+      return ["set weak", ""];
     }
   }
   /**
