@@ -1,3 +1,8 @@
+#### 1.0.5 Dec 04, 2019
+
+* 🐛 Fix minor lint errors
+* ⬆️ Update deps.
+
 #### 1.0.4 Nov 21, 2019
 
 * Add CHANGELOG

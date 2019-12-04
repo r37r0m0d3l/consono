@@ -1,12 +1,13 @@
 {
   "name": "consono",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Better variable inspector for JavaScript",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "npm run compile",
-    "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- consono.js"
+    "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- consono.js",
+    "lint": "npx eslint ./consono.js"
   },
   "repository": {
     "type": "git",
@@ -30,12 +31,12 @@
   },
   "homepage": "https://github.com/r37r0m0d3l/consono#readme",
   "devDependencies": {
-    "eslint": "6.6.0",
+    "eslint": "6.7.2",
     "eslint-config-prettier": "6.7.0",
     "eslint-plugin-prettier": "3.1.1",
     "jest": "24.9.0",
     "prettier": "1.19.1",
-    "terser": "4.4.0"
+    "terser": "4.4.2"
   },
   "dependencies": {
     "chalk": "3.0.0"

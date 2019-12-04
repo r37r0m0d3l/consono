@@ -151,7 +151,7 @@ function closureNameExtract(func) {
   if (func.name) {
     return func.name;
   }
-  const result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString());
+  const result = /^function\s+([\w]+)\s*\(/.exec(func.toString());
   return result ? result[1] : "";
 }
 
@@ -282,7 +282,7 @@ class Consono {
     let iterationLimit = Number.MAX_SAFE_INTEGER;
     const type = getType(value);
     switch (type) {
-      case "array":
+      case "array": {
         const arrLength = value.length;
         if (arrLength > this.arrayMaxElements) {
           startsWith = `${this.cli.keyword("array")}${subType.length ? ` ${this.cli.keyword(subType)}` : ""} \
@@ -299,7 +299,8 @@ ${this.cli.plain("[")}\n`;
         endsWith = `${indent}${this.cli.plain("]")}`;
         iterationLimit = this.arrayMaxElements;
         break;
-      case "object":
+      }
+      case "object": {
         const origObject = value;
         value = deCycle(value);
         if (describe === true) {
@@ -324,7 +325,8 @@ ${this.cli.keyword(getClass(origObject))} ${printSize} ${this.cli.plain("{")}\n`
         }
         iterationLimit = this.objectMaxProps;
         break;
-      case "arguments":
+      }
+      case "arguments": {
         const argLength = value.length;
         if (argLength > this.arrayMaxElements) {
           startsWith = `${this.cli.keyword("arguments")} \
@@ -341,7 +343,8 @@ ${this.cli.plain(")")} ${this.cli.plain("[")}\n`;
         endsWith = `${indent}${this.cli.plain("]")}`;
         iterationLimit = this.arrayMaxElements;
         break;
-      case "set":
+      }
+      case "set": {
         const setSize = value.size;
         if (setSize > this.setMaxValues) {
           startsWith = `${this.cli.keyword("set")} \
@@ -358,7 +361,8 @@ ${this.cli.plain(")")} ${this.cli.plain("{")}\n`;
         endsWith = `${indent}}`;
         iterationLimit = this.setMaxValues;
         break;
-      case "map":
+      }
+      case "map": {
         const mapSize = value.size;
         if (mapSize > this.mapMaxEntries) {
           startsWith = `${this.cli.keyword("map")} \
@@ -374,12 +378,13 @@ ${this.cli.plain("{")}\n`;
         endsWith = `${indent}${this.cli.plain("}")}`;
         iterationLimit = this.mapMaxEntries;
         break;
+      }
       default:
         return this.formatValue(indent, value);
     }
     let iteration = 0;
     switch (type) {
-      case "set":
+      case "set": {
         const iterateSet = Array.from(value);
         for (const itemKey in iterateSet) {
           const originalValue = iterateSet[itemKey];
@@ -391,6 +396,7 @@ ${this.cli.plain("{")}\n`;
           }
         }
         break;
+      }
       case "map":
         for (const entry of value.entries()) {
           const [entryKey, entryValue] = entry;
@@ -402,7 +408,7 @@ ${this.cli.plain("{")}\n`;
           }
         }
         break;
-      default:
+      default: {
         const keys = Object.keys(value)
           .sort((alpha, beta) => alpha.localeCompare(beta))
           .reduce((previous, current) => (previous[current] = void 0) || previous, {});
@@ -420,6 +426,7 @@ ${this.cli.plain("{")}\n`;
           }
         }
         break;
+      }
     }
     return `${startsWith}${print}${endsWith}`;
   }
@@ -655,7 +662,7 @@ ${this.cli.plain(")")}`,
    * @returns {[string, string]}
    */
   formatGenerator(value) {
-    return ["generator", this.cli.argument("Generator {…}")];
+    return ["generator", this.cli.argument(value.name || "Generator {…}")];
   }
   /**
    * @protected
@@ -712,7 +719,7 @@ ${this.cli.plain(")")}`,
    * @returns {[string, string]}
    */
   formatPromise(value) {
-    return ["promise", this.cli.argument("Promise {…}")];
+    return ["promise", this.cli.argument(value.name || "Promise {…}")];
   }
   /**
    * @protected
@@ -791,9 +798,9 @@ ${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.string
    */
   formatWeak(tag, value) {
     if (tag === TAG_WEAK_MAP) {
-      return ["map weak", ""];
+      return ["map weak", value.name || ""];
     } else {
-      return ["set weak", ""];
+      return ["set weak", value.name || ""];
     }
   }
   /**
