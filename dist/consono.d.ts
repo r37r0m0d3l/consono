@@ -85,4 +85,5 @@ export declare class Consono {
 }
 
 export declare const options: IConsonoOptions;
-export declare const theme: IConsonoTheme;
+export declare const THEME_DARK: IConsonoTheme;
+export declare const THEME_LIGHT: IConsonoTheme;

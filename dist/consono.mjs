@@ -1,4 +1,4 @@
-const chalk = require("chalk");
+import chalk from "chalk";
 
 const TAG_ARGUMENTS = "[object Arguments]";
 const TAG_ARRAY = "[object Array]";
@@ -901,4 +901,7 @@ function consono(variable, options = true, theme) {
   }
 }
 
-module.exports = { default: consono, consono, Consono, options: OPTIONS_DEFAULT };
+const options = OPTIONS_DEFAULT;
+
+export default consono;
+export { consono, Consono, options, THEME_LIGHT, THEME_DARK };

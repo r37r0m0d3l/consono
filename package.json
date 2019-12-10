@@ -1,18 +1,31 @@
 {
-  "name": "consono",
-  "version": "1.0.6",
+  "author": "Anton Trofimenko",
+  "bugs": {
+    "url": "https://github.com/r37r0m0d3l/consono/issues"
+  },
+  "dependencies": {
+    "chalk": "3.0.0"
+  },
   "description": "Better variable inspector for JavaScript",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest",
-    "build": "npm run compile",
-    "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- consono.js",
-    "lint": "npx eslint ./consono.js"
+  "devDependencies": {
+    "eslint": "6.7.2",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "jest": "24.9.0",
+    "prettier": "1.19.1",
+    "terser": "4.4.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/r37r0m0d3l/consono.git"
+  "exports": {
+    ".": "./dist/consono.cjs",
+    "./default": "./dist/consono.cjs",
+    "./es": "./dist/consono.mjs"
   },
+  "files": [
+    "dist/consono.cjs",
+    "dist/consono.d.ts",
+    "dist/consono.mjs"
+  ],
+  "homepage": "https://r37r0m0d3l.github.io/consono/",
   "keywords": [
     "console",
     "debug",
@@ -24,22 +37,19 @@
     "print",
     "variable"
   ],
-  "author": "Anton Trofimenko",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/r37r0m0d3l/consono/issues"
+  "main": "./dist/consono.cjs",
+  "name": "consono",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r37r0m0d3l/consono.git"
   },
-  "homepage": "https://github.com/r37r0m0d3l/consono#readme",
-  "devDependencies": {
-    "eslint": "6.7.2",
-    "eslint-config-prettier": "6.7.0",
-    "eslint-plugin-prettier": "3.1.1",
-    "jest": "24.9.0",
-    "prettier": "1.19.1",
-    "terser": "4.4.2"
+  "scripts": {
+    "build": "npm run compile",
+    "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output ./dist/consono.cjs -- ./src/consono.js",
+    "lint": "npx eslint ./src/consono.js",
+    "test": "jest"
   },
-  "dependencies": {
-    "chalk": "3.0.0"
-  },
-  "types": "./index.d.ts"
+  "types": "./dist/consono.d.ts",
+  "version": "1.0.7"
 }

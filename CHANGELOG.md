@@ -1,3 +1,8 @@
+#### 1.0.7 Dec 10, 2019
+
+* ➕️ Add ECMAScript module import option
+* ➕️ Add exported values THEME_LIGHT and THEME_DARK
+
 #### 1.0.6 Dec 04, 2019
 
 * ⬆️ Update .npmignore

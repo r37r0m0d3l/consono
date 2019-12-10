@@ -1,4 +1,4 @@
-const consono = require("../consono.js").default;
+const consono = require("../src/consono.js").default;
 
 describe("calling and printing", () => {
   it("should call console.log() three times", () => {

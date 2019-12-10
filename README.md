@@ -1,3 +1,7 @@
+![consono](docs/readme/logo.png?raw=true "consono")
+
+---
+
 Consono
 ===========
 
@@ -16,14 +20,22 @@ npm install consono
 ```
 ## Include
 
+Default is function for printing variable.
+
 ```js
 const consono = require("consono").default;
 ```
 
-or
+Require multiple items: function, constructor, options object, theme objects.
 
 ```js
-const { consono } = require("consono");
+const { consono, Consono, options, THEME_LIGHT, THEME_DARK } = require("consono");
+```
+
+Import as ECMAScript module.
+
+```js
+import { consono } from "consono/es";
 ```
 
 ## Options
@@ -36,7 +48,7 @@ const options = {
   quotesStart: `“`,
   stringMaxLength: 54,
 };
-const theme = "light";
+const theme = "light"; // default is "dark"
 const consono = new Consono(options, theme);
 consono.log("Cleared before output. Different quotes. And cut to 54!");
 // string • "Cleared before output. Different quotes. And cut to 54" (length=55, shown=54)

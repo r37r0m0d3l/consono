@@ -10,13 +10,22 @@
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
-    "ecmaVersion": 2018
+    "allowImportExportEverywhere": true,
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error",
     "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "double", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "prettier/prettier": "error",
+    "quotes": [
+      "error",
+      "double",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
     "semi": ["error", "always"]
   }
 }
