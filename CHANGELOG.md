@@ -1,3 +1,8 @@
+#### 1.0.8 Dec 10, 2019
+
+* 🐛 Fix circular reference property printing
+* 🐛 Fix minor lint errors
+
 #### 1.0.7 Dec 10, 2019
 
 * ➕️ Add ECMAScript module import option

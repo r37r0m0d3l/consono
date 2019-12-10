@@ -45,32 +45,32 @@ export declare class Consono {
   /**
    * @public
    * @static
-   * @param {boolean|object} options
-   * @param {object|string="dark"} theme
+   * @param {boolean|Object} options
+   * @param {Object|string="dark"} theme
    * @returns {Function}
    */
   public static factory(options?: boolean | IConsonoOptions, theme?: "dark" | "light" | IConsonoTheme): Function;
   /**
    * @public
    * @constructor
-   * @param {object=} options
-   * @param {object|string="dark"} theme
+   * @param {Object=} options
+   * @param {Object|string="dark"} theme
    */
   public constructor(options?: IConsonoOptions, theme?: "dark" | "light" | IConsonoTheme);
   /**
    * @public
    * @param {*} variable
-   * @returns {undefined|string}
+   * @returns {string|undefined}
    */
   public log(variable: any): string | void;
   /**
    * @public
-   * @param {object=} options
+   * @param {Object=} options
    */
   public setOptions(options?: IConsonoOptions): void;
   /**
    * @public
-   * @param {object|string="dark"} theme
+   * @param {Object|string="dark"} theme
    */
   public setTheme(theme?: "dark" | "light" | IConsonoTheme): void;
   /**

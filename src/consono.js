@@ -131,7 +131,7 @@ function deCycle(object) {
       if (prototypeTag(value) === TAG_ARRAY) {
         newIterable = [];
         for (index = 0; index < value.length; index += 1) {
-          newIterable[index] = deReCycle(value[index], `${path}[" + index + "]`);
+          newIterable[index] = deReCycle(value[index], `${path}["${index}"]`);
         }
       } else {
         newIterable = Object.create(object);
@@ -164,7 +164,7 @@ function getClass(value) {
 }
 
 function getType(value) {
-  let type = prototypeTag(value)
+  const type = prototypeTag(value)
     .toLowerCase()
     .split("[object ")
     .pop()
@@ -180,6 +180,11 @@ function getType(value) {
 }
 
 class Theme {
+  /**
+   * @constructor
+   * @param {number=3} level
+   * @param {Object|string=} theme
+   */
   constructor(level = 3, theme) {
     this.cli = new chalk.Instance({ level: Math.min(level, chalk.supportsColor.level) });
     let rgb;
@@ -226,8 +231,8 @@ class Consono {
   /**
    * @public
    * @constructor
-   * @param {object=} options
-   * @param {object|string=} theme
+   * @param {Object=} options
+   * @param {Object|string=} theme
    */
   constructor(options = {}, theme) {
     this.setOptions(options);
@@ -235,14 +240,15 @@ class Consono {
   }
   /**
    * @public
-   * @param {object|string=} theme
+   * @param {Object|string=} theme
    */
   setTheme(theme) {
+    /** @protected */
     this.cli = new Theme(this.colorize ? 3 : 0, theme);
   }
   /**
    * @public
-   * @param {object=} options
+   * @param {Object=} options
    */
   setOptions(options = {}) {
     options = options || {};
@@ -600,7 +606,7 @@ ${this.cli.plain(")")}`;
   /**
    * @protected
    * @param {string} tag
-   * @param {buffer} value
+   * @param {Buffer} value
    * @returns {[string, string]}
    */
   formatBuffer(tag, value) {
@@ -697,7 +703,7 @@ ${this.cli.plain(")")}`,
    * @returns {[string, string]}
    */
   formatNumber(value) {
-    let type = "";
+    let type;
     if (Number.isFinite(value)) {
       type = Number.isInteger(value) ? "number integer" : "number float";
     } else {
@@ -752,7 +758,7 @@ ${this.cli.plain(")")}`,
         printString = text.slice(0, this.stringMaxLength);
       }
     }
-    let value = "";
+    let value;
     if (stringLength === stringSize) {
       value = `${this.cli.string(this.quotesStart)}\
 ${this.cli.string(printString || text)}${this.cli.string(this.quotesEnd)} \
@@ -827,7 +833,7 @@ ${this.cli.plain(",")}\n`;
   /**
    * @public
    * @param {*} variable
-   * @returns {undefined|string}
+   * @returns {string|undefined}
    */
   log(variable) {
     if (this.console) {
@@ -847,9 +853,9 @@ ${this.cli.plain(",")}\n`;
 /**
  * @public
  * @static
- * @param {boolean|object} options
- * @param {object|string=} theme
- * @returns {undefined|string}
+ * @param {boolean|Object} options
+ * @param {Object|string=} theme
+ * @returns {string|undefined}
  */
 Consono.factory = function factory(options = true, theme) {
   const opts = { console: true };
@@ -876,9 +882,9 @@ Consono.factory = function factory(options = true, theme) {
 
 /**
  * @param {*} variable
- * @param {boolean|object} options
- * @param {object|string=} theme
- * @returns {undefined|string}
+ * @param {boolean|Object} options
+ * @param {Object|string=} theme
+ * @returns {string|undefined}
  */
 function consono(variable, options = true, theme) {
   const opts = { console: true };

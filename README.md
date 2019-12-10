@@ -1,7 +1,5 @@
 ![consono](docs/readme/logo.png?raw=true "consono")
 
----
-
 Consono
 ===========
 
@@ -12,6 +10,24 @@ Consono
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [Consono on github.io 🡆](https://r37r0m0d3l.github.io/consono/)
+
+## Motivation and differences from other libraries
+
+- **Light** and **dark** themes for terminal output
+- Can print to terminal or **return formatted and colored** string for later use
+- **Configurable coloring** of variables
+- **Turn on/off** output colorization
+- **Clear terminal** before output and / or **exit** after it
+- **Configurable indent** - tabs vs spaces
+- Availability to set **depth** for *object* inspection
+- Configurable **max items** for *array*, *map*, *object*, *set*
+- **Limit string length** when printing for better readability
+- Inspect **string length** vs **string chars**
+- Inspect **items count** for collection-like variables *array*, *map*, *object*, *set*
+- Actually **can inspect** *arguments*, *set* and *map*
+- Can print **function names** or mark them as **anonymous**
+- Handles **circular references**
+- And so on and so forth…
 
 ## Installation
 
@@ -29,7 +45,13 @@ const consono = require("consono").default;
 Require multiple items: function, constructor, options object, theme objects.
 
 ```js
-const { consono, Consono, options, THEME_LIGHT, THEME_DARK } = require("consono");
+const {
+  Consono,
+  consono,
+  options,
+  THEME_DARK
+  THEME_LIGHT,
+} = require("consono");
 ```
 
 Import as ECMAScript module.
@@ -51,7 +73,8 @@ const options = {
 const theme = "light"; // default is "dark"
 const consono = new Consono(options, theme);
 consono.log("Cleared before output. Different quotes. And cut to 54!");
-// string • "Cleared before output. Different quotes. And cut to 54" (length=55, shown=54)
+// string • "Cleared before output. Different quotes. And cut to 54"
+// (length=55, shown=54)
 ```
 
 ```js
@@ -80,7 +103,9 @@ consono.log("Text without colorization");
 
 ```js
 const { consono } = require("consono");
-console.debug(consono("Outputs a message only at the debug log level.", false));
+console.debug(
+  consono("Outputs a message only at the debug log level.", false)
+);
 ```
 
 ## Instance
