@@ -18,7 +18,7 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 [![GitHub stars](https://img.shields.io/github/stars/r37r0m0d3l/consono.svg?style=social&label=Star)](https://github.com/r37r0m0d3l/consono)
 [![GitHub watchers](https://img.shields.io/github/watchers/r37r0m0d3l/consono.svg?style=social&label=Watch)](https://github.com/r37r0m0d3l/consono)
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/consono)
-[![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/consono.svg?style=social&label=Fork&style=plastic)]()
+[![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/consono.svg?style=social&label=Fork)]()
 [![Twitter](https://img.shields.io/twitter/follow/r37r0m0d3l.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=r37r0m0d3l)
 
 ## Motivation and differences from other libraries
