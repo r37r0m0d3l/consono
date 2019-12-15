@@ -705,7 +705,19 @@ ${this.cli.plain(")")}`,
   formatNumber(value) {
     let type;
     if (Number.isFinite(value)) {
-      type = Number.isInteger(value) ? "number integer" : "number float";
+      if (Number.isInteger(value)) {
+        if (value === 0) {
+          if (Object.is(value, -0)) {
+            type = "number negative zero";
+          } else {
+            type = "number zero";
+          }
+        } else {
+          type = "number integer";
+        }
+      } else {
+        type = "number float";
+      }
     } else {
       type = "number";
       if (Number.isNaN(value)) {
@@ -716,7 +728,7 @@ ${this.cli.plain(")")}`,
         type += " negative infinity";
       }
     }
-    return [type, this.cli.number(value)];
+    return [type, this.cli.number(Object.is(value, -0) ? "-0" : value)];
   }
   /**
    * @protected

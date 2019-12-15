@@ -1,3 +1,7 @@
+#### 1.0.9 Dec 16, 2019
+
+* ⬆️ Update number presentation. When printing zeroes instead of 'number integer' print 'number zero' and 'number negative zero'
+
 #### 1.0.8 Dec 10, 2019
 
 * 🐛 Fix circular reference property printing
@@ -41,7 +45,7 @@
 #### 0.0.13 Nov 12, 2019
 
 * Code cleanup.
-* Update deps. 
+* Update deps.
 
 #### 0.0.12 Nov 11, 2019
 
@@ -51,11 +55,11 @@
 #### 0.0.11 Nov 11, 2019
 
 * Minor fix
-* Update `Set` example 
+* Update `Set` example
 
 #### 0.0.10 Nov 11, 2019
 
-* Now in input shown how many object properties are hidden 
+* Now in input shown how many object properties are hidden
 
 #### 0.0.9 Nov 11, 2019
 
