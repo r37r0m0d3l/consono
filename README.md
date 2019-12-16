@@ -1,4 +1,4 @@
-![consono](docs/readme/logo.png?raw=true "consono")
+![consono](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/logo.png?raw=true "consono")
 
 Consono
 ===========
@@ -13,7 +13,6 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 [![Issues](https://img.shields.io/github/issues-raw/r37r0m0d3l/consono.svg?maxAge=25000)](https://github.com/r37r0m0d3l/consono/issues)
 [![Dependecy Status](https://david-dm.org/r37r0m0d3l/consono.svg)](https://david-dm.org/r37r0m0d3l/consono)
 [![devDependencies Status](https://david-dm.org/r37r0m0d3l/consono/dev-status.svg)](https://david-dm.org/r37r0m0d3l/consono?type=dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [![GitHub stars](https://img.shields.io/github/stars/r37r0m0d3l/consono.svg?style=social&label=Star)](https://github.com/r37r0m0d3l/consono)
 [![GitHub watchers](https://img.shields.io/github/watchers/r37r0m0d3l/consono.svg?style=social&label=Watch)](https://github.com/r37r0m0d3l/consono)
@@ -41,6 +40,7 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 - Avoids **dependency hell** ([Wikipedia article](https://en.wikipedia.org/wiki/Dependency_hell)).
 - Can **clear terminal** before output.
 - Can **exit** Node.js process after output.
+- Import as **ECMAScript module**.
 - And so on and so forth…
 
 ## Installation
@@ -189,8 +189,6 @@ const defaultOptions = {
 consono("Some variable", defaultOptions);
 ```
 
-All possible outputs - [try it.](https://npm.runkit.com/consono)
-
 ## Examples
 
 ```js
@@ -198,14 +196,14 @@ consono(undefined);
 consono(null);
 ```
 
-![consono](docs/readme/001.png?raw=true "Nil")
+![Nil](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/001.png?raw=true "Nil")
 
 ```js
 consono(true);
 consono(false);
 ```
 
-![consono](docs/readme/002.png?raw=true "Boolean")
+![Boolean](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/002.png?raw=true "Boolean")
 
 
 ```js
@@ -217,27 +215,27 @@ consono(1.5);
 consono(BigInt(9007199254740991));
 ```
 
-![consono](docs/readme/003.png?raw=true "Number")
+![Number](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/003.png?raw=true "Number")
 
 ```js
 consono(new Date());
 ```
 
-![consono](docs/readme/004.png?raw=true "Date")
+![Date](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/004.png?raw=true "Date")
 
 ```js
 consono("Hello, world 😀😁😂🤣😃😄😅😆😉😊", { stringMaxLength: 17 });
 consono(Symbol("🌈"));
 ```
 
-![consono](docs/readme/005.png?raw=true "String")
+![String](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/005.png?raw=true "String")
 
 ```js
 consono(/[0-9]+/);
 consono(/\w+/giu);
 ```
 
-![consono](docs/readme/006.png?raw=true "RegExp")
+![RegExp](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/006.png?raw=true "RegExp")
 
 ```js
 consono(function() {});
@@ -245,7 +243,7 @@ consono(function helloWorld() {});
 consono(() => {});
 ```
 
-![consono](docs/readme/007.png?raw=true "Function")
+![Function](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/007.png?raw=true "Function")
 
 ```js
 consono(new Promise(() => {}));
@@ -254,21 +252,21 @@ consono(async () => {});
 consono(function* gen() { yield 1; });
 ```
 
-![consono](docs/readme/008.png?raw=true "Async")
+![Async](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/008.png?raw=true "Async")
 
 ```js
 consono([1, 2, 3]);
 consono(Int8Array.from([1, 2, 3]));
 ```
 
-![consono](docs/readme/009.png?raw=true "Array")
+![Array](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/009.png?raw=true "Array")
 
 ```js
 consono(new ArrayBuffer(8));
 consono(new SharedArrayBuffer(16));
 ```
 
-![consono](docs/readme/010.png?raw=true "Array Buffer")
+![Array Buffer](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/010.png?raw=true "Array Buffer")
 
 ```js
 consono(new Set(["a", true, { prop: 1 }]));
@@ -277,7 +275,7 @@ consono(new WeakMap());
 consono(new WeakSet());
 ```
 
-![consono](docs/readme/011.png?raw=true "Collection")
+![Collection](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/011.png?raw=true "Collection")
 
 ```js
 consono({});
@@ -288,7 +286,7 @@ myClass.deeper = new MyClass();
 consono(myClass);
 ```
 
-![consono](docs/readme/012.png?raw=true "Object")
+![Object](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/012.png?raw=true "Object")
 
 ```js
 consono(new Error("Standard error"));
@@ -299,17 +297,17 @@ consono(new SyntaxError("Not a source code"));
 consono(new TypeError("Value is not of the expected type"));
 ```
 
-![consono](docs/readme/013.png?raw=true "Error")
+![Error](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/013.png?raw=true "Error")
 
 ```js
 (function(a, b) { consono(arguments); })(true, false);
 ```
 
-![consono](docs/readme/014.png?raw=true "Arguments")
+![Arguments](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/014.png?raw=true "Arguments")
 
 
 ```js
 consono(global || globalThis, { objectMaxProps: 3 });
 ```
 
-![consono](docs/readme/015.png?raw=true "Global")
+![Global](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/015.png?raw=true "Global")

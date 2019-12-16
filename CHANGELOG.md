@@ -1,3 +1,8 @@
+#### 1.0.10 Dec 16, 2019
+
+* ⬆️ Update README
+
+
 #### 1.0.9 Dec 16, 2019
 
 * ⬆️ Update number presentation. When printing zeroes instead of 'number integer' print 'number zero' and 'number negative zero'
