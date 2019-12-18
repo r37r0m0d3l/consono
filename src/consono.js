@@ -45,6 +45,23 @@ const OPTIONS_DEFAULT = {
   stringMaxLength: 360,
 };
 
+const OPTIONS_KEYS = [
+  "arrayMaxElements",
+  "assignSymbol",
+  "clear",
+  "colorize",
+  "console",
+  "depth",
+  "exit",
+  "indent",
+  "mapMaxEntries",
+  "objectMaxProps",
+  "quotesEnd",
+  "quotesStart",
+  "setMaxValues",
+  "stringMaxLength",
+];
+
 const THEME_DARK = {
   argument: [253, 151, 31],
   boolean: [174, 129, 255],
@@ -155,8 +172,18 @@ function closureNameExtract(func) {
   return result ? result[1] : "";
 }
 
-function objSize(obj) {
+function objectSize(obj) {
   return Object.keys(obj).length;
+}
+
+function objectPick(object, keys) {
+  if (!keys.length || !Object.keys(object).length) {
+    return {};
+  }
+  return keys.reduce((accumulator, key) => {
+    accumulator[key] = object[key];
+    return accumulator;
+  }, {});
 }
 
 function getClass(value) {
@@ -310,7 +337,7 @@ ${this.cli.plain("[")}\n`;
         const origObject = value;
         value = deCycle(value);
         if (describe === true) {
-          const size = objSize(value);
+          const size = objectSize(value);
           let printSize = "";
           if (size > this.objectMaxProps) {
             printSize = `${this.cli.plain("(")}\
@@ -545,7 +572,7 @@ ${this.cli.plain("{")}\n`;
       case "object":
         type = "";
         if (this.currentDepth === this.depth) {
-          const size = objSize(originalValue);
+          const size = objectSize(originalValue);
           let printSize = "";
           if (size > this.objectMaxProps) {
             printSize = `${this.cli.plain("(")}\
@@ -860,58 +887,65 @@ ${this.cli.plain(",")}\n`;
       return this.toPrintable(variable);
     }
   }
+  /**
+   * @name factory
+   * @public
+   * @static
+   * @param {boolean|Object} options
+   * @param {Object|string=} theme
+   * @returns {string|undefined}
+   */
+  static factory(options = true, theme) {
+    const createdOptions = Consono.createOptions(options);
+    const instance = new Consono(createdOptions, theme);
+    return function consono(variable) {
+      if (createdOptions.console) {
+        if (createdOptions.clear) {
+          clearCli();
+        }
+        console.log(instance.toPrintable(variable));
+        if (createdOptions.exit) {
+          processExit();
+        }
+      } else {
+        return instance.toPrintable(variable);
+      }
+    };
+  }
+  /**
+   * @name createOptions
+   * @public
+   * @static
+   * @param {boolean|Object} options
+   * @returns {Object}
+   */
+  static createOptions(options = true) {
+    const basicOptions = { ...OPTIONS_DEFAULT };
+    if (typeof options === "boolean") {
+      basicOptions.console = options;
+    } else if (options && typeof options === "object") {
+      Object.assign(basicOptions, options);
+    }
+    return objectPick(basicOptions, OPTIONS_KEYS);
+  }
 }
 
 /**
- * @public
- * @static
- * @param {boolean|Object} options
- * @param {Object|string=} theme
- * @returns {string|undefined}
- */
-Consono.factory = function factory(options = true, theme) {
-  const opts = { console: true };
-  if (typeof options === "boolean") {
-    opts.console = options;
-  } else if (options && typeof options === "object") {
-    Object.assign(opts, options);
-  }
-  const instance = new Consono(options, theme);
-  return function consono(any) {
-    if (opts.console) {
-      if (opts.clear) {
-        clearCli();
-      }
-      console.log(instance.toPrintable(any));
-      if (opts.exit) {
-        processExit();
-      }
-    } else {
-      return instance.toPrintable(any);
-    }
-  };
-};
-
-/**
+ * @name consono
  * @param {*} variable
  * @param {boolean|Object} options
  * @param {Object|string=} theme
  * @returns {string|undefined}
  */
 function consono(variable, options = true, theme) {
-  const opts = { console: true };
-  if (typeof options === "boolean") {
-    opts.console = options;
-  } else if (options && typeof options === "object") {
-    Object.assign(opts, options);
-  }
-  const instance = new Consono(options, theme);
-  if (opts.console) {
-    if (opts.clear) {
+  const createdOptions = Consono.createOptions(options);
+  const instance = new Consono(createdOptions, theme);
+  if (createdOptions.console) {
+    if (createdOptions.clear) {
       clearCli();
     }
     console.log(instance.toPrintable(variable));
-    if (opts.exit) {
+    if (createdOptions.exit) {
       processExit();
     }
   } else {
@@ -919,4 +953,11 @@ function consono(variable, options = true, theme) {
   }
 }
 
-module.exports = { default: consono, consono, Consono, options: OPTIONS_DEFAULT, THEME_LIGHT, THEME_DARK };
+module.exports = {
+  default: consono,
+  consono,
+  Consono,
+  options: OPTIONS_DEFAULT,
+  THEME_LIGHT,
+  THEME_DARK,
+};

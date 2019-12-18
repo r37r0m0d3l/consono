@@ -49,7 +49,10 @@ export declare class Consono {
    * @param {Object|string="dark"} theme
    * @returns {Function}
    */
-  public static factory(options?: boolean | IConsonoOptions, theme?: "dark" | "light" | IConsonoTheme): Function;
+  public static factory(
+    options?: boolean | IConsonoOptions,
+    theme?: "dark" | "light" | IConsonoTheme,
+  ): (variable: any) => string | void;
   /**
    * @public
    * @constructor

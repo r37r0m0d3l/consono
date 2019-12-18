@@ -1,11 +1,11 @@
-![consono](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/logo.png?raw=true "consono")
+![Consono](docs/readme/logo.png?raw=true "Consono")
 
 Consono
 ===========
 
 The most **informative** and **correct** variable inspector for JavaScript on the web.
 
-[Consono on github.io ->](https://r37r0m0d3l.github.io/consono/)
+[Consono on github.io](https://r37r0m0d3l.github.io/consono/)
 
 [![NPM Version](https://img.shields.io/npm/v/consono.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/consono.svg?style=flat)]()
@@ -196,14 +196,14 @@ consono(undefined);
 consono(null);
 ```
 
-![Nil](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/001.png?raw=true "Nil")
+![Nil](docs/readme/001.png?raw=true "Nil")
 
 ```js
 consono(true);
 consono(false);
 ```
 
-![Boolean](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/002.png?raw=true "Boolean")
+![Boolean](docs/readme/002.png?raw=true "Boolean")
 
 
 ```js
@@ -215,27 +215,27 @@ consono(1.5);
 consono(BigInt(9007199254740991));
 ```
 
-![Number](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/003.png?raw=true "Number")
+![Number](docs/readme/003.png?raw=true "Number")
 
 ```js
 consono(new Date());
 ```
 
-![Date](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/004.png?raw=true "Date")
+![Date](docs/readme/004.png?raw=true "Date")
 
 ```js
 consono("Hello, world 😀😁😂🤣😃😄😅😆😉😊", { stringMaxLength: 17 });
 consono(Symbol("🌈"));
 ```
 
-![String](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/005.png?raw=true "String")
+![String](docs/readme/005.png?raw=true "String")
 
 ```js
 consono(/[0-9]+/);
 consono(/\w+/giu);
 ```
 
-![RegExp](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/006.png?raw=true "RegExp")
+![RegExp](docs/readme/006.png?raw=true "RegExp")
 
 ```js
 consono(function() {});
@@ -243,7 +243,7 @@ consono(function helloWorld() {});
 consono(() => {});
 ```
 
-![Function](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/007.png?raw=true "Function")
+![Function](docs/readme/007.png?raw=true "Function")
 
 ```js
 consono(new Promise(() => {}));
@@ -252,21 +252,21 @@ consono(async () => {});
 consono(function* gen() { yield 1; });
 ```
 
-![Async](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/008.png?raw=true "Async")
+![Async](docs/readme/008.png?raw=true "Async")
 
 ```js
 consono([1, 2, 3]);
 consono(Int8Array.from([1, 2, 3]));
 ```
 
-![Array](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/009.png?raw=true "Array")
+![Array](docs/readme/009.png?raw=true "Array")
 
 ```js
 consono(new ArrayBuffer(8));
 consono(new SharedArrayBuffer(16));
 ```
 
-![Array Buffer](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/010.png?raw=true "Array Buffer")
+![Array Buffer](docs/readme/010.png?raw=true "Array Buffer")
 
 ```js
 consono(new Set(["a", true, { prop: 1 }]));
@@ -275,7 +275,7 @@ consono(new WeakMap());
 consono(new WeakSet());
 ```
 
-![Collection](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/011.png?raw=true "Collection")
+![Collection](docs/readme/011.png?raw=true "Collection")
 
 ```js
 consono({});
@@ -286,7 +286,7 @@ myClass.deeper = new MyClass();
 consono(myClass);
 ```
 
-![Object](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/012.png?raw=true "Object")
+![Object](docs/readme/012.png?raw=true "Object")
 
 ```js
 consono(new Error("Standard error"));
@@ -297,17 +297,17 @@ consono(new SyntaxError("Not a source code"));
 consono(new TypeError("Value is not of the expected type"));
 ```
 
-![Error](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/013.png?raw=true "Error")
+![Error](docs/readme/013.png?raw=true "Error")
 
 ```js
 (function(a, b) { consono(arguments); })(true, false);
 ```
 
-![Arguments](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/014.png?raw=true "Arguments")
+![Arguments](docs/readme/014.png?raw=true "Arguments")
 
 
 ```js
 consono(global || globalThis, { objectMaxProps: 3 });
 ```
 
-![Global](https://raw.githubusercontent.com/r37r0m0d3l/consono/master/docs/readme/015.png?raw=true "Global")
+![Global](docs/readme/015.png?raw=true "Global")
