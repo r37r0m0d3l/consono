@@ -1,4 +1,4 @@
-![Consono](docs/readme/logo.gif?raw=true "Consono")
+![Consono](docs/readme/logo.png?raw=true "Consono")
 
 Consono
 ===========
@@ -196,14 +196,14 @@ consono(undefined);
 consono(null);
 ```
 
-![Nil](docs/readme/001.gif?raw=true "Nil")
+![Nil](docs/readme/001.png?raw=true "Nil")
 
 ```js
 consono(true);
 consono(false);
 ```
 
-![Boolean](docs/readme/002.gif?raw=true "Boolean")
+![Boolean](docs/readme/002.png?raw=true "Boolean")
 
 
 ```js
@@ -215,27 +215,27 @@ consono(1.5);
 consono(BigInt(9007199254740991));
 ```
 
-![Number](docs/readme/003.gif?raw=true "Number")
+![Number](docs/readme/003.png?raw=true "Number")
 
 ```js
 consono(new Date());
 ```
 
-![Date](docs/readme/004.gif?raw=true "Date")
+![Date](docs/readme/004.png?raw=true "Date")
 
 ```js
 consono("Hello, world 😀😁😂🤣😃😄😅😆😉😊", { stringMaxLength: 17 });
 consono(Symbol("🌈"));
 ```
 
-![String](docs/readme/005.gif?raw=true "String")
+![String](docs/readme/005.png?raw=true "String")
 
 ```js
 consono(/[0-9]+/);
 consono(/\w+/giu);
 ```
 
-![RegExp](docs/readme/006.gif?raw=true "RegExp")
+![RegExp](docs/readme/006.png?raw=true "RegExp")
 
 ```js
 consono(function() {});
@@ -243,7 +243,7 @@ consono(function helloWorld() {});
 consono(() => {});
 ```
 
-![Function](docs/readme/007.gif?raw=true "Function")
+![Function](docs/readme/007.png?raw=true "Function")
 
 ```js
 consono(new Promise(() => {}));
@@ -252,21 +252,21 @@ consono(async () => {});
 consono(function* gen() { yield 1; });
 ```
 
-![Async](docs/readme/008.gif?raw=true "Async")
+![Async](docs/readme/008.png?raw=true "Async")
 
 ```js
 consono([1, 2, 3]);
 consono(Int8Array.from([1, 2, 3]));
 ```
 
-![Array](docs/readme/009.gif?raw=true "Array")
+![Array](docs/readme/009.png?raw=true "Array")
 
 ```js
 consono(new ArrayBuffer(8));
 consono(new SharedArrayBuffer(16));
 ```
 
-![Array Buffer](docs/readme/010.gif?raw=true "Array Buffer")
+![Array Buffer](docs/readme/010.png?raw=true "Array Buffer")
 
 ```js
 consono(new Set(["a", true, { prop: 1 }]));
@@ -275,18 +275,15 @@ consono(new WeakMap());
 consono(new WeakSet());
 ```
 
-![Collection](docs/readme/011.gif?raw=true "Collection")
+![Collection](docs/readme/011.png?raw=true "Collection")
 
 ```js
 consono({});
 
-class MyClass {}
-const myClass = new MyClass();
-myClass.deeper = new MyClass();
-consono(myClass);
-```
+class MyClass {} const myClass = new MyClass(); myClass.deeper = new
+MyClass(); consono(myClass); ```
 
-![Object](docs/readme/012.gif?raw=true "Object")
+![Object](docs/readme/012.png?raw=true "Object")
 
 ```js
 consono(new Error("Standard error"));
@@ -297,17 +294,17 @@ consono(new SyntaxError("Not a source code"));
 consono(new TypeError("Value is not of the expected type"));
 ```
 
-![Error](docs/readme/013.gif?raw=true "Error")
+![Error](docs/readme/013.png?raw=true "Error")
 
 ```js
 (function(a, b) { consono(arguments); })(true, false);
 ```
 
-![Arguments](docs/readme/014.gif?raw=true "Arguments")
+![Arguments](docs/readme/014.png?raw=true "Arguments")
 
 
 ```js
 consono(global || globalThis, { objectMaxProps: 3 });
 ```
 
-![Global](docs/readme/015.gif?raw=true "Global")
+![Global](docs/readme/015.png?raw=true "Global")
