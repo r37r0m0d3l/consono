@@ -1,3 +1,7 @@
+#### 1.0.13 Dec 22, 2019
+
+* ⬆️ Update deps.
+
 #### 1.0.12 Dec 22, 2019
 
 * ⬆️ Update deps.
