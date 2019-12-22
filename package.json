@@ -48,5 +48,5 @@
     "test": "jest"
   },
   "types": "./dist/consono.d.ts",
-  "version": "1.0.13"
+  "version": "1.0.14"
 }

@@ -1,3 +1,7 @@
+#### 1.0.14 Dec 22, 2019
+
+* ⬆️ Update README
+
 #### 1.0.13 Dec 22, 2019
 
 * ⬆️ Update deps.
