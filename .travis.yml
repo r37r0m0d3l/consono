@@ -8,5 +8,4 @@ npm:
 env:
   - TEST_SUITE=test
 script:
-  - npm run build
   - npm run $TEST_SUITE
