@@ -41,6 +41,7 @@ const OPTIONS_DEFAULT = {
   objectMaxProps: 99,
   quotesEnd: `"`,
   quotesStart: `"`,
+  returns: true,
   setMaxValues: 99,
   stringMaxLength: 360,
 };
@@ -58,6 +59,7 @@ const OPTIONS_KEYS = [
   "objectMaxProps",
   "quotesEnd",
   "quotesStart",
+  "returns",
   "setMaxValues",
   "stringMaxLength",
 ];
@@ -102,9 +104,9 @@ function clearCli() {
   }
 }
 
-function processExit() {
+function processExit(code = 0) {
   try {
-    process.exit(0);
+    process.exit(code);
   } catch (error) {
     //
   }
@@ -255,6 +257,24 @@ class Theme {
 }
 
 class Consono {
+  #arrayMaxElements;
+  #arrow;
+  #clear;
+  #colorize;
+  #console;
+  #currentDepth;
+  #depth;
+  #exit;
+  #indentType;
+  #indent;
+  #mapMaxEntries;
+  #objectMaxProps;
+  #quotesEnd;
+  #quotesStart;
+  #returns;
+  #setMaxValues;
+  #stringMaxLength;
+  #theme;
   /**
    * @public
    * @constructor
@@ -271,7 +291,7 @@ class Consono {
    */
   setTheme(theme) {
     /** @protected */
-    this.cli = new Theme(this.colorize ? 3 : 0, theme);
+    this.#theme = new Theme(this.#colorize ? 3 : 0, theme);
   }
   /**
    * @public
@@ -283,22 +303,23 @@ class Consono {
       ...OPTIONS_DEFAULT,
       ...options,
     };
-    this.arrayMaxElements = opts.arrayMaxElements;
-    this.arrow = opts.assignSymbol;
-    this.clear = opts.clear;
-    this.colorize = opts.colorize;
-    this.console = opts.console;
-    this.currentDepth = 0;
-    this.depth = opts.depth;
-    this.exit = opts.exit;
-    this.indentType = opts.indent;
-    this.indent = this.indentType.repeat(opts.indentPad);
-    this.mapMaxEntries = opts.mapMaxEntries;
-    this.objectMaxProps = opts.objectMaxProps;
-    this.quotesEnd = opts.quotesEnd;
-    this.quotesStart = opts.quotesStart;
-    this.setMaxValues = opts.setMaxValues;
-    this.stringMaxLength = opts.stringMaxLength;
+    this.#arrayMaxElements = Number.parseInt(opts.arrayMaxElements);
+    this.#arrow = `${opts.assignSymbol}`;
+    this.#clear = !!opts.clear;
+    this.#colorize = !!opts.colorize;
+    this.#console = !!opts.console;
+    this.#currentDepth = 0;
+    this.#depth = Number.parseInt(opts.depth);
+    this.#exit = !!opts.exit;
+    this.#indentType = `${opts.indent}`;
+    this.#indent = this.#indentType.repeat(opts.indentPad);
+    this.#mapMaxEntries = Number.parseInt(opts.mapMaxEntries);
+    this.#objectMaxProps = Number.parseInt(opts.objectMaxProps);
+    this.#quotesEnd = `${opts.quotesEnd}`;
+    this.#quotesStart = `${opts.quotesStart}`;
+    this.#returns = !!opts.returns;
+    this.#setMaxValues = Number.parseInt(opts.setMaxValues);
+    this.#stringMaxLength = Number.parseInt(opts.stringMaxLength);
   }
   /**
    * @public
@@ -317,20 +338,20 @@ class Consono {
     switch (type) {
       case "array": {
         const arrLength = value.length;
-        if (arrLength > this.arrayMaxElements) {
-          startsWith = `${this.cli.keyword("array")}${subType.length ? ` ${this.cli.keyword(subType)}` : ""} \
-${this.cli.plain("(")}${this.cli.argument("elements")}${this.cli.plain("=")}\
-${this.cli.number(arrLength)}${this.cli.plain(",")} \
-${this.cli.argument("shown")}=${this.cli.number(this.arrayMaxElements)}${this.cli.plain(")")} \
-${this.cli.plain("[")}\n`;
+        if (arrLength > this.#arrayMaxElements) {
+          startsWith = `${this.#theme.keyword("array")}${subType.length ? ` ${this.#theme.keyword(subType)}` : ""} \
+${this.#theme.plain("(")}${this.#theme.argument("elements")}${this.#theme.plain("=")}\
+${this.#theme.number(arrLength)}${this.#theme.plain(",")} \
+${this.#theme.argument("shown")}=${this.#theme.number(this.#arrayMaxElements)}${this.#theme.plain(")")} \
+${this.#theme.plain("[")}\n`;
         } else {
-          startsWith = `${this.cli.keyword("array")}${subType.length ? ` ${this.cli.keyword(subType)}` : ""} \
-${this.cli.plain("(")}${this.cli.argument("elements")}${this.cli.plain("=")}\
-${this.cli.number(arrLength)}${this.cli.plain(")")} \
-${this.cli.plain("[")}\n`;
+          startsWith = `${this.#theme.keyword("array")}${subType.length ? ` ${this.#theme.keyword(subType)}` : ""} \
+${this.#theme.plain("(")}${this.#theme.argument("elements")}${this.#theme.plain("=")}\
+${this.#theme.number(arrLength)}${this.#theme.plain(")")} \
+${this.#theme.plain("[")}\n`;
         }
-        endsWith = `${indent}${this.cli.plain("]")}`;
-        iterationLimit = this.arrayMaxElements;
+        endsWith = `${indent}${this.#theme.plain("]")}`;
+        iterationLimit = this.#arrayMaxElements;
         break;
       }
       case "object": {
@@ -339,77 +360,79 @@ ${this.cli.plain("[")}\n`;
         if (describe === true) {
           const size = objectSize(value);
           let printSize = "";
-          if (size > this.objectMaxProps) {
-            printSize = `${this.cli.plain("(")}\
-${this.cli.argument("props")}${this.cli.plain("=")}${this.cli.number(size)}\
-${this.cli.plain(",")} \
-${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.objectMaxProps)}${this.cli.plain(")")}`;
+          if (size > this.#objectMaxProps) {
+            printSize = `${this.#theme.plain("(")}\
+${this.#theme.argument("props")}${this.#theme.plain("=")}${this.#theme.number(size)}\
+${this.#theme.plain(",")} \
+${this.#theme.argument("shown")}${this.#theme.plain("=")}${this.#theme.number(this.#objectMaxProps)}${this.#theme.plain(
+              ")",
+            )}`;
           } else {
-            printSize = `${this.cli.plain("(")}\
-${this.cli.argument("props")}${this.cli.plain("=")}${this.cli.number(size)}\
-${this.cli.plain(")")}`;
+            printSize = `${this.#theme.plain("(")}\
+${this.#theme.argument("props")}${this.#theme.plain("=")}${this.#theme.number(size)}\
+${this.#theme.plain(")")}`;
           }
-          startsWith = `${this.cli.keyword("object")} \
-${this.cli.keyword(getClass(origObject))} ${printSize} ${this.cli.plain("{")}\n`;
-          endsWith = `${indent}${this.cli.plain("}")}`;
+          startsWith = `${this.#theme.keyword("object")} \
+${this.#theme.keyword(getClass(origObject))} ${printSize} ${this.#theme.plain("{")}\n`;
+          endsWith = `${indent}${this.#theme.plain("}")}`;
         } else {
-          startsWith = `${this.cli.plain("(")}\n`;
-          endsWith = `${indent}${this.cli.plain(")")}`;
+          startsWith = `${this.#theme.plain("(")}\n`;
+          endsWith = `${indent}${this.#theme.plain(")")}`;
         }
-        iterationLimit = this.objectMaxProps;
+        iterationLimit = this.#objectMaxProps;
         break;
       }
       case "arguments": {
         const argLength = value.length;
-        if (argLength > this.arrayMaxElements) {
-          startsWith = `${this.cli.keyword("arguments")} \
-${this.cli.plain("(")}\
-${this.cli.argument("arity")}${this.cli.plain("=")}${this.cli.number(argLength)}, \
-${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.arrayMaxElements)}\
-${this.cli.plain(")")} ${this.cli.plain("[")}\n`;
+        if (argLength > this.#arrayMaxElements) {
+          startsWith = `${this.#theme.keyword("arguments")} \
+${this.#theme.plain("(")}\
+${this.#theme.argument("arity")}${this.#theme.plain("=")}${this.#theme.number(argLength)}, \
+${this.#theme.argument("shown")}${this.#theme.plain("=")}${this.#theme.number(this.#arrayMaxElements)}\
+${this.#theme.plain(")")} ${this.#theme.plain("[")}\n`;
         } else {
-          startsWith = `${this.cli.keyword("arguments")} \
-${this.cli.plain("(")}\
-${this.cli.argument("arity")}${this.cli.plain("=")}${this.cli.number(argLength)}\
-${this.cli.plain(")")} ${this.cli.plain("[")}\n`;
+          startsWith = `${this.#theme.keyword("arguments")} \
+${this.#theme.plain("(")}\
+${this.#theme.argument("arity")}${this.#theme.plain("=")}${this.#theme.number(argLength)}\
+${this.#theme.plain(")")} ${this.#theme.plain("[")}\n`;
         }
-        endsWith = `${indent}${this.cli.plain("]")}`;
-        iterationLimit = this.arrayMaxElements;
+        endsWith = `${indent}${this.#theme.plain("]")}`;
+        iterationLimit = this.#arrayMaxElements;
         break;
       }
       case "set": {
         const setSize = value.size;
-        if (setSize > this.setMaxValues) {
-          startsWith = `${this.cli.keyword("set")} \
-${this.cli.plain("(")}\
-${this.cli.argument("size")}${this.cli.plain("=")}${this.cli.number(setSize)}${this.cli.plain(",")} \
-${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.setMaxValues)}\
-${this.cli.plain(")")} ${this.cli.plain("{")}\n`;
+        if (setSize > this.#setMaxValues) {
+          startsWith = `${this.#theme.keyword("set")} \
+${this.#theme.plain("(")}\
+${this.#theme.argument("size")}${this.#theme.plain("=")}${this.#theme.number(setSize)}${this.#theme.plain(",")} \
+${this.#theme.argument("shown")}${this.#theme.plain("=")}${this.#theme.number(this.#setMaxValues)}\
+${this.#theme.plain(")")} ${this.#theme.plain("{")}\n`;
         } else {
-          startsWith = `${this.cli.keyword("set")} \
-${this.cli.plain("(")}\
-${this.cli.argument("size")}${this.cli.plain("=")}${this.cli.number(setSize)}\
-${this.cli.plain(")")} ${this.cli.plain("{")}\n`;
+          startsWith = `${this.#theme.keyword("set")} \
+${this.#theme.plain("(")}\
+${this.#theme.argument("size")}${this.#theme.plain("=")}${this.#theme.number(setSize)}\
+${this.#theme.plain(")")} ${this.#theme.plain("{")}\n`;
         }
         endsWith = `${indent}}`;
-        iterationLimit = this.setMaxValues;
+        iterationLimit = this.#setMaxValues;
         break;
       }
       case "map": {
         const mapSize = value.size;
-        if (mapSize > this.mapMaxEntries) {
-          startsWith = `${this.cli.keyword("map")} \
-${this.cli.plain("(")}\
-${this.cli.argument("size")}${this.cli.plain("=")}${this.cli.number(mapSize)}${this.cli.plain(",")} \
-${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.mapMaxEntries)}\
-${this.cli.plain(")")} ${this.cli.plain("{")}\n`;
+        if (mapSize > this.#mapMaxEntries) {
+          startsWith = `${this.#theme.keyword("map")} \
+${this.#theme.plain("(")}\
+${this.#theme.argument("size")}${this.#theme.plain("=")}${this.#theme.number(mapSize)}${this.#theme.plain(",")} \
+${this.#theme.argument("shown")}${this.#theme.plain("=")}${this.#theme.number(this.#mapMaxEntries)}\
+${this.#theme.plain(")")} ${this.#theme.plain("{")}\n`;
         } else {
-          startsWith = `${this.cli.keyword("map")} ${this.cli.plain("(")}\
-${this.cli.argument("size")}${this.cli.plain("=")}${this.cli.number(mapSize)}${this.cli.plain(")")} \
-${this.cli.plain("{")}\n`;
+          startsWith = `${this.#theme.keyword("map")} ${this.#theme.plain("(")}\
+${this.#theme.argument("size")}${this.#theme.plain("=")}${this.#theme.number(mapSize)}${this.#theme.plain(")")} \
+${this.#theme.plain("{")}\n`;
         }
-        endsWith = `${indent}${this.cli.plain("}")}`;
-        iterationLimit = this.mapMaxEntries;
+        endsWith = `${indent}${this.#theme.plain("}")}`;
+        iterationLimit = this.#mapMaxEntries;
         break;
       }
       default:
@@ -571,25 +594,26 @@ ${this.cli.plain("{")}\n`;
       case "array":
       case "object":
         type = "";
-        if (this.currentDepth === this.depth) {
+        if (this.#currentDepth === this.#depth) {
           const size = objectSize(originalValue);
           let printSize = "";
-          if (size > this.objectMaxProps) {
-            printSize = `${this.cli.plain("(")}\
-${this.cli.argument("props")}${this.cli.plain("=")}${this.cli.number(size)}${this.cli.plain(",")} \
-${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.objectMaxProps)}\
-${this.cli.plain(")")}`;
+          if (size > this.#objectMaxProps) {
+            printSize = `${this.#theme.plain("(")}\
+${this.#theme.argument("props")}${this.#theme.plain("=")}${this.#theme.number(size)}${this.#theme.plain(",")} \
+${this.#theme.argument("shown")}${this.#theme.plain("=")}${this.#theme.number(this.#objectMaxProps)}\
+${this.#theme.plain(")")}`;
           } else {
-            printSize = `${this.cli.plain("(")}\
-${this.cli.argument("props")}${this.cli.plain("=")}${this.cli.number(size)}\
-${this.cli.plain(")")}`;
+            printSize = `${this.#theme.plain("(")}\
+${this.#theme.argument("props")}${this.#theme.plain("=")}${this.#theme.number(size)}\
+${this.#theme.plain(")")}`;
           }
-          value = `${this.cli.keyword("object")} ${this.cli.keyword(getClass(originalValue))} ${printSize}`;
+          value = `${this.#theme.keyword("object")} ${this.#theme.keyword(getClass(originalValue))} ${printSize}`;
         } else {
-          this.currentDepth += 1;
-          const ind = type === "array" ? `${this.cli.comment(indent)}` : `${indent}${this.cli.comment(this.indent)}`;
-          value = this.toPrintable(originalValue, ind, describe, subType);
-          this.currentDepth -= 1;
+          this.#currentDepth += 1;
+          const indentToPrint =
+            type === "array" ? `${this.#theme.comment(indent)}` : `${indent}${this.#theme.comment(this.#indent)}`;
+          value = this.toPrintable(originalValue, indentToPrint, describe, subType);
+          this.#currentDepth -= 1;
         }
         break;
       default:
@@ -604,7 +628,7 @@ ${this.cli.plain(")")}`;
         }
         break;
     }
-    return `${this.cli.keyword(type)}${type.length ? this.cli.plain(" • ") : ""}${value}`;
+    return `${this.#theme.keyword(type)}${type.length ? this.#theme.plain(" • ") : ""}${value}`;
   }
   /**
    * @protected
@@ -620,7 +644,7 @@ ${this.cli.plain(")")}`;
    * @returns {[string, string]}
    */
   formatBigInt(value) {
-    return ["number bigint", this.cli.number(value)];
+    return ["number bigint", this.#theme.number(value)];
   }
   /**
    * @protected
@@ -628,7 +652,7 @@ ${this.cli.plain(")")}`;
    * @returns {[string, string]}
    */
   formatBoolean(value) {
-    return ["boolean", this.cli.boolean(value)];
+    return ["boolean", this.#theme.boolean(value)];
   }
   /**
    * @protected
@@ -639,9 +663,9 @@ ${this.cli.plain(")")}`;
   formatBuffer(tag, value) {
     return [
       TAG_ARRAY_BUFFER ? "array buffer" : "array buffer shared",
-      `${this.cli.plain("(")}\
-${this.cli.argument("bytes")}${this.cli.plain("=")}${this.cli.number(value.byteLength)}\
-${this.cli.plain(")")}`,
+      `${this.#theme.plain("(")}\
+${this.#theme.argument("bytes")}${this.#theme.plain("=")}${this.#theme.number(value.byteLength)}\
+${this.#theme.plain(")")}`,
     ];
   }
   /**
@@ -650,7 +674,7 @@ ${this.cli.plain(")")}`,
    * @returns {[string, string]}
    */
   formatDate(value) {
-    return ["date", this.cli.name(value.toISOString() + " • " + value.toString())];
+    return ["date", this.#theme.name(value.toISOString() + " • " + value.toString())];
   }
   /**
    * @protected
@@ -658,7 +682,7 @@ ${this.cli.plain(")")}`,
    * @returns {[string, *]}
    */
   formatError(value) {
-    return [`error ${getClass(value)}`, this.cli.string(value.message)];
+    return [`error ${getClass(value)}`, this.#theme.string(value.message)];
   }
   /**
    * @protected
@@ -678,7 +702,7 @@ ${this.cli.plain(")")}`,
     }
     const name = closureNameExtract(value);
     if (name.length) {
-      type = `${type} ${this.cli.name(name)}`;
+      type = `${type} ${this.#theme.name(name)}`;
     } else {
       type = `${type} anonymous`;
     }
@@ -687,14 +711,14 @@ ${this.cli.plain(")")}`,
         .replace(/\n+/g, "")
         .split(")")
         .shift() + ") {…}";
-    return [type, this.cli.argument(source)];
+    return [type, this.#theme.argument(source)];
   }
   /**
    * @protected
    * @returns {[string, string]}
    */
   formatGenerator() {
-    return ["generator", this.cli.argument("Generator {…}")];
+    return ["generator", this.#theme.argument("Generator {…}")];
   }
   /**
    * @protected
@@ -706,7 +730,7 @@ ${this.cli.plain(")")}`,
   formatGlobal(tag, value, indent) {
     return [
       `global ${tag === TAG_WINDOW ? "window" : "this"}`,
-      this.toPrintable({ ...value }, `${indent}${this.cli.comment(this.indent)}`),
+      this.toPrintable({ ...value }, `${indent}${this.#theme.comment(this.#indent)}`),
     ];
   }
   /**
@@ -722,7 +746,7 @@ ${this.cli.plain(")")}`,
    * @returns {[string, string]}
    */
   formatNull() {
-    return ["empty", this.cli.string("null")];
+    return ["empty", this.#theme.string("null")];
   }
   /**
    * @protected
@@ -755,14 +779,14 @@ ${this.cli.plain(")")}`,
         type += " negative infinity";
       }
     }
-    return [type, this.cli.number(Object.is(value, -0) ? "-0" : value)];
+    return [type, this.#theme.number(Object.is(value, -0) ? "-0" : value)];
   }
   /**
    * @protected
    * @returns {[string, string]}
    */
   formatPromise() {
-    return ["promise", this.cli.argument("Promise {…}")];
+    return ["promise", this.#theme.argument("Promise {…}")];
   }
   /**
    * @protected
@@ -770,7 +794,7 @@ ${this.cli.plain(")")}`,
    * @returns {[string, string]}
    */
   formatRegexp(value) {
-    return [`regexp ${value.flags}`, this.cli.name(value)];
+    return [`regexp ${value.flags}`, this.#theme.name(value)];
   }
   /**
    * @protected
@@ -790,30 +814,32 @@ ${this.cli.plain(")")}`,
     const stringSize = stringAsArray.length;
     const stringLength = text.length;
     let printString = "";
-    if (this.stringMaxLength > 0) {
+    if (this.#stringMaxLength > 0) {
       if (stringLength !== stringSize) {
-        printString = stringAsArray.slice(0, this.stringMaxLength).join("");
+        printString = stringAsArray.slice(0, this.#stringMaxLength).join("");
       } else {
-        printString = text.slice(0, this.stringMaxLength);
+        printString = text.slice(0, this.#stringMaxLength);
       }
     }
     let value;
     if (stringLength === stringSize) {
-      value = `${this.cli.string(this.quotesStart)}\
-${this.cli.string(printString || text)}${this.cli.string(this.quotesEnd)} \
-${this.cli.plain("(")}${this.cli.argument("length")}${this.cli.plain("=")}${this.cli.number(stringLength)}`;
+      value = `${this.#theme.string(this.#quotesStart)}\
+${this.#theme.string(printString || text)}${this.#theme.string(this.#quotesEnd)} \
+${this.#theme.plain("(")}${this.#theme.argument("length")}${this.#theme.plain("=")}${this.#theme.number(stringLength)}`;
     } else {
-      value = `${this.cli.string(this.quotesStart)}\
-${this.cli.string(printString || text)}${this.cli.string(this.quotesEnd)} \
-${this.cli.plain("(")}\
-${this.cli.argument("length")}${this.cli.plain("=")}${this.cli.number(stringLength)}${this.cli.plain(",")} \
-${this.cli.argument("symbols")}${this.cli.plain("=")}${this.cli.number(stringSize)}`;
+      value = `${this.#theme.string(this.#quotesStart)}\
+${this.#theme.string(printString || text)}${this.#theme.string(this.#quotesEnd)} \
+${this.#theme.plain("(")}\
+${this.#theme.argument("length")}${this.#theme.plain("=")}${this.#theme.number(stringLength)}${this.#theme.plain(",")} \
+${this.#theme.argument("symbols")}${this.#theme.plain("=")}${this.#theme.number(stringSize)}`;
     }
-    if (stringSize > this.stringMaxLength) {
-      value = `${value}${this.cli.plain(",")} \
-${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.stringMaxLength)}${this.cli.plain(")")}`;
+    if (stringSize > this.#stringMaxLength) {
+      value = `${value}${this.#theme.plain(",")} \
+${this.#theme.argument("shown")}${this.#theme.plain("=")}${this.#theme.number(
+        this.#stringMaxLength,
+      )}${this.#theme.plain(")")}`;
     } else {
-      value = `${value}${this.cli.plain(")")}`;
+      value = `${value}${this.#theme.plain(")")}`;
     }
     clearString(printString);
     return ["string", value];
@@ -831,7 +857,7 @@ ${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.string
    * @returns {[string, string]}
    */
   formatUndefined() {
-    return ["empty", this.cli.string("undefined")];
+    return ["empty", this.#theme.string("undefined")];
   }
   /**
    * @protected
@@ -856,18 +882,20 @@ ${this.cli.argument("shown")}${this.cli.plain("=")}${this.cli.number(this.string
   formatAssign(paramType, indent, key, value) {
     let keyPart;
     if (paramType === "map") {
-      return `${indent}${this.cli.comment(this.indent)}${value}\
-${this.cli.plain(",")}\n`;
+      return `${indent}${this.#theme.comment(this.#indent)}${value}\
+${this.#theme.plain(",")}\n`;
     } else if (paramType === "set") {
-      return `${indent}${this.cli.comment(this.indent)}${this.cli.plain(this.arrow)} ${value}\
-${this.cli.plain(",")}\n`;
+      return `${indent}${this.#theme.comment(this.#indent)}${this.#theme.plain(this.#arrow)} ${value}\
+${this.#theme.plain(",")}\n`;
     } else if (isNumericKey(key) || (paramType === "array" && typeof key !== "string")) {
-      keyPart = `${this.cli.plain("[")}${this.cli.property(key)}${this.cli.plain("]")}`;
+      keyPart = `${this.#theme.plain("[")}${this.#theme.property(key)}${this.#theme.plain("]")}`;
     } else {
-      keyPart = `${this.cli.plain(this.quotesStart)}${this.cli.property(key)}${this.cli.plain(this.quotesEnd)}`;
+      keyPart = `${this.#theme.plain(this.#quotesStart)}${this.#theme.property(key)}${this.#theme.plain(
+        this.#quotesEnd,
+      )}`;
     }
-    return `${indent}${this.cli.comment(this.indent)}${keyPart} ${this.cli.plain(this.arrow)} ${value}\
-${this.cli.plain(",")}\n`;
+    return `${indent}${this.#theme.comment(this.#indent)}${keyPart} ${this.#theme.plain(this.#arrow)} ${value}\
+${this.#theme.plain(",")}\n`;
   }
   /**
    * @public
@@ -875,15 +903,16 @@ ${this.cli.plain(",")}\n`;
    * @returns {string|undefined}
    */
   log(variable) {
-    if (this.console) {
-      if (this.clear) {
+    if (this.#console) {
+      if (this.#clear) {
         clearCli();
       }
       console.log(this.toPrintable(variable));
-      if (this.exit) {
+      if (this.#exit) {
         processExit();
       }
-    } else {
+    }
+    if (this.#returns) {
       return this.toPrintable(variable);
     }
   }
@@ -907,7 +936,8 @@ ${this.cli.plain(",")}\n`;
         if (createdOptions.exit) {
           processExit();
         }
-      } else {
+      }
+      if (createdOptions.returns) {
         return instance.toPrintable(variable);
       }
     };
@@ -920,7 +950,7 @@ ${this.cli.plain(",")}\n`;
    * @returns {Object}
    */
   static createOptions(options = true) {
-    const basicOptions = { console: true };
+    const basicOptions = { ...OPTIONS_DEFAULT };
     if (typeof options === "boolean") {
       basicOptions.console = options;
     } else if (options && typeof options === "object") {
@@ -948,7 +978,8 @@ function consono(variable, options = true, theme) {
     if (createdOptions.exit) {
       processExit();
     }
-  } else {
+  }
+  if (createdOptions.returns) {
     return instance.toPrintable(variable);
   }
 }
@@ -956,10 +987,4 @@ function consono(variable, options = true, theme) {
 const options = OPTIONS_DEFAULT;
 
 export default consono;
-export {
-  consono,
-  Consono,
-  options,
-  THEME_LIGHT,
-  THEME_DARK,
-};
+export { consono, Consono, options, THEME_LIGHT, THEME_DARK };

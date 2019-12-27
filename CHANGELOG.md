@@ -1,3 +1,9 @@
+#### 1.1.0 Dec 27, 2019
+
+* ✨ Incompatible changes. Consono now always return formatted string by default. To change this behavior use option property "returns".
+
+* ⬆️ Make all properties private.
+
 #### 1.0.14 Dec 22, 2019
 
 * ⬆️ Update README

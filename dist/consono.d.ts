@@ -11,6 +11,7 @@ export interface IConsonoOptions {
   objectMaxProps?: number;
   quotesEnd?: string;
   quotesStart?: string;
+  returns?: boolean;
   setMaxValues?: number;
   stringMaxLength?: number;
 }

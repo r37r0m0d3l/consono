@@ -165,7 +165,7 @@ const defaultOptions = {
   clear: false,
   // Colorize the output
   colorize: true,
-  // Return string or output to console
+  // Output to console
   console: true,
   // Default depth of object
   depth: 20,
@@ -181,6 +181,8 @@ const defaultOptions = {
   quotesEnd: `"`,
   // Quote end
   quotesStart: `"`,
+  // Return inspected variable as string
+  returns: true,
   // Maximum number of values in set to show
   setMaxValues: 99,
   // Maximum length of string to show
