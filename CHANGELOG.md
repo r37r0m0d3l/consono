@@ -1,3 +1,7 @@
+#### 1.1.1 Dec 29, 2019
+
+* ✨ Exit code now accepting false, true and exit code number.
+
 #### 1.1.0 Dec 27, 2019
 
 * ✨ Incompatible changes. Consono now always return formatted string by default. To change this behavior use option property "returns".

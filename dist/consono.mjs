@@ -105,14 +105,24 @@ function clearCli() {
 }
 
 function processExit(code = 0) {
+  if (code === false) {
+    return;
+  }
+  const exitCode = Number.parseInt(code.toString());
+  if (!Number.isInteger(exitCode)) {
+    return;
+  }
+  if (exitCode < 0) {
+    return;
+  }
   try {
-    process.exit(code);
+    process.exit(exitCode);
   } catch (error) {
     //
   }
 }
 
-function isNumericKey(value) {
+function isInteger(value) {
   return Number.isInteger(Number.parseInt(value));
 }
 
@@ -310,7 +320,15 @@ class Consono {
     this.#console = !!opts.console;
     this.#currentDepth = 0;
     this.#depth = Number.parseInt(opts.depth);
-    this.#exit = !!opts.exit;
+    if (opts.exit === false) {
+      this.#exit = false;
+    } else if (opts.exit === true) {
+      this.#exit = 0;
+    } else if (isInteger(opts.exit)) {
+      this.#exit = opts.exit;
+    } else {
+      this.#exit = false;
+    }
     this.#indentType = `${opts.indent}`;
     this.#indent = this.#indentType.repeat(opts.indentPad);
     this.#mapMaxEntries = Number.parseInt(opts.mapMaxEntries);
@@ -887,7 +905,7 @@ ${this.#theme.plain(",")}\n`;
     } else if (paramType === "set") {
       return `${indent}${this.#theme.comment(this.#indent)}${this.#theme.plain(this.#arrow)} ${value}\
 ${this.#theme.plain(",")}\n`;
-    } else if (isNumericKey(key) || (paramType === "array" && typeof key !== "string")) {
+    } else if (isInteger(key) || (paramType === "array" && typeof key !== "string")) {
       keyPart = `${this.#theme.plain("[")}${this.#theme.property(key)}${this.#theme.plain("]")}`;
     } else {
       keyPart = `${this.#theme.plain(this.#quotesStart)}${this.#theme.property(key)}${this.#theme.plain(
@@ -908,9 +926,7 @@ ${this.#theme.plain(",")}\n`;
         clearCli();
       }
       console.log(this.toPrintable(variable));
-      if (this.#exit) {
-        processExit();
-      }
+      processExit(this.#exit);
     }
     if (this.#returns) {
       return this.toPrintable(variable);
@@ -933,9 +949,7 @@ ${this.#theme.plain(",")}\n`;
           clearCli();
         }
         console.log(instance.toPrintable(variable));
-        if (createdOptions.exit) {
-          processExit();
-        }
+        processExit(createdOptions.exit);
       }
       if (createdOptions.returns) {
         return instance.toPrintable(variable);
@@ -975,9 +989,7 @@ function consono(variable, options = true, theme) {
       clearCli();
     }
     console.log(instance.toPrintable(variable));
-    if (createdOptions.exit) {
-      processExit();
-    }
+    processExit(createdOptions.exit);
   }
   if (createdOptions.returns) {
     return instance.toPrintable(variable);

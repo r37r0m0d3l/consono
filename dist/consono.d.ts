@@ -5,7 +5,7 @@ export interface IConsonoOptions {
   colorize?: boolean;
   console?: boolean;
   depth?: number;
-  exit?: boolean;
+  exit?: boolean | number;
   indent?: string;
   mapMaxEntries?: number;
   objectMaxProps?: number;

@@ -169,7 +169,8 @@ const defaultOptions = {
   console: true,
   // Default depth of object
   depth: 20,
-  // Exit on completion
+  // 'false' - do nothing. 'true' - exit status ok.
+  // Number greater than zero - exit status with passed error code.
   exit: false,
   // Print indentation
   indent: "ˑˑ",
