@@ -25,10 +25,15 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 ## Table of contents
 
 [Examples](#examples)
+
 [Motivation](#motivation)
+
 [Installation](#installation)
+
 [Include](#include)
+
 [Options](#options)
+
 [Instance](#instance)
 
 ## Examples
