@@ -108,6 +108,9 @@ function processExit(code = 0) {
   if (code === false) {
     return;
   }
+  if (code === true) {
+    code = 0;
+  }
   const exitCode = Number.parseInt(code.toString());
   if (!Number.isInteger(exitCode)) {
     return;

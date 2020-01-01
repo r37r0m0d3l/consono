@@ -11,6 +11,8 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 [![NPM Downloads](https://img.shields.io/npm/dt/consono.svg?style=flat)]()
 [![Build Status](https://travis-ci.org/r37r0m0d3l/consono.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/consono)
 [![Issues](https://img.shields.io/github/issues-raw/r37r0m0d3l/consono.svg?maxAge=25000)](https://github.com/r37r0m0d3l/consono/issues)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/272b5247f8b777c75360/maintainability)](https://codeclimate.com/github/r37r0m0d3l/consono/maintainability)
 [![Dependecy Status](https://david-dm.org/r37r0m0d3l/consono.svg)](https://david-dm.org/r37r0m0d3l/consono)
 [![devDependencies Status](https://david-dm.org/r37r0m0d3l/consono/dev-status.svg)](https://david-dm.org/r37r0m0d3l/consono?type=dev)
 
@@ -20,7 +22,136 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/consono.svg?style=social&label=Fork)]()
 [![Twitter](https://img.shields.io/twitter/follow/r37r0m0d3l.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=r37r0m0d3l)
 
-## Motivation and differences from other libraries
+## Table of contents
+
+[Examples](#examples)
+[Motivation](#motivation)
+[Installation](#installation)
+[Include](#include)
+[Options](#options)
+[Instance](#instance)
+
+## Examples
+
+```js
+consono(undefined);
+consono(null);
+```
+
+![Nil](docs/readme/001.png?raw=true "Nil")
+
+```js
+consono(true);
+consono(false);
+```
+
+![Boolean](docs/readme/002.png?raw=true "Boolean")
+
+```js
+consono(Infinity);
+consono(Number.NEGATIVE_INFINITY);
+consono(NaN);
+consono(1);
+consono(1.5);
+consono(BigInt(9007199254740991));
+```
+
+![Number](docs/readme/003.png?raw=true "Number")
+
+```js
+consono(new Date());
+```
+
+![Date](docs/readme/004.png?raw=true "Date")
+
+```js
+consono("Hello, world 😀😁😂🤣😃😄😅😆😉😊", { stringMaxLength: 17 });
+consono(Symbol("🌈"));
+```
+
+![String](docs/readme/005.png?raw=true "String")
+
+```js
+consono(/[0-9]+/);
+consono(/\w+/giu);
+```
+
+![RegExp](docs/readme/006.png?raw=true "RegExp")
+
+```js
+consono(function() {});
+consono(function helloWorld() {});
+consono(() => {});
+```
+
+![Function](docs/readme/007.png?raw=true "Function")
+
+```js
+consono(new Promise(() => {}));
+consono(async function helloWorld() {});
+consono(async () => {});
+consono(function* gen() { yield 1; });
+```
+
+![Async](docs/readme/008.png?raw=true "Async")
+
+```js
+consono([1, 2, 3]);
+consono(Int8Array.from([1, 2, 3]));
+```
+
+![Array](docs/readme/009.png?raw=true "Array")
+
+```js
+consono(new ArrayBuffer(8));
+consono(new SharedArrayBuffer(16));
+```
+
+![Array Buffer](docs/readme/010.png?raw=true "Array Buffer")
+
+```js
+consono(new Set(["a", true, { prop: 1 }]));
+consono(new Map([["first", "a"], [true, "b"]]));
+consono(new WeakMap());
+consono(new WeakSet());
+```
+
+![Collection](docs/readme/011.png?raw=true "Collection")
+
+```js
+consono({});
+
+class MyClass {} const myClass = new MyClass(); myClass.deeper = new
+MyClass(); consono(myClass); ```
+
+![Object](docs/readme/012.png?raw=true "Object")
+
+```js
+consono(new Error("Standard error"));
+consono(new EvalError("Unable to run this code"));
+consono(new RangeError("Must be less than 10 and greater than 0"));
+consono(new ReferenceError("This is error from try/catch"));
+consono(new SyntaxError("Not a source code"));
+consono(new TypeError("Value is not of the expected type"));
+```
+
+![Error](docs/readme/013.png?raw=true "Error")
+
+```js
+(function(a, b) { consono(arguments); })(true, false);
+```
+
+![Arguments](docs/readme/014.png?raw=true "Arguments")
+
+```js
+consono(global || globalThis, { objectMaxProps: 3 });
+```
+
+![Global](docs/readme/015.png?raw=true "Global")
+
+## Motivation
+
+Motivation and differences from other libraries.
 
 - **Light** and **dark** themes for terminal output ([prefers-color-scheme: Hello darkness, my old friend](https://web.dev/prefers-color-scheme/)).
 - **Configurable coloring** of variables.
@@ -191,123 +322,3 @@ const defaultOptions = {
 };
 consono("Some variable", defaultOptions);
 ```
-
-## Examples
-
-```js
-consono(undefined);
-consono(null);
-```
-
-![Nil](docs/readme/001.png?raw=true "Nil")
-
-```js
-consono(true);
-consono(false);
-```
-
-![Boolean](docs/readme/002.png?raw=true "Boolean")
-
-
-```js
-consono(Infinity);
-consono(Number.NEGATIVE_INFINITY);
-consono(NaN);
-consono(1);
-consono(1.5);
-consono(BigInt(9007199254740991));
-```
-
-![Number](docs/readme/003.png?raw=true "Number")
-
-```js
-consono(new Date());
-```
-
-![Date](docs/readme/004.png?raw=true "Date")
-
-```js
-consono("Hello, world 😀😁😂🤣😃😄😅😆😉😊", { stringMaxLength: 17 });
-consono(Symbol("🌈"));
-```
-
-![String](docs/readme/005.png?raw=true "String")
-
-```js
-consono(/[0-9]+/);
-consono(/\w+/giu);
-```
-
-![RegExp](docs/readme/006.png?raw=true "RegExp")
-
-```js
-consono(function() {});
-consono(function helloWorld() {});
-consono(() => {});
-```
-
-![Function](docs/readme/007.png?raw=true "Function")
-
-```js
-consono(new Promise(() => {}));
-consono(async function helloWorld() {});
-consono(async () => {});
-consono(function* gen() { yield 1; });
-```
-
-![Async](docs/readme/008.png?raw=true "Async")
-
-```js
-consono([1, 2, 3]);
-consono(Int8Array.from([1, 2, 3]));
-```
-
-![Array](docs/readme/009.png?raw=true "Array")
-
-```js
-consono(new ArrayBuffer(8));
-consono(new SharedArrayBuffer(16));
-```
-
-![Array Buffer](docs/readme/010.png?raw=true "Array Buffer")
-
-```js
-consono(new Set(["a", true, { prop: 1 }]));
-consono(new Map([["first", "a"], [true, "b"]]));
-consono(new WeakMap());
-consono(new WeakSet());
-```
-
-![Collection](docs/readme/011.png?raw=true "Collection")
-
-```js
-consono({});
-
-class MyClass {} const myClass = new MyClass(); myClass.deeper = new
-MyClass(); consono(myClass); ```
-
-![Object](docs/readme/012.png?raw=true "Object")
-
-```js
-consono(new Error("Standard error"));
-consono(new EvalError("Unable to run this code"));
-consono(new RangeError("Must be less than 10 and greater than 0"));
-consono(new ReferenceError("This is error from try/catch"));
-consono(new SyntaxError("Not a source code"));
-consono(new TypeError("Value is not of the expected type"));
-```
-
-![Error](docs/readme/013.png?raw=true "Error")
-
-```js
-(function(a, b) { consono(arguments); })(true, false);
-```
-
-![Arguments](docs/readme/014.png?raw=true "Arguments")
-
-
-```js
-consono(global || globalThis, { objectMaxProps: 3 });
-```
-
-![Global](docs/readme/015.png?raw=true "Global")

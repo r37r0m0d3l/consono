@@ -1,3 +1,7 @@
+#### 1.1.2 Jan 01, 2020
+
+* 🐛 Fix exit code option skipping boolean value.
+
 #### 1.1.1 Dec 29, 2019
 
 * ✨ Exit code now accepting false, true and exit code number.
