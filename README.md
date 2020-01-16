@@ -11,6 +11,7 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 [![NPM Downloads](https://img.shields.io/npm/dt/consono.svg?style=flat)]()
 [![Build Status](https://travis-ci.org/r37r0m0d3l/consono.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/consono)
 [![Issues](https://img.shields.io/github/issues-raw/r37r0m0d3l/consono.svg?maxAge=25000)](https://github.com/r37r0m0d3l/consono/issues)
+[![Known Vulnerabilities](https://snyk.io/test/github/r37r0m0d3l/consono/badge.svg?targetFile=package.json)](https://snyk.io/test/github/r37r0m0d3l/consono?targetFile=package.json)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/272b5247f8b777c75360/maintainability)](https://codeclimate.com/github/r37r0m0d3l/consono/maintainability)
 [![Dependency Status](https://david-dm.org/r37r0m0d3l/consono.svg)](https://david-dm.org/r37r0m0d3l/consono)
