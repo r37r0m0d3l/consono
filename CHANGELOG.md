@@ -1,3 +1,7 @@
+#### 1.1.3 Jan 23, 2020
+
+* ⬆️ Update dependencies
+
 #### 1.1.2 Jan 01, 2020
 
 * 🐛 Fix exit code option skipping boolean value.
