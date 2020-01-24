@@ -88,7 +88,7 @@ const THEME_LIGHT = {
   string: [113, 140, 0],
 };
 
-function clearCli() {
+function cliExit() {
   if ("clear" in console) {
     try {
       console.clear();
@@ -129,15 +129,15 @@ function isInteger(value) {
   return Number.isInteger(Number.parseInt(value));
 }
 
-function prototypeTag(value) {
+function prototypeName(value) {
   return Object.prototype.toString.call(value);
 }
 
-function clearString(str) {
-  return str.length < 12 ? str : (" " + str).slice(1);
+function stringClearReference(text) {
+  return text.length < 12 ? text : (" " + text).slice(1);
 }
 
-function deCycle(object) {
+function objectDeCycle(object) {
   const objects = [];
   const paths = [];
   return (function deReCycle(value, path) {
@@ -160,7 +160,7 @@ function deCycle(object) {
       }
       objects.push(value);
       paths.push(path);
-      if (prototypeTag(value) === TAG_ARRAY) {
+      if (prototypeName(value) === TAG_ARRAY) {
         newIterable = [];
         for (index = 0; index < value.length; index += 1) {
           newIterable[index] = deReCycle(value[index], `${path}["${index}"]`);
@@ -179,7 +179,7 @@ function deCycle(object) {
   })(object, "&");
 }
 
-function closureNameExtract(func) {
+function funcNameExtract(func) {
   if (func.name) {
     return func.name;
   }
@@ -201,12 +201,12 @@ function objectPick(object, keys) {
   }, {});
 }
 
-function getClass(value) {
+function objectClass(value) {
   return value.constructor.name;
 }
 
-function getType(value) {
-  const type = prototypeTag(value)
+function objectType(value) {
+  const type = prototypeName(value)
     .toLowerCase()
     .split("[object ")
     .pop()
@@ -237,11 +237,11 @@ class Theme {
       case theme === "light":
         rgb = THEME_LIGHT;
         break;
-      case prototypeTag(theme) === TAG_OBJECT:
-        rgb = { ...THEME_DARK, ...theme };
+      case prototypeName(theme) === TAG_OBJECT:
+        rgb = { ...THEME_LIGHT, ...theme };
         break;
       default:
-        rgb = THEME_DARK;
+        rgb = THEME_LIGHT;
         break;
     }
     this.argument = this.compose(...rgb.argument);
@@ -355,7 +355,7 @@ class Consono {
     let startsWith = "";
     let endsWith = "";
     let iterationLimit = Number.MAX_SAFE_INTEGER;
-    const type = getType(value);
+    const type = objectType(value);
     switch (type) {
       case "array": {
         const arrLength = value.length;
@@ -377,7 +377,7 @@ ${this.#theme.plain("[")}\n`;
       }
       case "object": {
         const origObject = value;
-        value = deCycle(value);
+        value = objectDeCycle(value);
         if (describe === true) {
           const size = objectSize(value);
           let printSize = "";
@@ -394,7 +394,7 @@ ${this.#theme.argument("props")}${this.#theme.plain("=")}${this.#theme.number(si
 ${this.#theme.plain(")")}`;
           }
           startsWith = `${this.#theme.keyword("object")} \
-${this.#theme.keyword(getClass(origObject))} ${printSize} ${this.#theme.plain("{")}\n`;
+${this.#theme.keyword(objectClass(origObject))} ${printSize} ${this.#theme.plain("{")}\n`;
           endsWith = `${indent}${this.#theme.plain("}")}`;
         } else {
           startsWith = `${this.#theme.plain("(")}\n`;
@@ -494,7 +494,7 @@ ${this.#theme.plain("{")}\n`;
             continue;
           }
           const originalValue = value[key];
-          const originalParamType = getType(originalValue);
+          const originalParamType = objectType(originalValue);
           const formattedValue = this.formatValue(indent, originalValue);
           print += this.formatAssign(originalParamType, indent, key, formattedValue);
           iteration += 1;
@@ -516,9 +516,9 @@ ${this.#theme.plain("{")}\n`;
    */
   formatValue(indent, originalValue, describe = true) {
     let value = "";
-    let type = getType(originalValue);
+    let type = objectType(originalValue);
     let subType = "";
-    const tag = prototypeTag(originalValue);
+    const tag = prototypeName(originalValue);
     switch (tag) {
       case TAG_VOID:
         [type, value] = this.formatUndefined();
@@ -585,7 +585,7 @@ ${this.#theme.plain("{")}\n`;
       default:
         if (tag.includes("Array")) {
           type = "array";
-          subType = getClass(originalValue).toLowerCase();
+          subType = objectClass(originalValue).toLowerCase();
           originalValue = Array.from(originalValue);
         } else if (tag.includes("Iterator]")) {
           const iterator = tag.split(" ")[1];
@@ -628,7 +628,7 @@ ${this.#theme.plain(")")}`;
 ${this.#theme.argument("props")}${this.#theme.plain("=")}${this.#theme.number(size)}\
 ${this.#theme.plain(")")}`;
           }
-          value = `${this.#theme.keyword("object")} ${this.#theme.keyword(getClass(originalValue))} ${printSize}`;
+          value = `${this.#theme.keyword("object")} ${this.#theme.keyword(objectClass(originalValue))} ${printSize}`;
         } else {
           this.#currentDepth += 1;
           const indentToPrint =
@@ -703,7 +703,7 @@ ${this.#theme.plain(")")}`,
    * @returns {[string, *]}
    */
   formatError(value) {
-    return [`error ${getClass(value)}`, this.#theme.string(value.message)];
+    return [`error ${objectClass(value)}`, this.#theme.string(value.message)];
   }
   /**
    * @protected
@@ -721,7 +721,7 @@ ${this.#theme.plain(")")}`,
         type = `${type} generator`;
         break;
     }
-    const name = closureNameExtract(value);
+    const name = funcNameExtract(value);
     if (name.length) {
       type = `${type} ${this.#theme.name(name)}`;
     } else {
@@ -862,7 +862,7 @@ ${this.#theme.argument("shown")}${this.#theme.plain("=")}${this.#theme.number(
     } else {
       value = `${value}${this.#theme.plain(")")}`;
     }
-    clearString(printString);
+    stringClearReference(printString);
     return ["string", value];
   }
   /**
@@ -926,7 +926,7 @@ ${this.#theme.plain(",")}\n`;
   log(variable) {
     if (this.#console) {
       if (this.#clear) {
-        clearCli();
+        cliExit();
       }
       console.log(this.toPrintable(variable));
       processExit(this.#exit);
@@ -949,7 +949,7 @@ ${this.#theme.plain(",")}\n`;
     return function consono(variable) {
       if (createdOptions.console) {
         if (createdOptions.clear) {
-          clearCli();
+          cliExit();
         }
         console.log(instance.toPrintable(variable));
         processExit(createdOptions.exit);
@@ -989,7 +989,7 @@ function consono(variable, options = true, theme) {
   const instance = new Consono(createdOptions, theme);
   if (createdOptions.console) {
     if (createdOptions.clear) {
-      clearCli();
+      cliExit();
     }
     console.log(instance.toPrintable(variable));
     processExit(createdOptions.exit);

@@ -2,9 +2,9 @@ language: node_js
 before_install:
   - "npm install npm -g"
 node_js:
-  - "13.6.0"
+  - "13.7.0"
 npm:
-- "6.13.0"
+- "6.13.6"
 env:
   - TEST_SUITE=test
 script:

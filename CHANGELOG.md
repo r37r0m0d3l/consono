@@ -1,3 +1,9 @@
+#### 1.1.4 Jan 24, 2020
+
+- 💥 Light theme now is default
+
+- ♻️ Tiny inner refactorings
+
 #### 1.1.3 Jan 23, 2020
 
 * ⬆️ Update dependencies
