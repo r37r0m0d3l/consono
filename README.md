@@ -21,7 +21,6 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 [![GitHub watchers](https://img.shields.io/github/watchers/r37r0m0d3l/consono.svg?style=social&label=Watch)](https://github.com/r37r0m0d3l/consono)
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/consono)
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/consono.svg?style=social&label=Fork)]()
-[![Twitter](https://img.shields.io/twitter/follow/r37r0m0d3l.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=r37r0m0d3l)
 
 ## Table of contents
 
@@ -216,6 +215,12 @@ Import as ECMAScript module.
 import { consono } from "consono/es";
 ```
 
+UNPKG CDN.
+
+```html
+<script src="https://unpkg.com/consono/dist/consono.js"></script>
+```
+
 ## Options
 
 ```js
@@ -328,3 +333,17 @@ const defaultOptions = {
 };
 consono("Some variable", defaultOptions);
 ```
+
+## Advertisement
+
+You also might be interested in my other repositories:
+
+- [Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage) - Universal localStorage fallback.
+
+- [Publish Subscribe](https://r37r0m0d3l.github.io/publish_subscribe) - JavaScript implementation of the Publish-Subscribe pattern.
+
+- [Vicis](https://r37r0m0d3l.github.io/vicis) - Presentation and transformation layer for data output in RESTful APIs.
+
+Or find useful these tools:
+
+- [JSON Sorter](https://r37r0m0d3l.github.io/json_sort) - Neat online JSON sorter.
