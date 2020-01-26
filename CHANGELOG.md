@@ -1,3 +1,7 @@
+#### 1.1.5 Jan 26, 2020
+
+- 📚 Update documentation
+
 #### 1.1.4 Jan 24, 2020
 
 - 💥 Light theme now is default
