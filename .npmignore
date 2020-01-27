@@ -1,7 +1,4 @@
-/docs/
-/temp/
-/src/
-/test/
+/.babelrc
 /.editorconfig
 /.eslintignore
 /.eslintrc.json
@@ -15,10 +12,15 @@
 /.nvmrc
 /.prettierignore
 /.prettierrc
+/.remarkrc
 /.travis.yml
 /.yarnrc
-/_config.yml
 /CHANGELOG.md
-/LICENSE
-/README.md
 /CNAME
+/README.md
+/_config.yml
+/docs/
+/src/
+/temp/
+/test/
+/yarn.lock
