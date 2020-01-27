@@ -33,7 +33,7 @@ describe("Test collection", () => {
   consono(NaN);
   consono(1);
   consono(1.5);
-  consono(BigInt(9007199254740991));
+  consono(BigInt(123456));
   consono(new Date());
   consono(Math);
   //#endregion
