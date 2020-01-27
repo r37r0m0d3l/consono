@@ -1,3 +1,9 @@
+#### 1.1.6 Jan 27, 2020
+
+- ♻️ Move `console.log` calls to immediate in event loop
+
+- 📚 Update documentation
+
 #### 1.1.5 Jan 26, 2020
 
 - 📚 Update documentation

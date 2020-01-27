@@ -928,7 +928,7 @@ ${this.#theme.plain(",")}\n`;
       if (this.#clear) {
         cliExit();
       }
-      console.log(this.toPrintable(variable));
+      setTimeout(() => console.log(this.toPrintable(variable)), 0);
       processExit(this.#exit);
     }
     if (this.#returns) {
@@ -951,7 +951,7 @@ ${this.#theme.plain(",")}\n`;
         if (createdOptions.clear) {
           cliExit();
         }
-        console.log(instance.toPrintable(variable));
+        setTimeout(() => console.log(instance.toPrintable(variable)), 0);
         processExit(createdOptions.exit);
       }
       if (createdOptions.returns) {
@@ -991,7 +991,7 @@ function consono(variable, options = true, theme) {
     if (createdOptions.clear) {
       cliExit();
     }
-    console.log(instance.toPrintable(variable));
+    setTimeout(() => console.log(instance.toPrintable(variable)), 0);
     processExit(createdOptions.exit);
   }
   if (createdOptions.returns) {
