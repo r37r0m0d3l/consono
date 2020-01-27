@@ -35,6 +35,7 @@ const OPTIONS_DEFAULT = {
   console: true,
   depth: 20,
   exit: false,
+  immediate: false,
   indent: "ˑˑ",
   indentPad: 1,
   mapMaxEntries: 99,
@@ -278,6 +279,7 @@ class Consono {
   #currentDepth;
   #depth;
   #exit;
+  #immediate;
   #indentType;
   #indent;
   #mapMaxEntries;
@@ -339,6 +341,7 @@ class Consono {
     this.#quotesEnd = `${opts.quotesEnd}`;
     this.#quotesStart = `${opts.quotesStart}`;
     this.#returns = !!opts.returns;
+    this.#immediate = !!opts.immediate;
     this.#setMaxValues = Number.parseInt(opts.setMaxValues);
     this.#stringMaxLength = Number.parseInt(opts.stringMaxLength);
   }
@@ -928,7 +931,11 @@ ${this.#theme.plain(",")}\n`;
       if (this.#clear) {
         cliExit();
       }
-      setTimeout(() => console.log(this.toPrintable(variable)), 0);
+      if (this.#immediate) {
+        setTimeout(() => console.log(this.toPrintable(variable)), 0);
+      } else {
+        console.log(this.toPrintable(variable));
+      }
       processExit(this.#exit);
     }
     if (this.#returns) {
@@ -951,7 +958,11 @@ ${this.#theme.plain(",")}\n`;
         if (createdOptions.clear) {
           cliExit();
         }
-        setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+        if (createdOptions.immediate) {
+          setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+        } else {
+          console.log(instance.toPrintable(variable));
+        }
         processExit(createdOptions.exit);
       }
       if (createdOptions.returns) {
@@ -991,7 +1002,11 @@ function consono(variable, options = true, theme) {
     if (createdOptions.clear) {
       cliExit();
     }
-    setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+    if (createdOptions.immediate) {
+      setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+    } else {
+      console.log(instance.toPrintable(variable));
+    }
     processExit(createdOptions.exit);
   }
   if (createdOptions.returns) {

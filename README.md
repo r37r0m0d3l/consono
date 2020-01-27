@@ -14,6 +14,7 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 [![Known Vulnerabilities](https://snyk.io/test/github/r37r0m0d3l/consono/badge.svg?targetFile=package.json)](https://snyk.io/test/github/r37r0m0d3l/consono?targetFile=package.json)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/272b5247f8b777c75360/maintainability)](https://codeclimate.com/github/r37r0m0d3l/consono/maintainability)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/840765276efe44319278e280e6985de0)](https://www.codacy.com/manual/r37r0m0d3l/consono?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=r37r0m0d3l/consono&amp;utm_campaign=Badge_Grade)
 [![Dependency Status](https://david-dm.org/r37r0m0d3l/consono.svg)](https://david-dm.org/r37r0m0d3l/consono)
 [![devDependencies Status](https://david-dm.org/r37r0m0d3l/consono/dev-status.svg)](https://david-dm.org/r37r0m0d3l/consono?type=dev)
 
@@ -314,6 +315,8 @@ const defaultOptions = {
   // 'false' - do nothing. 'true' - exit status ok.
   // Number greater than zero - exit status with passed error code.
   exit: false,
+  // Call console.log immediately
+  immediate: false,
   // Print indentation
   indent: "ˑˑ",
   // Maximum number of entries in map to show

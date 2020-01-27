@@ -6,6 +6,7 @@ export interface IConsonoOptions {
   console?: boolean;
   depth?: number;
   exit?: boolean | number;
+  immediate?: boolean;
   indent?: string;
   mapMaxEntries?: number;
   objectMaxProps?: number;
