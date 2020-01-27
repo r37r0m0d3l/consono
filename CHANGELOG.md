@@ -29,7 +29,6 @@
 #### 1.1.0 Dec 27, 2019
 
 -   ✨ Incompatible changes. Consono now always return formatted string by default. To change this behavior use option property "returns".
-
 -   ⬆️ Make all properties private.
 
 #### 1.0.14 Dec 22, 2019
@@ -51,7 +50,6 @@
 #### 1.0.10 Dec 16, 2019
 
 -   ⬆️ Update README
-
 
 #### 1.0.9 Dec 16, 2019
 
@@ -106,7 +104,6 @@
 
 -   Add "colorize" option
 
-
 #### 0.0.11 Nov 11, 2019
 
 -   Minor fix
@@ -119,7 +116,6 @@
 #### 0.0.9 Nov 11, 2019
 
 -   Add color output
-
 
 #### 0.0.8 Nov 8, 2019
 
