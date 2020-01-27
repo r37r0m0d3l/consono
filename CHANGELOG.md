@@ -1,3 +1,7 @@
+#### 1.1.8 Jan 27, 2020
+
+-   ✅️ Make tests consistent
+
 #### 1.1.7 Jan 27, 2020
 
 -   ➕️ Add `immediate` option. Call `console.log` immediately.

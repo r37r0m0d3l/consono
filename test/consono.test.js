@@ -1,4 +1,4 @@
-const consono = require("../src/consono.js").default;
+const { consono } = require("../src/consono.js");
 
 describe("Main test", () => {
   const options = {

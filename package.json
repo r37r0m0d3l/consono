@@ -38,7 +38,7 @@
     "dist/consono.d.ts",
     "dist/consono.mjs"
   ],
-  "homepage": "https://r37r0m0d3l.github.io/consono/",
+  "homepage": "https://consono.js.org/",
   "keywords": [
     "console",
     "debug",
@@ -63,5 +63,5 @@
     "test": "jest"
   },
   "types": "./dist/consono.d.ts",
-  "version": "1.1.7"
+  "version": "1.1.8"
 }
