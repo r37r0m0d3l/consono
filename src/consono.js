@@ -72,7 +72,7 @@ const THEME_DARK = {
   keyword: [249, 38, 114],
   name: [230, 219, 116],
   number: [174, 129, 255],
-  plain: [255, 255, 255],
+  plain: [128, 128, 128],
   property: [102, 217, 239],
   string: [166, 226, 46],
 };
@@ -84,7 +84,7 @@ const THEME_LIGHT = {
   keyword: [200, 40, 41],
   name: [201, 159, 0],
   number: [101, 67, 133],
-  plain: [0, 0, 0],
+  plain: [128, 128, 128],
   property: [32, 123, 129],
   string: [113, 140, 0],
 };

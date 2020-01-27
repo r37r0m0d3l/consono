@@ -1,3 +1,7 @@
+#### 1.1.9 Jan 27, 2020
+
+-   💥 Change light and dark theme colors
+
 #### 1.1.8 Jan 27, 2020
 
 -   ✅️ Make tests consistent
