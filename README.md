@@ -1,11 +1,9 @@
 ![Consono](docs/readme/logo.png?raw=true "Consono")
 
-Consono
+🕵️ Consono 🕵️‍♀️
 ===========
 
-The most **informative** and **correct** variable inspector for JavaScript on the web.
-
-[Consono on github.io](https://r37r0m0d3l.github.io/consono/)
+The most correct, informative, appealing and configurable variable inspector for Node.js
 
 [![NPM Version](https://img.shields.io/npm/v/consono.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/consono.svg?style=flat)]()
@@ -25,7 +23,7 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/consono)
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/consono.svg?style=social&label=Fork)]()
 
-## Table of contents
+## 🧭 Table of contents
 
 [Examples](#examples)
 
@@ -39,7 +37,7 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 
 [Instance](#instance)
 
-## Examples
+## 🧬 Examples
 
 ```js
 consono(undefined);
@@ -158,7 +156,7 @@ consono(global || globalThis, { objectMaxProps: 3 });
 
 ![Global](docs/readme/015.png?raw=true "Global")
 
-## Motivation
+## 🔋 Motivation
 
 Motivation and differences from other libraries.
 
@@ -183,7 +181,7 @@ Motivation and differences from other libraries.
 -   Import as **ECMAScript module**.
 -   And so on and so forth…
 
-## Installation
+## 📦 Installation
 
 ```bash
 npm install consono
@@ -193,7 +191,7 @@ npm install consono
 yarn add consono
 ```
 
-## Include
+## ⌨️ Include
 
 Default is function for printing variable.
 
@@ -225,7 +223,7 @@ UNPKG CDN.
 <script src="https://unpkg.com/consono/dist/consono.js"></script>
 ```
 
-## Options
+## ⚙️ Options
 
 ```js
 const { Consono } = require("consono");
@@ -273,14 +271,14 @@ console.debug(
 );
 ```
 
-## Instance
+## 🏷️ Instance
 
 ```js
 const consono = Consono.factory(options, theme);
 consono("This is log function with your own options");
 ```
 
-### Log function
+### 🔖 Log function
 
 ```js
 const { consono } = require("consono");

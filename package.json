@@ -12,7 +12,7 @@
   "dependencies": {
     "chalk": "3.0.0"
   },
-  "description": "Better variable inspector for JavaScript",
+  "description": "The most correct, informative, appealing and configurable variable inspector for Node.js",
   "devDependencies": {
     "@babel/core": "7.8.3",
     "@babel/plugin-proposal-class-properties": "7.8.3",
@@ -44,6 +44,7 @@
     "debug",
     "debugging",
     "echo",
+    "inspector",
     "log",
     "logger",
     "logging",
@@ -63,5 +64,5 @@
     "test": "jest"
   },
   "types": "./dist/consono.d.ts",
-  "version": "1.1.10"
+  "version": "1.1.11"
 }
