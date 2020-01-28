@@ -11,12 +11,14 @@ The most **informative** and **correct** variable inspector for JavaScript on th
 [![NPM Downloads](https://img.shields.io/npm/dt/consono.svg?style=flat)]()
 [![Build Status](https://travis-ci.org/r37r0m0d3l/consono.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/consono)
 [![Issues](https://img.shields.io/github/issues-raw/r37r0m0d3l/consono.svg?maxAge=25000)](https://github.com/r37r0m0d3l/consono/issues)
+
 [![Known Vulnerabilities](https://snyk.io/test/github/r37r0m0d3l/consono/badge.svg?targetFile=package.json)](https://snyk.io/test/github/r37r0m0d3l/consono?targetFile=package.json)
+[![Dependency Status](https://david-dm.org/r37r0m0d3l/consono.svg)](https://david-dm.org/r37r0m0d3l/consono)
+[![devDependencies Status](https://david-dm.org/r37r0m0d3l/consono/dev-status.svg)](https://david-dm.org/r37r0m0d3l/consono?type=dev)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/272b5247f8b777c75360/maintainability)](https://codeclimate.com/github/r37r0m0d3l/consono/maintainability)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/840765276efe44319278e280e6985de0)](https://www.codacy.com/manual/r37r0m0d3l/consono?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=r37r0m0d3l/consono&amp;utm_campaign=Badge_Grade)
-[![Dependency Status](https://david-dm.org/r37r0m0d3l/consono.svg)](https://david-dm.org/r37r0m0d3l/consono)
-[![devDependencies Status](https://david-dm.org/r37r0m0d3l/consono/dev-status.svg)](https://david-dm.org/r37r0m0d3l/consono?type=dev)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=r37r0m0d3l_consono&metric=alert_status)](https://sonarcloud.io/dashboard?id=r37r0m0d3l_consono)
 
 [![GitHub stars](https://img.shields.io/github/stars/r37r0m0d3l/consono.svg?style=social&label=Star)](https://github.com/r37r0m0d3l/consono)
 [![GitHub watchers](https://img.shields.io/github/watchers/r37r0m0d3l/consono.svg?style=social&label=Watch)](https://github.com/r37r0m0d3l/consono)
@@ -128,7 +130,8 @@ consono(new WeakSet());
 consono({});
 
 class MyClass {} const myClass = new MyClass(); myClass.deeper = new
-MyClass(); consono(myClass); ```
+MyClass(); consono(myClass);
+```
 
 ![Object](docs/readme/012.png?raw=true "Object")
 
@@ -339,13 +342,13 @@ consono("Some variable", defaultOptions);
 
 ## 👀 Discover more 👀
 
--   🌠[OF](https://r37r0m0d3l.github.io/of/)🌠 - Promise wrapper with some sugar.
+-   🌠[OF](https://of.js.org)🌠 - Promise wrapper with some sugar.
 
 -   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Universal localStorage fallback.
 
--   🔄[Publish Subscribe](https://r37r0m0d3l.github.io/publish_subscribe)🔄 - JavaScript implementation of the Publish-Subscribe pattern.
+-   🔄[Publish Subscribe](https://publish-subscribe.js.org)🔄 - JavaScript implementation of the Publish-Subscribe pattern.
 
--   🧰[Vicis](https://r37r0m0d3l.github.io/vicis)🧰 - Presentation and transformation layer for data output in RESTful APIs.
+-   🧰[Vicis](https://vicis.js.org)🧰 - Presentation and transformation layer for data output in RESTful APIs.
 
 Or find useful these tools:
 

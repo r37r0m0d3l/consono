@@ -1,3 +1,7 @@
+#### 1.1.10 Jan 28, 2020
+
+-   ⬆️ Update dependencies
+
 #### 1.1.9 Jan 27, 2020
 
 -   💥 Change light and dark theme colors
