@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Consono - The most correct, informative, appealing and configurable variable inspector for Node.js</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="description"
+      content="The most correct, informative, appealing and configurable variable inspector for Node.js"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" />
+    <style>
+      :root {
+        --base-font-size: 18px;
+        --base-line-height: 1.05;
+        --sidebar-nav-link-border-color--active: #000;
+        --sidebar-nav-link-color--active: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      window.$docsify = {
+        name: "Consono",
+        repo: "https://github.com/r37r0m0d3l/consono",
+        auto2top: true,
+        logo: "img/logo.png",
+        copyCode: {
+          buttonText: "Copy to clipboard",
+          errorText: "Error",
+          successText: "Copied",
+        },
+        themeColor: "#000000",
+      };
+    </script>
+    <script src="https://unpkg.com/docsify/lib/docsify.min.js"></script>
+    <script src="https://unpkg.com/docsify-copy-code@2"></script>
+    <script src="https://unpkg.com/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://unpkg.com/prismjs/components/prism-json.min.js"></script>
+    <script src="https://unpkg.com/prismjs/components/prism-typescript.min.js"></script>
+    <script>
+      if (typeof navigator.serviceWorker !== "undefined") {
+        navigator.serviceWorker.register("sw.js");
+      }
+    </script>
+  </body>
+</html>

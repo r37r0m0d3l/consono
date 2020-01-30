@@ -1,11 +1,7 @@
-![Consono](docs/img/logo.png?raw=true "Consono")
-
 🕵️ Consono 🕵️‍♀️
 ===========
 
 The most correct, informative, appealing and configurable variable inspector for Node.js
-
-[Consono Documentation](https://consono.js.org)
 
 [![NPM Version](https://img.shields.io/npm/v/consono.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/consono.svg?style=flat)]()
@@ -32,14 +28,14 @@ consono(undefined);
 consono(null);
 ```
 
-![Nil](docs/img/light/001.png?raw=true "Nil")
+![Nil](/img/light/001.png?raw=true "Nil")
 
 ```js
 consono(true);
 consono(false);
 ```
 
-![Boolean](docs/img/light/002.png?raw=true "Boolean")
+![Boolean](/img/light/002.png?raw=true "Boolean")
 
 ```js
 consono(Infinity);
@@ -50,27 +46,27 @@ consono(1.5);
 consono(BigInt(9007199254740991));
 ```
 
-![Number](docs/img/light/003.png?raw=true "Number")
+![Number](/img/light/003.png?raw=true "Number")
 
 ```js
 consono(new Date());
 ```
 
-![Date](docs/img/light/004.png?raw=true "Date")
+![Date](/img/light/004.png?raw=true "Date")
 
 ```js
 consono("Hello, world 😀😁😂🤣😃😄😅😆😉😊", { stringMaxLength: 17 });
 consono(Symbol("🌈"));
 ```
 
-![String](docs/img/light/005.png?raw=true "String")
+![String](/img/light/005.png?raw=true "String")
 
 ```js
 consono(/[0-9]+/);
 consono(/\w+/giu);
 ```
 
-![RegExp](docs/img/light/006.png?raw=true "RegExp")
+![RegExp](/img/light/006.png?raw=true "RegExp")
 
 ```js
 consono(function() {});
@@ -78,7 +74,7 @@ consono(function helloWorld() {});
 consono(() => {});
 ```
 
-![Function](docs/img/light/007.png?raw=true "Function")
+![Function](/img/light/007.png?raw=true "Function")
 
 ```js
 consono(new Promise(() => {}));
@@ -87,21 +83,21 @@ consono(async () => {});
 consono(function* gen() { yield 1; });
 ```
 
-![Async](docs/img/light/008.png?raw=true "Async")
+![Async](/img/light/008.png?raw=true "Async")
 
 ```js
 consono([1, 2, 3]);
 consono(Int8Array.from([1, 2, 3]));
 ```
 
-![Array](docs/img/light/009.png?raw=true "Array")
+![Array](/img/light/009.png?raw=true "Array")
 
 ```js
 consono(new ArrayBuffer(8));
 consono(new SharedArrayBuffer(16));
 ```
 
-![Array Buffer](docs/img/light/010.png?raw=true "Array Buffer")
+![Array Buffer](/img/light/010.png?raw=true "Array Buffer")
 
 ```js
 consono(new Set(["a", true, { prop: 1 }]));
@@ -110,7 +106,7 @@ consono(new WeakMap());
 consono(new WeakSet());
 ```
 
-![Collection](docs/img/light/011.png?raw=true "Collection")
+![Collection](/img/light/011.png?raw=true "Collection")
 
 ```js
 consono({});
@@ -119,7 +115,7 @@ class MyClass {} const myClass = new MyClass(); myClass.deeper = new
 MyClass(); consono(myClass);
 ```
 
-![Object](docs/img/light/012.png?raw=true "Object")
+![Object](/img/light/012.png?raw=true "Object")
 
 ```js
 consono(new Error("Standard error"));
@@ -130,19 +126,19 @@ consono(new SyntaxError("Not a source code"));
 consono(new TypeError("Value is not of the expected type"));
 ```
 
-![Error](docs/img/light/013.png?raw=true "Error")
+![Error](/img/light/013.png?raw=true "Error")
 
 ```js
 (function(a, b) { consono(arguments); })(true, false);
 ```
 
-![Arguments](docs/img/light/014.png?raw=true "Arguments")
+![Arguments](/img/light/014.png?raw=true "Arguments")
 
 ```js
 consono(global || globalThis, { objectMaxProps: 3 });
 ```
 
-![Global](docs/img/light/015.png?raw=true "Global")
+![Global](/img/light/015.png?raw=true "Global")
 
 ## 🔋 Motivation
 
