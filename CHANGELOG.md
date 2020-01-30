@@ -1,3 +1,7 @@
+#### 1.1.12 Jan 30, 2020
+
+-   ➕ Add shortcuts `consonoExit`, `consonoPlain`, `consonoReturn`.
+
 #### 1.1.11 Jan 28, 2020
 
 -   📚 Update documentation

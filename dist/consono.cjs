@@ -990,6 +990,7 @@ ${this.#theme.plain(",")}\n`;
 
 /**
  * @name consono
+ * @description Print variable
  * @param {*} variable
  * @param {boolean|Object} options
  * @param {Object|string=} theme
@@ -1014,11 +1015,95 @@ function consono(variable, options = true, theme) {
   }
 }
 
+/**
+ * @name consonoExit
+ * @description Print variable and exit process
+ * @param {*} variable
+ * @param {boolean|Object} options
+ * @param {Object|string=} theme
+ * @param {boolean|number=} exitCode
+ * @returns {string|undefined}
+ */
+function consonoExit(variable, options = true, theme, exitCode = 0) {
+  const createdOptions = Consono.createOptions({ ...options, exit: exitCode });
+  const instance = new Consono(createdOptions, theme);
+  if (createdOptions.console) {
+    if (createdOptions.clear) {
+      cliExit();
+    }
+    if (createdOptions.immediate) {
+      setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+    } else {
+      console.log(instance.toPrintable(variable));
+    }
+    processExit(createdOptions.exit);
+  }
+  if (createdOptions.returns) {
+    return instance.toPrintable(variable);
+  }
+}
+
+/**
+ * @name consonoPlain
+ * @description Print variable without highlighting
+ * @param {*} variable
+ * @param {boolean|Object} options
+ * @returns {string|undefined}
+ */
+function consonoPlain(variable, options = true) {
+  const createdOptions = Consono.createOptions({ ...options, colorize: false });
+  const instance = new Consono(createdOptions);
+  if (createdOptions.console) {
+    if (createdOptions.clear) {
+      cliExit();
+    }
+    if (createdOptions.immediate) {
+      setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+    } else {
+      console.log(instance.toPrintable(variable));
+    }
+    processExit(createdOptions.exit);
+  }
+  if (createdOptions.returns) {
+    return instance.toPrintable(variable);
+  }
+}
+
+/**
+ * @name consonoReturn
+ * @description Return variable with highlighting
+ * @param {*} variable
+ * @param {boolean|Object} options
+ * @param {Object|string=} theme
+ * @returns {string|undefined}
+ */
+function consonoReturn(variable, options = true, theme) {
+  const createdOptions = Consono.createOptions({ ...options, console: false, returns: true });
+  const instance = new Consono(createdOptions, theme);
+  if (createdOptions.console) {
+    if (createdOptions.clear) {
+      cliExit();
+    }
+    if (createdOptions.immediate) {
+      setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+    } else {
+      console.log(instance.toPrintable(variable));
+    }
+    processExit(createdOptions.exit);
+  }
+  if (createdOptions.returns) {
+    return instance.toPrintable(variable);
+  }
+}
+
 module.exports = {
-  default: consono,
-  consono,
   Consono,
-  options: OPTIONS_DEFAULT,
-  THEME_LIGHT,
   THEME_DARK,
+  THEME_LIGHT,
+  consono,
+  consonoExit,
+  consonoPlain,
+  consonoReturn,
+  default: consono,
+  options: OPTIONS_DEFAULT,
 };

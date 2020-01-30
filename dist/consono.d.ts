@@ -32,6 +32,8 @@ export interface IConsonoTheme {
 export default consono;
 
 /**
+ * @name consono
+ * @description Print variable
  * @param {*} variable
  * @param {boolean|object} options
  * @param {object|string="dark"} theme
@@ -42,6 +44,45 @@ export declare function consono(
   options?: boolean | IConsonoOptions,
   theme?: "dark" | "light" | IConsonoTheme,
 ): string | void;
+
+/**
+ * @name consonoExit
+ * @description Print variable and exit process
+ * @param {*} variable
+ * @param {boolean|Object} options
+ * @param {Object|string=} theme
+ * @param {boolean|number=} exitCode
+ * @returns {string|undefined}
+ */
+export declare function consonoExit(
+  variable: any,
+  options?: boolean | IConsonoOptions,
+  theme?: "dark" | "light" | IConsonoTheme,
+  exitCode?: boolean | number,
+): string | void;
+
+/**
+ * @name consonoPlain
+ * @description Print variable without highlighting
+ * @param {*} variable
+ * @param {boolean|Object} options
+ * @returns {string|undefined}
+ */
+export declare function consonoPlain(variable: any, options?: boolean | IConsonoOptions): string | void;
+
+/**
+ * @name consonoReturn
+ * @description Return variable with highlighting
+ * @param {*} variable
+ * @param {boolean|Object} options
+ * @param {Object|string=} theme
+ * @returns {string|undefined}
+ */
+export declare function consonoReturn(
+  variable: any,
+  options?: boolean | IConsonoOptions,
+  theme?: "dark" | "light" | IConsonoTheme,
+): string;
 
 export declare class Consono {
   /**

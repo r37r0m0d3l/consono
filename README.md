@@ -23,20 +23,6 @@ The most correct, informative, appealing and configurable variable inspector for
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/consono)
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/consono.svg?style=social&label=Fork)]()
 
-## 🧭 Table of contents
-
-[Examples](#examples)
-
-[Motivation](#motivation)
-
-[Installation](#installation)
-
-[Include](#include)
-
-[Options](#options)
-
-[Instance](#instance)
-
 ## 🧬 Examples
 
 ```js
@@ -44,14 +30,14 @@ consono(undefined);
 consono(null);
 ```
 
-![Nil](docs/readme/001.png?raw=true "Nil")
+![Nil](docs/img/light/001.png?raw=true "Nil")
 
 ```js
 consono(true);
 consono(false);
 ```
 
-![Boolean](docs/readme/002.png?raw=true "Boolean")
+![Boolean](docs/img/light/002.png?raw=true "Boolean")
 
 ```js
 consono(Infinity);
@@ -62,27 +48,27 @@ consono(1.5);
 consono(BigInt(9007199254740991));
 ```
 
-![Number](docs/readme/003.png?raw=true "Number")
+![Number](docs/img/light/003.png?raw=true "Number")
 
 ```js
 consono(new Date());
 ```
 
-![Date](docs/readme/004.png?raw=true "Date")
+![Date](docs/img/light/004.png?raw=true "Date")
 
 ```js
 consono("Hello, world 😀😁😂🤣😃😄😅😆😉😊", { stringMaxLength: 17 });
 consono(Symbol("🌈"));
 ```
 
-![String](docs/readme/005.png?raw=true "String")
+![String](docs/img/light/005.png?raw=true "String")
 
 ```js
 consono(/[0-9]+/);
 consono(/\w+/giu);
 ```
 
-![RegExp](docs/readme/006.png?raw=true "RegExp")
+![RegExp](docs/img/light/006.png?raw=true "RegExp")
 
 ```js
 consono(function() {});
@@ -90,7 +76,7 @@ consono(function helloWorld() {});
 consono(() => {});
 ```
 
-![Function](docs/readme/007.png?raw=true "Function")
+![Function](docs/img/light/007.png?raw=true "Function")
 
 ```js
 consono(new Promise(() => {}));
@@ -99,21 +85,21 @@ consono(async () => {});
 consono(function* gen() { yield 1; });
 ```
 
-![Async](docs/readme/008.png?raw=true "Async")
+![Async](docs/img/light/008.png?raw=true "Async")
 
 ```js
 consono([1, 2, 3]);
 consono(Int8Array.from([1, 2, 3]));
 ```
 
-![Array](docs/readme/009.png?raw=true "Array")
+![Array](docs/img/light/009.png?raw=true "Array")
 
 ```js
 consono(new ArrayBuffer(8));
 consono(new SharedArrayBuffer(16));
 ```
 
-![Array Buffer](docs/readme/010.png?raw=true "Array Buffer")
+![Array Buffer](docs/img/light/010.png?raw=true "Array Buffer")
 
 ```js
 consono(new Set(["a", true, { prop: 1 }]));
@@ -122,7 +108,7 @@ consono(new WeakMap());
 consono(new WeakSet());
 ```
 
-![Collection](docs/readme/011.png?raw=true "Collection")
+![Collection](docs/img/light/011.png?raw=true "Collection")
 
 ```js
 consono({});
@@ -131,7 +117,7 @@ class MyClass {} const myClass = new MyClass(); myClass.deeper = new
 MyClass(); consono(myClass);
 ```
 
-![Object](docs/readme/012.png?raw=true "Object")
+![Object](docs/img/light/012.png?raw=true "Object")
 
 ```js
 consono(new Error("Standard error"));
@@ -142,19 +128,19 @@ consono(new SyntaxError("Not a source code"));
 consono(new TypeError("Value is not of the expected type"));
 ```
 
-![Error](docs/readme/013.png?raw=true "Error")
+![Error](docs/img/light/013.png?raw=true "Error")
 
 ```js
 (function(a, b) { consono(arguments); })(true, false);
 ```
 
-![Arguments](docs/readme/014.png?raw=true "Arguments")
+![Arguments](docs/img/light/014.png?raw=true "Arguments")
 
 ```js
 consono(global || globalThis, { objectMaxProps: 3 });
 ```
 
-![Global](docs/readme/015.png?raw=true "Global")
+![Global](docs/img/light/015.png?raw=true "Global")
 
 ## 🔋 Motivation
 
@@ -215,12 +201,6 @@ Import as ECMAScript module.
 
 ```js
 import { consono } from "consono/es";
-```
-
-UNPKG CDN.
-
-```html
-<script src="https://unpkg.com/consono/dist/consono.js"></script>
 ```
 
 ## ⚙️ Options
@@ -337,6 +317,15 @@ const defaultOptions = {
 };
 consono("Some variable", defaultOptions);
 ```
+
+## 🔮 Shortcuts
+
+```js
+consonoExit("Some value", null, null, 15); // Exit code - 15
+consonoPlain("Some value"); // No colorization
+consonoReturn("Some value"); // Return only, no `console.log`
+```
+
 
 ## 👀 Discover more 👀
 
