@@ -1,3 +1,7 @@
+#### 1.1.14 Jan 31, 2020
+
+-   ⬆️ Update dependencies
+
 #### 1.1.13 Jan 28, 2020
 
 -   📚 Update documentation
