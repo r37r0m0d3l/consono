@@ -59,10 +59,11 @@
     "url": "git+https://github.com/r37r0m0d3l/consono.git"
   },
   "scripts": {
+    "docs-serve": "docsify serve docs",
     "lint": "npx eslint ./src/consono.js",
     "lint-md": "remark .",
     "test": "jest"
   },
   "types": "./dist/consono.d.ts",
-  "version": "1.1.14"
+  "version": "1.1.15"
 }

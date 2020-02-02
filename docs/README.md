@@ -21,6 +21,37 @@ The most correct, informative, appealing and configurable variable inspector for
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/consono)
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/consono.svg?style=social&label=Fork)]()
 
+---
+
+_If you use this project don't forget to give a ⭐ [star](https://github.com/r37r0m0d3l/consono) ⭐ to it on GitHub!_
+
+---
+
+## 🔋 Motivation
+
+Motivation and differences from other libraries.
+
+-   **Light** and **dark** themes for terminal output ([prefers-color-scheme: Hello darkness, my old friend](https://web.dev/prefers-color-scheme/)).
+-   **Configurable coloring** of variables.
+-   Can print to terminal or **return formatted and colored** string for later use ([How to get result string of console.log in javascript code? You can't.](https://stackoverflow.com/questions/17904957/how-to-get-result-string-of-console-log-in-javascript-code)).
+-   **Turn on/off** output colorization. It even works on Windows - use [Windows Terminal (Preview)](https://github.com/microsoft/terminal).
+-   **Configurable indent** - tabs vs spaces.
+-   Availability to set **depth** for *object* inspection.
+-   Configurable **max items** for *array*, *map*, *object*, *set*.
+-   **Limit string length** when printing for better readability.
+-   Inspect both string **character count** and **string length** ([It’s Not Wrong that "🤦🏼‍♂️".length == 7](https://hsivonen.fi/string-length/)).
+-   Inspect **positive zeroes** and **negative zeroes** ([JavaScript’s two zeros](https://2ality.com/2012/03/signedzero)).
+-   Inspect **items count** for collection-like variables *array*, *map*, *object*, *set*.
+-   Actually **can inspect** *arguments*, *set* and *map*.
+-   Can print **function names** or mark them as **anonymous**.
+-   Handles **circular references**.
+-   Has **TypeScript** declaration file ([Writing Declaration Files for @types](https://devblogs.microsoft.com/typescript/writing-dts-files-for-types/)).
+-   Avoids **dependency hell** ([Wikipedia article](https://en.wikipedia.org/wiki/Dependency_hell)).
+-   Can **clear terminal** before output.
+-   Can **exit** Node.js process after output.
+-   Import as **ECMAScript module**.
+-   And so on and so forth…
+
 ## 🧬 Examples
 
 ```js
@@ -139,31 +170,6 @@ consono(global || globalThis, { objectMaxProps: 3 });
 ```
 
 ![Global](/img/light/015.png?raw=true "Global")
-
-## 🔋 Motivation
-
-Motivation and differences from other libraries.
-
--   **Light** and **dark** themes for terminal output ([prefers-color-scheme: Hello darkness, my old friend](https://web.dev/prefers-color-scheme/)).
--   **Configurable coloring** of variables.
--   Can print to terminal or **return formatted and colored** string for later use ([How to get result string of console.log in javascript code? You can't.](https://stackoverflow.com/questions/17904957/how-to-get-result-string-of-console-log-in-javascript-code)).
--   **Turn on/off** output colorization. It even works on Windows - use [Windows Terminal (Preview)](https://github.com/microsoft/terminal).
--   **Configurable indent** - tabs vs spaces.
--   Availability to set **depth** for *object* inspection.
--   Configurable **max items** for *array*, *map*, *object*, *set*.
--   **Limit string length** when printing for better readability.
--   Inspect both string **character count** and **string length** ([It’s Not Wrong that "🤦🏼‍♂️".length == 7](https://hsivonen.fi/string-length/)).
--   Inspect **positive zeroes** and **negative zeroes** ([JavaScript’s two zeros](https://2ality.com/2012/03/signedzero)).
--   Inspect **items count** for collection-like variables *array*, *map*, *object*, *set*.
--   Actually **can inspect** *arguments*, *set* and *map*.
--   Can print **function names** or mark them as **anonymous**.
--   Handles **circular references**.
--   Has **TypeScript** declaration file ([Writing Declaration Files for @types](https://devblogs.microsoft.com/typescript/writing-dts-files-for-types/)).
--   Avoids **dependency hell** ([Wikipedia article](https://en.wikipedia.org/wiki/Dependency_hell)).
--   Can **clear terminal** before output.
--   Can **exit** Node.js process after output.
--   Import as **ECMAScript module**.
--   And so on and so forth…
 
 ## 📦 Installation
 
@@ -323,7 +329,6 @@ consonoExit("Some value", null, null, 15); // Exit code - 15
 consonoPlain("Some value"); // No colorization
 consonoReturn("Some value"); // Return only, no `console.log`
 ```
-
 
 ## 👀 Discover more
 
