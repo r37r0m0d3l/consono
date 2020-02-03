@@ -21,6 +21,7 @@
 /_config.yml
 /_layouts/
 /docs/
+/renovate.json
 /src/
 /temp/
 /test/
