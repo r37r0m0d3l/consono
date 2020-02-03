@@ -5,7 +5,7 @@
 
 The most correct, informative, appealing and configurable variable inspector for Node.js
 
-[Consono Documentation](https://consono.js.org)
+[🗎 Consono Documentation 🗎](https://consono.js.org)
 
 [![NPM Version](https://img.shields.io/npm/v/consono.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/consono.svg?style=flat)]()
