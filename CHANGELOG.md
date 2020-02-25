@@ -1,62 +1,65 @@
+#### 1.2.0 Feb 25, 2020
+
+-   ➕️ Added `stdout` option. Call `process.stdout.write` instead of `console.log`.
+-   📚 Update documentation.
+
 #### 1.1.16 Feb 03, 2020
 
--   📚 Update documentation
+-   📚 Update documentation.
 
 #### 1.1.15 Feb 02, 2020
 
--   📚 Update documentation
+-   📚 Update documentation.
 
 #### 1.1.14 Jan 31, 2020
 
--   ⬆️ Update dependencies
+-   ⬆️ Update dependencies.
 
 #### 1.1.13 Jan 28, 2020
 
--   📚 Update documentation
+-   📚 Update documentation.
 
 #### 1.1.12 Jan 30, 2020
 
--   ➕ Add shortcuts `consonoExit`, `consonoPlain`, `consonoReturn`.
+-   ➕ Added shortcuts `consonoExit`, `consonoPlain`, `consonoReturn`.
 
 #### 1.1.11 Jan 28, 2020
 
--   📚 Update documentation
+-   📚 Update documentation.
 
 #### 1.1.10 Jan 28, 2020
 
--   ⬆️ Update dependencies
+-   ⬆️ Update dependencies.
 
 #### 1.1.9 Jan 27, 2020
 
--   💥 Change light and dark theme colors
+-   💥 Change light and dark theme colors.
 
 #### 1.1.8 Jan 27, 2020
 
--   ✅️ Make tests consistent
+-   ✅️ Make tests consistent.
 
 #### 1.1.7 Jan 27, 2020
 
--   ➕️ Add `immediate` option. Call `console.log` immediately.
+-   ➕️ Added `immediate` option. Call `console.log` immediately.
 
 #### 1.1.6 Jan 27, 2020
 
--   ♻️ Move `console.log` calls to immediate in event loop
-
--   📚 Update documentation
+-   ♻️ Move `console.log` calls to immediate in event loop.
+-   📚 Update documentation.
 
 #### 1.1.5 Jan 26, 2020
 
--   📚 Update documentation
+-   📚 Update documentation.
 
 #### 1.1.4 Jan 24, 2020
 
--   💥 Light theme now is default
-
--   ♻️ Tiny inner refactorings
+-   💥 Light theme now is default.
+-   ♻️ Tiny inner refactorings.
 
 #### 1.1.3 Jan 23, 2020
 
--   ⬆️ Update dependencies
+-   ⬆️ Update dependencies.
 
 #### 1.1.2 Jan 01, 2020
 
@@ -73,59 +76,59 @@
 
 #### 1.0.14 Dec 22, 2019
 
--   ⬆️ Update README
+-   ⬆️ Update README.
 
 #### 1.0.13 Dec 22, 2019
 
--   ⬆️ Update deps.
+-   ⬆️ Update dependencies.
 
 #### 1.0.12 Dec 22, 2019
 
--   ⬆️ Update deps.
+-   ⬆️ Update dependencies.
 
 #### 1.0.11 Dec 18, 2019
 
--   🐛 Fix options initialization
+-   🐛 Fix options initialization.
 
 #### 1.0.10 Dec 16, 2019
 
--   ⬆️ Update README
+-   ⬆️ Update README.
 
 #### 1.0.9 Dec 16, 2019
 
--   ⬆️ Update number presentation. When printing zeroes instead of 'number integer' print 'number zero' and 'number negative zero'
+-   ⬆️ Update number presentation. When printing zeroes instead of 'number integer' print 'number zero' and 'number negative zero'.
 
 #### 1.0.8 Dec 10, 2019
 
--   🐛 Fix circular reference property printing
--   🐛 Fix minor lint errors
+-   🐛 Fix circular reference property printing.
+-   🐛 Fix minor lint errors.
 
 #### 1.0.7 Dec 10, 2019
 
--   ➕️ Add ECMAScript module import option
--   ➕️ Add exported values THEME_LIGHT and THEME_DARK
+-   ➕️ Added ECMAScript module import option.
+-   ➕️ Added exported values THEME_LIGHT and THEME_DARK.
 
 #### 1.0.6 Dec 04, 2019
 
--   ⬆️ Update .npmignore
+-   ⬆️ Update .npmignore.
 
 #### 1.0.5 Dec 04, 2019
 
--   🐛 Fix minor lint errors
--   ⬆️ Update deps.
+-   🐛 Fix minor lint errors.
+-   ⬆️ Update dependencies.
 
 #### 1.0.4 Nov 21, 2019
 
--   Add CHANGELOG
--   Sort object keys before output
+-   ➕ Added CHANGELOG.
+-   Sort object keys before output.
 
 #### 1.0.3 Nov 21, 2019
 
--   Add theme option
+-   ➕ Added theme option.
 
 #### 1.0.2 Nov 13, 2019
 
--   Minor docs update
+-   Minor docs update.
 
 #### 1.0.1 Nov 13, 2019
 
@@ -133,58 +136,58 @@
 
 #### 1.0.0 Nov 13, 2019
 
--   Add options in export
+-   ➕ Added options in export.
 
 #### 0.0.13 Nov 12, 2019
 
 -   Code cleanup.
--   Update deps.
+-   ⬆️ Update dependencies.
 
 #### 0.0.12 Nov 11, 2019
 
--   Add "colorize" option
+-   ➕ Added "colorize" option.
 
 #### 0.0.11 Nov 11, 2019
 
--   Minor fix
--   Update `Set` example
+-   Minor fix.
+-   ⬆️ Update `Set` example.
 
 #### 0.0.10 Nov 11, 2019
 
--   Now in input shown how many object properties are hidden
+-   Now in input shown how many object properties are hidden.
 
 #### 0.0.9 Nov 11, 2019
 
--   Add color output
+-   ➕ Added color output.
 
 #### 0.0.8 Nov 8, 2019
 
--   Update documentation
+-   ⬆️ Update documentation.
 
 #### 0.0.7 Nov 6, 2019
 
--   Add tests
+-   ➕ Added tests.
 
 #### 0.0.6 Nov 6, 2019
 
--   Add tests
+-   ➕ Added tests.
 
 #### 0.0.5 Nov 6, 2019
 
--   Add build script
+-   ➕ Added build script.
 
 #### 0.0.4 Nov 6, 2019
 
--   Add README
+-   ➕ Added README.
 
 #### 0.0.3 Nov 6, 2019
 
--   Remove unnecessary files with .npmignore
+-   Remove unnecessary files with .npmignore.
 
 #### 0.0.2 Nov 5, 2019
 
--   Bump version
+-   Bump version.
 
 #### 0.0.1 Nov 4, 2019
 
--   Initial commit
+-   Initial commit.

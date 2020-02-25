@@ -13,6 +13,7 @@
 /.prettierignore
 /.prettierrc
 /.remarkrc
+/.sonarcloud.properties
 /.travis.yml
 /.yarnrc
 /CHANGELOG.md
@@ -21,6 +22,7 @@
 /_config.yml
 /_layouts/
 /docs/
+/package-lock.json
 /renovate.json
 /src/
 /temp/

@@ -44,6 +44,7 @@ const OPTIONS_DEFAULT = {
   quotesStart: `"`,
   returns: true,
   setMaxValues: 99,
+  stdout: false,
   stringMaxLength: 360,
 };
 
@@ -62,6 +63,7 @@ const OPTIONS_KEYS = [
   "quotesStart",
   "returns",
   "setMaxValues",
+  "stdout",
   "stringMaxLength",
 ];
 
@@ -102,6 +104,14 @@ function cliExit() {
     } catch (err) {
       //
     }
+  }
+}
+
+function cliPrint(message, stdout = false) {
+  if (!stdout) {
+    console.log(message);
+  } else {
+    process.stdout.write(message);
   }
 }
 
@@ -288,6 +298,7 @@ class Consono {
   #quotesStart;
   #returns;
   #setMaxValues;
+  #stdout;
   #stringMaxLength;
   #theme;
   /**
@@ -323,6 +334,7 @@ class Consono {
     this.#clear = !!opts.clear;
     this.#colorize = !!opts.colorize;
     this.#console = !!opts.console;
+    this.#stdout = !!opts.stdout;
     this.#currentDepth = 0;
     this.#depth = Number.parseInt(opts.depth);
     if (opts.exit === false) {
@@ -932,9 +944,9 @@ ${this.#theme.plain(",")}\n`;
         cliExit();
       }
       if (this.#immediate) {
-        setTimeout(() => console.log(this.toPrintable(variable)), 0);
+        setTimeout(() => cliPrint(this.toPrintable(variable), this.#stdout), 0);
       } else {
-        console.log(this.toPrintable(variable));
+        cliPrint(this.toPrintable(variable), this.#stdout);
       }
       processExit(this.#exit);
     }
@@ -959,9 +971,9 @@ ${this.#theme.plain(",")}\n`;
           cliExit();
         }
         if (createdOptions.immediate) {
-          setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+          setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
         } else {
-          console.log(instance.toPrintable(variable));
+          cliPrint(instance.toPrintable(variable), createdOptions.stdout);
         }
         processExit(createdOptions.exit);
       }
@@ -1004,9 +1016,9 @@ function consono(variable, options = true, theme) {
       cliExit();
     }
     if (createdOptions.immediate) {
-      setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
     } else {
-      console.log(instance.toPrintable(variable));
+      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
     }
     processExit(createdOptions.exit);
   }
@@ -1032,9 +1044,9 @@ function consonoExit(variable, options = true, theme, exitCode = 0) {
       cliExit();
     }
     if (createdOptions.immediate) {
-      setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
     } else {
-      console.log(instance.toPrintable(variable));
+      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
     }
     processExit(createdOptions.exit);
   }
@@ -1058,9 +1070,9 @@ function consonoPlain(variable, options = true) {
       cliExit();
     }
     if (createdOptions.immediate) {
-      setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
     } else {
-      console.log(instance.toPrintable(variable));
+      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
     }
     processExit(createdOptions.exit);
   }
@@ -1085,9 +1097,9 @@ function consonoReturn(variable, options = true, theme) {
       cliExit();
     }
     if (createdOptions.immediate) {
-      setTimeout(() => console.log(instance.toPrintable(variable)), 0);
+      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
     } else {
-      console.log(instance.toPrintable(variable));
+      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
     }
     processExit(createdOptions.exit);
   }

@@ -14,6 +14,7 @@ export interface IConsonoOptions {
   quotesStart?: string;
   returns?: boolean;
   setMaxValues?: number;
+  stdout?: boolean;
   stringMaxLength?: number;
 }
 
