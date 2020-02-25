@@ -315,6 +315,8 @@ const defaultOptions = {
   returns: true,
   // Maximum number of values in set to show
   setMaxValues: 99,
+  // Call `process.stdout.write` instead of `console.log`.
+  stdout: false,
   // Maximum length of string to show
   stringMaxLength: 360,
 };
