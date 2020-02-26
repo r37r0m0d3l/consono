@@ -10,7 +10,7 @@
     }
   ],
   "dependencies": {
-    "chalk": "3.0.0"
+    "chalk": "latest"
   },
   "description": "The most correct, informative, appealing and configurable variable inspector for Node.js",
   "devDependencies": {
@@ -18,7 +18,7 @@
     "@babel/plugin-proposal-class-properties": "7.8.3",
     "@babel/preset-env": "7.8.4",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "10.0.3",
+    "babel-eslint": "10.1.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.0",
     "eslint-plugin-prettier": "3.1.2",
@@ -64,8 +64,9 @@
     "docs-serve": "docsify serve docs",
     "lint": "npx eslint ./src/consono.js",
     "lint-md": "remark .",
-    "test": "jest"
+    "test": "jest",
+    "upgrade": "yarn upgrade-interactive --latest"
   },
   "types": "./dist/consono.d.ts",
-  "version": "1.2.0"
+  "version": "1.2.1"
 }
