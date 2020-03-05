@@ -14,9 +14,9 @@
   },
   "description": "The most correct, informative, appealing and configurable variable inspector for Node.js",
   "devDependencies": {
-    "@babel/core": "7.8.6",
+    "@babel/core": "7.8.7",
     "@babel/plugin-proposal-class-properties": "7.8.3",
-    "@babel/preset-env": "7.8.6",
+    "@babel/preset-env": "7.8.7",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "eslint": "6.8.0",
