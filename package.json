@@ -14,9 +14,12 @@
   },
   "description": "The most correct, informative, appealing and configurable variable inspector for Node.js",
   "devDependencies": {
-    "@babel/core": "7.8.4",
+    "@babel/core": "7.8.7",
     "@babel/plugin-proposal-class-properties": "7.8.3",
-    "@babel/preset-env": "7.8.4",
+    "@babel/plugin-proposal-private-methods": "7.8.3",
+    "@babel/preset-env": "7.8.7",
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-node-resolve": "7.1.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "eslint": "6.8.0",
@@ -28,7 +31,11 @@
     "remark-lint": "6.0.5",
     "remark-preset-lint-consistent": "2.0.3",
     "remark-preset-lint-markdown-style-guide": "2.1.3",
-    "remark-preset-lint-recommended": "3.0.3"
+    "remark-preset-lint-recommended": "3.0.3",
+    "rollup": "2.0.2",
+    "rollup-plugin-auto-external": "2.0.0",
+    "rollup-plugin-babel": "4.4.0",
+    "rollup-plugin-terser": "5.2.0"
   },
   "exports": {
     ".": "./dist/consono.cjs",
@@ -37,8 +44,12 @@
   },
   "files": [
     "dist/consono.cjs",
+    "dist/consono.cjs.map",
     "dist/consono.d.ts",
-    "dist/consono.mjs"
+    "dist/consono.js",
+    "dist/consono.js.map",
+    "dist/consono.mjs",
+    "dist/consono.mjs.map"
   ],
   "homepage": "https://consono.js.org",
   "keywords": [
@@ -61,12 +72,14 @@
     "url": "git+https://github.com/r37r0m0d3l/consono.git"
   },
   "scripts": {
+    "build-cli": "rollup --config rollup.config.cli.js",
+    "build-web": "rollup --config rollup.config.web.js",
     "docs-serve": "docsify serve docs",
-    "lint": "npx eslint ./src/consono.js",
+    "lint": "eslint ./src/**/*.mjs",
     "lint-md": "remark .",
     "test": "jest",
     "upgrade": "yarn upgrade-interactive --latest"
   },
   "types": "./dist/consono.d.ts",
-  "version": "1.2.1"
+  "version": "1.3.0"
 }

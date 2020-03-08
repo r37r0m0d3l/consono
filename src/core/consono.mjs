@@ -1,286 +1,21 @@
-const chalk = require("chalk");
+import OPTIONS_DEFAULT from "../const/options_default.mjs";
+import OPTIONS_KEYS from "../const/options_keys.mjs";
+import TAG from "../const/tag.mjs";
+import Theme from "./theme.mjs";
+import cliExit from "../utils/cliExit.mjs";
+import cliPrint from "../utils/cliPrint.mjs";
+import funcNameExtract from "../utils/funcNameExtract.mjs";
+import isInteger from "../utils/isInteger.mjs";
+import objectClass from "../utils/objectClass.mjs";
+import objectDeCycle from "../utils/objectDeCycle.mjs";
+import objectPick from "../utils/objectPick.mjs";
+import objectSize from "../utils/objectSize.mjs";
+import objectType from "../utils/objectType.mjs";
+import processExit from "../utils/processExit.mjs";
+import prototypeName from "../utils/prototypeName.mjs";
+import stringClearReference from "../utils/stringClearReference.mjs";
 
-const TAG_ARGUMENTS = "[object Arguments]";
-const TAG_ARRAY = "[object Array]";
-const TAG_ARRAY_BUFFER = "[object ArrayBuffer]";
-const TAG_ASYNC_FUNCTION = "[object AsyncFunction]";
-const TAG_BIGINT = "[object BigInt]";
-const TAG_BOOL = "[object Boolean]";
-const TAG_DATE = "[object Date]";
-const TAG_ERROR = "[object Error]";
-const TAG_FUNCTION = "[object Function]";
-const TAG_GENERATOR = "[object Generator]";
-const TAG_GENERATOR_FUNCTION = "[object GeneratorFunction]";
-const TAG_GLOBAL = "[object global]";
-const TAG_MAP = "[object Map]";
-const TAG_NULL = "[object Null]";
-const TAG_NUMBER = "[object Number]";
-const TAG_OBJECT = "[object Object]";
-const TAG_PROMISE = "[object Promise]";
-const TAG_REGEXP = "[object RegExp]";
-const TAG_SET = "[object Set]";
-const TAG_SHARED_ARRAY_BUFFER = "[object SharedArrayBuffer]";
-const TAG_STRING = "[object String]";
-const TAG_SYMBOL = "[object Symbol]";
-const TAG_VOID = "[object Undefined]";
-const TAG_WEAK_MAP = "[object WeakMap]";
-const TAG_WEAK_SET = "[object WeakSet]";
-const TAG_WINDOW = "[object Window]";
-
-const OPTIONS_DEFAULT = {
-  arrayMaxElements: 99,
-  assignSymbol: "→",
-  clear: false,
-  colorize: true,
-  console: true,
-  depth: 20,
-  exit: false,
-  immediate: false,
-  indent: "ˑˑ",
-  indentPad: 1,
-  mapMaxEntries: 99,
-  objectMaxProps: 99,
-  quotesEnd: `"`,
-  quotesStart: `"`,
-  returns: true,
-  setMaxValues: 99,
-  stdout: false,
-  stringMaxLength: 360,
-};
-
-const OPTIONS_KEYS = [
-  "arrayMaxElements",
-  "assignSymbol",
-  "clear",
-  "colorize",
-  "console",
-  "depth",
-  "exit",
-  "indent",
-  "mapMaxEntries",
-  "objectMaxProps",
-  "quotesEnd",
-  "quotesStart",
-  "returns",
-  "setMaxValues",
-  "stdout",
-  "stringMaxLength",
-];
-
-const THEME_DARK = {
-  argument: [253, 151, 31],
-  boolean: [174, 129, 255],
-  comment: [117, 113, 94],
-  keyword: [249, 38, 114],
-  name: [230, 219, 116],
-  number: [174, 129, 255],
-  plain: [128, 128, 128],
-  property: [102, 217, 239],
-  string: [166, 226, 46],
-};
-
-const THEME_LIGHT = {
-  argument: [245, 135, 31],
-  boolean: [66, 113, 174],
-  comment: [117, 113, 94],
-  keyword: [200, 40, 41],
-  name: [201, 159, 0],
-  number: [101, 67, 133],
-  plain: [128, 128, 128],
-  property: [32, 123, 129],
-  string: [113, 140, 0],
-};
-
-function cliExit() {
-  if ("clear" in console) {
-    try {
-      console.clear();
-    } catch (err) {
-      //
-    }
-  } else {
-    try {
-      process.stdout.write("\u001b[2J\u001b[0;0H");
-    } catch (err) {
-      //
-    }
-  }
-}
-
-function cliPrint(message, stdout = false) {
-  if (!stdout) {
-    console.log(message);
-  } else {
-    process.stdout.write(message);
-  }
-}
-
-function processExit(code = 0) {
-  if (code === false) {
-    return;
-  }
-  if (code === true) {
-    code = 0;
-  }
-  const exitCode = Number.parseInt(code.toString());
-  if (!Number.isInteger(exitCode)) {
-    return;
-  }
-  if (exitCode < 0) {
-    return;
-  }
-  try {
-    process.exit(exitCode);
-  } catch (error) {
-    //
-  }
-}
-
-function isInteger(value) {
-  return Number.isInteger(Number.parseInt(value));
-}
-
-function prototypeName(value) {
-  return Object.prototype.toString.call(value);
-}
-
-function stringClearReference(text) {
-  return text.length < 12 ? text : (" " + text).slice(1);
-}
-
-function objectDeCycle(object) {
-  const objects = [];
-  const paths = [];
-  return (function deReCycle(value, path) {
-    let index;
-    let name;
-    let newIterable;
-    if (
-      typeof value === "object" &&
-      value !== null &&
-      !(value instanceof Boolean) &&
-      !(value instanceof Date) &&
-      !(value instanceof Number) &&
-      !(value instanceof RegExp) &&
-      !(value instanceof String)
-    ) {
-      for (index = 0; index < objects.length; index += 1) {
-        if (objects[index] === value) {
-          return { "&circularReference": paths[index] };
-        }
-      }
-      objects.push(value);
-      paths.push(path);
-      if (prototypeName(value) === TAG_ARRAY) {
-        newIterable = [];
-        for (index = 0; index < value.length; index += 1) {
-          newIterable[index] = deReCycle(value[index], `${path}["${index}"]`);
-        }
-      } else {
-        newIterable = Object.create(object);
-        for (name in value) {
-          if (Object.prototype.hasOwnProperty.call(value, name)) {
-            newIterable[name] = deReCycle(value[name], `${path}[${JSON.stringify(name)}]`);
-          }
-        }
-      }
-      return newIterable;
-    }
-    return value;
-  })(object, "&");
-}
-
-function funcNameExtract(func) {
-  if (func.name) {
-    return func.name;
-  }
-  const result = /^function\s+([\w]+)\s*\(/.exec(func.toString());
-  return result ? result[1] : "";
-}
-
-function objectSize(obj) {
-  return Object.keys(obj).length;
-}
-
-function objectPick(object, keys) {
-  if (!keys.length || !Object.keys(object).length) {
-    return {};
-  }
-  return keys.reduce((accumulator, key) => {
-    accumulator[key] = object[key];
-    return accumulator;
-  }, {});
-}
-
-function objectClass(value) {
-  return value.constructor.name;
-}
-
-function objectType(value) {
-  const type = prototypeName(value)
-    .toLowerCase()
-    .split("[object ")
-    .pop()
-    .split("]")
-    .shift();
-  if (["global", "window"].includes(type)) {
-    return "object";
-  }
-  if (type.includes("error")) {
-    return "error";
-  }
-  return type;
-}
-
-class Theme {
-  /**
-   * @constructor
-   * @param {number=3} level
-   * @param {Object|string=} theme
-   */
-  constructor(level = 3, theme) {
-    this.cli = new chalk.Instance({ level: Math.min(level, chalk.supportsColor.level) });
-    let rgb;
-    switch (true) {
-      case theme === "dark":
-        rgb = THEME_DARK;
-        break;
-      case theme === "light":
-        rgb = THEME_LIGHT;
-        break;
-      case prototypeName(theme) === TAG_OBJECT:
-        rgb = { ...THEME_LIGHT, ...theme };
-        break;
-      default:
-        rgb = THEME_LIGHT;
-        break;
-    }
-    this.argument = this.compose(...rgb.argument);
-    this.boolean = this.compose(...rgb.boolean);
-    this.comment = this.compose(...rgb.comment);
-    this.keyword = this.compose(...rgb.keyword);
-    this.name = this.compose(...rgb.name);
-    this.number = this.compose(...rgb.number);
-    this.plain = this.compose(...rgb.plain);
-    this.property = this.compose(...rgb.property);
-    this.string = this.compose(...rgb.string);
-  }
-  static toRGB(color) {
-    color = Number.parseInt(color.toString(), 10);
-    if (!Number.isInteger(color)) {
-      return 255;
-    }
-    return Math.min(255, Math.max(0, color));
-  }
-  compose(red = 255, green = 255, blue = 255) {
-    red = Theme.toRGB(red);
-    green = Theme.toRGB(green);
-    blue = Theme.toRGB(blue);
-    return (value) => this.cli.rgb(red, green, blue)(value.toString());
-  }
-}
-
-class Consono {
+export default class Consono {
   #arrayMaxElements;
   #arrow;
   #clear;
@@ -535,66 +270,66 @@ ${this.#theme.plain("{")}\n`;
     let subType = "";
     const tag = prototypeName(originalValue);
     switch (tag) {
-      case TAG_VOID:
+      case TAG.VOID:
         [type, value] = this.formatUndefined();
         break;
-      case TAG_NULL:
+      case TAG.NULL:
         [type, value] = this.formatNull();
         break;
-      case TAG_GLOBAL:
-      case TAG_WINDOW:
+      case TAG.GLOBAL:
+      case TAG.WINDOW:
         [type, value] = this.formatGlobal(tag, originalValue, indent);
         break;
-      case TAG_BIGINT:
+      case TAG.BIGINT:
         [type, value] = this.formatBigInt(originalValue);
         break;
-      case TAG_NUMBER:
+      case TAG.NUMBER:
         [type, value] = this.formatNumber(originalValue);
         break;
-      case TAG_BOOL:
+      case TAG.BOOL:
         [type, value] = this.formatBoolean(originalValue);
         break;
-      case TAG_STRING:
+      case TAG.STRING:
         [type, value] = this.formatString(originalValue);
         break;
-      case TAG_REGEXP:
+      case TAG.REGEXP:
         [type, value] = this.formatRegexp(originalValue);
         break;
-      case TAG_FUNCTION:
-      case TAG_ASYNC_FUNCTION:
-      case TAG_GENERATOR_FUNCTION:
+      case TAG.FUNCTION:
+      case TAG.ASYNC_FUNCTION:
+      case TAG.GENERATOR_FUNCTION:
         [type, value] = this.formatFunction(tag, originalValue);
         break;
-      case TAG_DATE:
+      case TAG.DATE:
         [type, value] = this.formatDate(originalValue);
         break;
-      case TAG_ARGUMENTS:
+      case TAG.ARGUMENTS:
         [type, value] = this.formatArguments(originalValue);
         break;
-      case TAG_SYMBOL:
+      case TAG.SYMBOL:
         [type, value] = this.formatSymbol(originalValue);
         break;
-      case TAG_PROMISE:
+      case TAG.PROMISE:
         [type, value] = this.formatPromise();
         break;
-      case TAG_GENERATOR:
+      case TAG.GENERATOR:
         [type, value] = this.formatGenerator();
         break;
-      case TAG_ERROR:
+      case TAG.ERROR:
         [type, value] = this.formatError(originalValue);
         break;
-      case TAG_WEAK_SET:
-      case TAG_WEAK_MAP:
+      case TAG.WEAK_SET:
+      case TAG.WEAK_MAP:
         [type, value] = this.formatWeak(tag);
         break;
-      case TAG_SET:
+      case TAG.SET:
         [type, value] = this.formatSet(originalValue);
         break;
-      case TAG_MAP:
+      case TAG.MAP:
         [type, value] = this.formatMap(originalValue);
         break;
-      case TAG_ARRAY_BUFFER:
-      case TAG_SHARED_ARRAY_BUFFER:
+      case TAG.ARRAY_BUFFER:
+      case TAG.SHARED_ARRAY_BUFFER:
         [type, value] = this.formatBuffer(tag, originalValue);
         break;
       default:
@@ -698,7 +433,7 @@ ${this.#theme.plain(")")}`;
    */
   formatBuffer(tag, value) {
     return [
-      TAG_ARRAY_BUFFER ? "array buffer" : "array buffer shared",
+      TAG.ARRAY_BUFFER ? "array buffer" : "array buffer shared",
       `${this.#theme.plain("(")}\
 ${this.#theme.argument("bytes")}${this.#theme.plain("=")}${this.#theme.number(value.byteLength)}\
 ${this.#theme.plain(")")}`,
@@ -729,10 +464,10 @@ ${this.#theme.plain(")")}`,
   formatFunction(tag, value) {
     let type = "function";
     switch (tag) {
-      case TAG_ASYNC_FUNCTION:
+      case TAG.ASYNC_FUNCTION:
         type = `${type} async`;
         break;
-      case TAG_GENERATOR_FUNCTION:
+      case TAG.GENERATOR_FUNCTION:
         type = `${type} generator`;
         break;
     }
@@ -765,7 +500,7 @@ ${this.#theme.plain(")")}`,
    */
   formatGlobal(tag, value, indent) {
     return [
-      `global ${tag === TAG_WINDOW ? "window" : "this"}`,
+      `global ${tag === TAG.WINDOW ? "window" : "this"}`,
       this.toPrintable({ ...value }, `${indent}${this.#theme.comment(this.#indent)}`),
     ];
   }
@@ -901,7 +636,7 @@ ${this.#theme.argument("shown")}${this.#theme.plain("=")}${this.#theme.number(
    * @returns {[string,string]}
    */
   formatWeak(tag) {
-    if (tag === TAG_WEAK_MAP) {
+    if (tag === TAG.WEAK_MAP) {
       return ["map weak", ""];
     } else {
       return ["set weak", ""];
@@ -999,123 +734,3 @@ ${this.#theme.plain(",")}\n`;
     return objectPick(basicOptions, OPTIONS_KEYS);
   }
 }
-
-/**
- * @name consono
- * @description Print variable
- * @param {*} variable
- * @param {boolean|Object} options
- * @param {Object|string=} theme
- * @returns {string|undefined}
- */
-function consono(variable, options = true, theme) {
-  const createdOptions = Consono.createOptions(options);
-  const instance = new Consono(createdOptions, theme);
-  if (createdOptions.console) {
-    if (createdOptions.clear) {
-      cliExit();
-    }
-    if (createdOptions.immediate) {
-      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
-    } else {
-      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
-    }
-    processExit(createdOptions.exit);
-  }
-  if (createdOptions.returns) {
-    return instance.toPrintable(variable);
-  }
-}
-
-/**
- * @name consonoExit
- * @description Print variable and exit process
- * @param {*} variable
- * @param {boolean|Object} options
- * @param {Object|string=} theme
- * @param {boolean|number=} exitCode
- * @returns {string|undefined}
- */
-function consonoExit(variable, options = true, theme, exitCode = 0) {
-  const createdOptions = Consono.createOptions({ ...options, exit: exitCode });
-  const instance = new Consono(createdOptions, theme);
-  if (createdOptions.console) {
-    if (createdOptions.clear) {
-      cliExit();
-    }
-    if (createdOptions.immediate) {
-      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
-    } else {
-      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
-    }
-    processExit(createdOptions.exit);
-  }
-  if (createdOptions.returns) {
-    return instance.toPrintable(variable);
-  }
-}
-
-/**
- * @name consonoPlain
- * @description Print variable without highlighting
- * @param {*} variable
- * @param {boolean|Object} options
- * @returns {string|undefined}
- */
-function consonoPlain(variable, options = true) {
-  const createdOptions = Consono.createOptions({ ...options, colorize: false });
-  const instance = new Consono(createdOptions);
-  if (createdOptions.console) {
-    if (createdOptions.clear) {
-      cliExit();
-    }
-    if (createdOptions.immediate) {
-      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
-    } else {
-      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
-    }
-    processExit(createdOptions.exit);
-  }
-  if (createdOptions.returns) {
-    return instance.toPrintable(variable);
-  }
-}
-
-/**
- * @name consonoReturn
- * @description Return variable with highlighting
- * @param {*} variable
- * @param {boolean|Object} options
- * @param {Object|string=} theme
- * @returns {string|undefined}
- */
-function consonoReturn(variable, options = true, theme) {
-  const createdOptions = Consono.createOptions({ ...options, console: false, returns: true });
-  const instance = new Consono(createdOptions, theme);
-  if (createdOptions.console) {
-    if (createdOptions.clear) {
-      cliExit();
-    }
-    if (createdOptions.immediate) {
-      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
-    } else {
-      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
-    }
-    processExit(createdOptions.exit);
-  }
-  if (createdOptions.returns) {
-    return instance.toPrintable(variable);
-  }
-}
-
-module.exports = {
-  Consono,
-  THEME_DARK,
-  THEME_LIGHT,
-  consono,
-  consonoExit,
-  consonoPlain,
-  consonoReturn,
-  default: consono,
-  options: OPTIONS_DEFAULT,
-};

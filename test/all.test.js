@@ -1,4 +1,4 @@
-const { consono } = require("../src/consono.js");
+const { consono } = require("../dist/consono.cjs");
 
 describe("Test collection", () => {
   //#region Value properties
