@@ -1,4 +1,5 @@
 import Consono from "../core/consono.mjs";
+import WEB from "../const/web.mjs";
 import cliExit from "../utils/cliExit.mjs";
 import cliPrint from "../utils/cliPrint.mjs";
 import processExit from "../utils/processExit.mjs";
@@ -26,7 +27,7 @@ export default function consonoExit(variable, options = true, theme, exitCode = 
     }
     processExit(createdOptions.exit);
   }
-  if (createdOptions.returns) {
+  if (createdOptions.returns && !WEB) {
     return instance.toPrintable(variable);
   }
 }
