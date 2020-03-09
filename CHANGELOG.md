@@ -2,6 +2,10 @@
 
 ---
 
+## 1.3.1 Mar 09, 2020
+
+-   🐛 Fix `package.json`.
+
 ## 1.3.0 Mar 09, 2020
 
 -   ➕️ Added web browser build for.
