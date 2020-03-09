@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.0 Mar 09, 2020
+
+-   ➕️ Added web browser build for.
+
+-   ⬆️ Dependencies updated.
+
 ## 1.2.1 Jan 31, 2020
 
 -   ⬆️ Dependencies updated.

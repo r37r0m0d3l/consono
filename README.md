@@ -35,7 +35,7 @@ Motivation and differences from other libraries.
 -   Can print to terminal or **return formatted and colored** string for later use ([How to get result string of console.log in javascript code? You can't.](https://stackoverflow.com/questions/17904957/how-to-get-result-string-of-console-log-in-javascript-code)).
 -   **Turn on/off** output colorization. It even works on Windows - use [Windows Terminal (Preview)](https://github.com/microsoft/terminal).
 -   **Configurable indent** - tabs vs spaces.
--   Availability to set **depth** for *object* inspection.
+-   Availability to set the **depth** for *object* inspection.
 -   Configurable **max items** for *array*, *map*, *object*, *set*.
 -   **Limit string length** when printing for better readability.
 -   Inspect both string **character count** and **string length** ([It’s Not Wrong that "🤦🏼‍♂️".length == 7](https://hsivonen.fi/string-length/)).
@@ -182,10 +182,10 @@ yarn add consono
 
 ## ⌨️ Include
 
-Default is function for printing variable.
+The default is a function for printing variable.
 
 ```javascript
-const consono = require("consono").default;
+const { consono } = require("consono");
 ```
 
 Require multiple items: function, constructor, options object, theme objects.
@@ -204,6 +204,14 @@ Import as ECMAScript module.
 
 ```javascript
 import { consono } from "consono/es";
+```
+
+UNPKG CDN.
+
+> Note that the web browser version has no theme support, limited color palette, and only support chromium based browsers.
+
+```html
+<script src="https://unpkg.com/consono/dist/consono.js"></script>
 ```
 
 ## ⚙️ Options

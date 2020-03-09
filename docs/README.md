@@ -181,7 +181,7 @@ yarn add consono
 The default is a function for printing variable.
 
 ```javascript
-const consono = require("consono").default;
+const { consono } = require("consono");
 ```
 
 Require multiple items: function, constructor, options object, theme objects.
@@ -200,6 +200,14 @@ Import as ECMAScript module.
 
 ```javascript
 import { consono } from "consono/es";
+```
+
+UNPKG CDN.
+
+> Note that the web browser version has no theme support, limited color palette, and only support chromium based browsers.
+
+```html
+<script src="https://unpkg.com/consono/dist/consono.js"></script>
 ```
 
 ## ⚙️ Options
