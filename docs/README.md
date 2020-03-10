@@ -1,6 +1,6 @@
 # 🕵️ Consono 🕵️‍♀️
 
-The most correct, informative, appealing and configurable variable inspector for Node.js
+The most correct, informative, appealing and configurable variable inspector for JavaScript
 
 [![NPM Version](https://img.shields.io/npm/v/consono.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/consono.svg?style=flat)]()

@@ -12,7 +12,7 @@
   "dependencies": {
     "chalk": "latest"
   },
-  "description": "The most correct, informative, appealing and configurable variable inspector for Node.js",
+  "description": "The most correct, informative, appealing and configurable variable inspector for JavaScript",
   "devDependencies": {
     "@babel/core": "7.8.7",
     "@babel/plugin-proposal-class-properties": "7.8.3",
@@ -32,10 +32,10 @@
     "remark-preset-lint-consistent": "2.0.3",
     "remark-preset-lint-markdown-style-guide": "2.1.3",
     "remark-preset-lint-recommended": "3.0.3",
-    "rollup": "2.0.2",
+    "rollup": "2.0.3",
     "rollup-plugin-auto-external": "2.0.0",
     "rollup-plugin-babel": "4.4.0",
-    "rollup-plugin-terser": "5.2.0"
+    "rollup-plugin-terser": "5.3.0"
   },
   "exports": {
     ".": "./dist/consono.cjs",
@@ -53,6 +53,7 @@
   ],
   "homepage": "https://consono.js.org",
   "keywords": [
+    "backend",
     "console",
     "debug",
     "debugging",
@@ -82,5 +83,5 @@
   },
   "type": "module",
   "types": "./dist/consono.d.ts",
-  "version": "1.3.1"
+  "version": "1.3.2"
 }

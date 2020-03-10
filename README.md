@@ -2,7 +2,7 @@
 
 # 🕵️ Consono 🕵️‍♀️
 
-The most correct, informative, appealing and configurable variable inspector for Node.js
+The most correct, informative, appealing and configurable variable inspector for JavaScript
 
 [🗎 Consono Documentation 🗎](https://consono.js.org)
 

@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.2 Mar 10, 2020
+
+-   ⬆️ Dependencies updated.
+
+-   📚 Documentation updated.
+
 ## 1.3.1 Mar 09, 2020
 
 -   🐛 Fix `package.json`.
