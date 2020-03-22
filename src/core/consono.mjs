@@ -389,12 +389,7 @@ ${this.#theme.plain(")")}`;
         break;
       default:
         if (!type.length) {
-          type = tag
-            .split("[object ")
-            .pop()
-            .split("]")
-            .shift()
-            .toLowerCase();
+          type = tag.split("[object ").pop().split("]").shift().toLowerCase();
           value = originalValue.toString();
         }
         break;
@@ -477,11 +472,7 @@ ${this.#theme.plain(")")}`,
     } else {
       type = `${type} anonymous`;
     }
-    const source =
-      `${value}`
-        .replace(/\n+/g, "")
-        .split(")")
-        .shift() + ") {…}";
+    const source = `${value}`.replace(/\n+/g, "").split(")").shift() + ") {…}";
     return [type, this.#theme.argument(source)];
   }
   /**

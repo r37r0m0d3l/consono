@@ -2,6 +2,10 @@
 
 ---
 
+## 1.3.3 Mar 22, 2020
+
+-   ⬆️ Dependencies updated.
+
 ## 1.3.2 Mar 10, 2020
 
 -   ⬆️ Dependencies updated.
