@@ -36,4 +36,5 @@ export default {
       warnings: true,
     }),
   ],
+  external: ["chalk"],
 };
