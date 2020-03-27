@@ -3,8 +3,21 @@
     "remark-preset-lint-consistent",
     "remark-preset-lint-markdown-style-guide",
     "remark-preset-lint-recommended",
-    ["lint-no-file-name-irregular-characters", false],
-    ["remark-lint-maximum-line-length", 180],
-    ["remark-lint-list-item-spacing", false]
+    [
+      "lint-no-file-name-irregular-characters",
+      false
+    ],
+    [
+      "remark-lint-maximum-line-length",
+      180
+    ],
+    [
+      "remark-lint-list-item-spacing",
+      false
+    ],
+    [
+      "remark-lint-table-pipe-alignment",
+      false
+    ]
   ]
 }
