@@ -18,11 +18,13 @@
 /.yarnrc
 /CHANGELOG.md
 /CNAME
+/LICENSE
 /README.md
 /_config.yml
 /_layouts/
 /docs/
 /package-lock.json
+/package.json
 /renovate.json
 /src/
 /temp/
