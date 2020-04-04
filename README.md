@@ -6,11 +6,11 @@ The most correct, informative, appealing and configurable variable inspector for
 
 [🗎 Consono Documentation 🗎](https://consono.js.org)
 
-[![NPM Version](https://img.shields.io/npm/v/consono.svg?style=flat)]()
-[![NPM Downloads](https://img.shields.io/npm/dt/consono.svg?style=flat)]()
-[![Build Status](https://travis-ci.org/r37r0m0d3l/consono.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/consono)
-[![GitHub stars](https://img.shields.io/github/stars/r37r0m0d3l/consono.svg?style=social&label=Star)](https://github.com/r37r0m0d3l/consono)
-[![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l)
+[![npm](https://badgen.net/npm/v/consono?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/consono)
+[![downloads](https://badgen.net/npm/dt/consono?&icon=terminal&label=downloads&color=009688)](https://github.com/r37r0m0d3l/consono)
+[![stars](https://badgen.net/github/stars/r37r0m0d3l/consono?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/consono)
+[![types](https://badgen.net/npm/types/consono?&icon=typescript&label=types&color=1E90FF)](https://github.com/r37r0m0d3l/consono)
+[![build](https://badgen.net/travis/r37r0m0d3l/consono?&icon=travis&label=build)](https://github.com/r37r0m0d3l/consono)
 
 ---
 

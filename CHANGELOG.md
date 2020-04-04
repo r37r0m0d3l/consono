@@ -2,6 +2,10 @@
 
 ---
 
+## 1.3.6 Apr 04, 2020
+
+-   ⬆️ Dependencies updated. Major change `chalk@4.0.0`.
+
 ## 1.3.5 Mar 30, 2020
 
 -   ⬆️ Dependencies updated.
