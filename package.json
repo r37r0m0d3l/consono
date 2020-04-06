@@ -48,8 +48,8 @@
         "require": "./dist/consono.browser.cjs"
       },
       "node": {
-        "import": "./dist/consono.mjs",
-        "require": "./dist/consono.cjs"
+        "import": "./dist/consono.node.mjs",
+        "require": "./dist/consono.node.cjs"
       },
       "import": "./dist/consono.node.mjs",
       "require": "./dist/consono.node.cjs",
