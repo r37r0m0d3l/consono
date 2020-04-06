@@ -84,8 +84,8 @@
     "variable"
   ],
   "license": "MIT",
-  "main": "./dist/consono.cjs",
-  "module": "./dist/consono.mjs",
+  "main": "./dist/consono.node.cjs",
+  "module": "./dist/consono.node.mjs",
   "name": "consono",
   "repository": {
     "type": "git",
