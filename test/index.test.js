@@ -1,4 +1,4 @@
-const { consono } = require("../dist/consono.cjs");
+const { consono } = require("../dist/consono.node.cjs");
 
 describe("calling and printing", () => {
   it("should call console.log() three times", () => {
