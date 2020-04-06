@@ -25,4 +25,7 @@ export default function consonoReturn(variable, options = true, theme) {
     }
     processExit(createdOptions.exit);
   }
+  if (createdOptions.returns) {
+    return instance.toPrintable(variable);
+  }
 }

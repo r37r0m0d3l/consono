@@ -24,4 +24,7 @@ export default function consonoPlain(variable, options = true) {
     }
     processExit(createdOptions.exit);
   }
+  if (createdOptions.returns) {
+    return instance.toPrintable(variable);
+  }
 }

@@ -1,3 +1,3 @@
-export default function cliPrint(message, stdout = false) {
+export default function cliPrint(message) {
   console.log(message);
 }

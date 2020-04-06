@@ -26,4 +26,7 @@ export default function consonoExit(variable, options = true, theme, exitCode = 
     }
     processExit(createdOptions.exit);
   }
+  if (createdOptions.returns) {
+    return instance.toPrintable(variable);
+  }
 }
