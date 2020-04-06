@@ -4,19 +4,19 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import rollupPluginTerser from "rollup-plugin-terser";
 
-const INPUT_NAME = "index.mjs";
+const INPUT_NAME = "index.browser.mjs";
 const OUTPUT_NAME = "consono";
 
 export default {
   input: `./src/${INPUT_NAME}`,
   output: [
     {
-      file: `./dist/${OUTPUT_NAME}.cjs`,
+      file: `./dist/${OUTPUT_NAME}.browser.cjs`,
       format: "cjs",
       sourcemap: true,
     },
     {
-      file: `./dist/${OUTPUT_NAME}.mjs`,
+      file: `./dist/${OUTPUT_NAME}.browser.mjs`,
       format: "es",
       sourcemap: true,
     },

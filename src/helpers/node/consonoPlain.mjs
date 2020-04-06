@@ -1,8 +1,7 @@
-import Consono from "../core/consono.mjs";
-import WEB from "../const/web.mjs";
-import cliExit from "../utils/cliExit.mjs";
-import cliPrint from "../utils/cliPrint.mjs";
-import processExit from "../utils/processExit.mjs";
+import Consono from "../../core/node/consono.mjs";
+import cliExit from "../../utils/cliExit.mjs";
+import cliPrint from "../../utils/node/cliPrint.mjs";
+import processExit from "../../utils/processExit.mjs";
 
 /**
  * @name consonoPlain
@@ -25,7 +24,7 @@ export default function consonoPlain(variable, options = true) {
     }
     processExit(createdOptions.exit);
   }
-  if (createdOptions.returns && !WEB) {
+  if (createdOptions.returns) {
     return instance.toPrintable(variable);
   }
 }

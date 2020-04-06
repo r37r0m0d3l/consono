@@ -1,7 +1,7 @@
 import chalk from "chalk";
 
-import THEME_DARK from "../const/theme_dark.mjs";
-import THEME_LIGHT from "../const/theme_light.mjs";
+import THEME_DARK from "../../const/theme_dark.mjs";
+import THEME_LIGHT from "../../const/theme_light.mjs";
 
 export default class Theme {
   /**

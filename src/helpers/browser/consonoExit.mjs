@@ -1,0 +1,29 @@
+import Consono from "../../core/browser/consono.mjs";
+import cliExit from "../../utils/cliExit.mjs";
+import cliPrint from "../../utils/browser/cliPrint.mjs";
+import processExit from "../../utils/processExit.mjs";
+
+/**
+ * @name consonoExit
+ * @description Print variable and exit process
+ * @param {*} variable
+ * @param {boolean|Object} options
+ * @param {Object|string=} theme
+ * @param {boolean|number=} exitCode
+ * @returns {string|undefined}
+ */
+export default function consonoExit(variable, options = true, theme, exitCode = 0) {
+  const createdOptions = Consono.createOptions({ ...options, exit: exitCode });
+  const instance = new Consono(createdOptions, theme);
+  if (createdOptions.console) {
+    if (createdOptions.clear) {
+      cliExit();
+    }
+    if (createdOptions.immediate) {
+      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
+    } else {
+      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
+    }
+    processExit(createdOptions.exit);
+  }
+}

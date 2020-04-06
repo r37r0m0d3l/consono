@@ -6,11 +6,12 @@ The most correct, informative, appealing and configurable variable inspector for
 
 [🗎 Consono Documentation 🗎](https://consono.js.org)
 
-[![npm](https://badgen.net/npm/v/consono?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/consono)
-[![downloads](https://badgen.net/npm/dt/consono?&icon=terminal&label=downloads&color=009688)](https://github.com/r37r0m0d3l/consono)
-[![stars](https://badgen.net/github/stars/r37r0m0d3l/consono?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/consono)
-[![types](https://badgen.net/npm/types/consono?&icon=typescript&label=types&color=1E90FF)](https://github.com/r37r0m0d3l/consono)
-[![build](https://badgen.net/travis/r37r0m0d3l/consono?&icon=travis&label=build)](https://github.com/r37r0m0d3l/consono)
+[![npm](https://badgen.net/npm/v/consono?&icon=npm&label=npm&color=DD3636&v&v=1.4.0)](https://www.npmjs.com/package/consono)
+[![downloads](https://badgen.net/npm/dt/consono?&icon=terminal&label=downloads&color=009688&&v=1.4.0)](https://github.com/r37r0m0d3l/consono)
+[![stars](https://badgen.net/github/stars/r37r0m0d3l/consono?&icon=github&label=stars&color=ffcc33&&v=1.4.0)](https://github.com/r37r0m0d3l/consono)
+[![types](https://badgen.net/npm/types/consono?&icon=typescript&label=types&color=1E90FF&v=1.4.0)](https://github.com/r37r0m0d3l/consono)
+[![build](https://badgen.net/travis/r37r0m0d3l/consono?&icon=travis&label=build&v=1.4.0)](https://github.com/r37r0m0d3l/consono)
+[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/consono?&icon=lgtm&label=lgtm:js/ts&color=00C853&v=1.4.0)](https://github.com/r37r0m0d3l/consono)
 
 ---
 

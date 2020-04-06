@@ -1,19 +1,19 @@
-import OPTIONS_DEFAULT from "../const/options_default.mjs";
-import OPTIONS_KEYS from "../const/options_keys.mjs";
-import TAG from "../const/tag.mjs";
+import OPTIONS_DEFAULT from "../../const/options_default.mjs";
+import OPTIONS_KEYS from "../../const/options_keys.mjs";
+import TAG from "../../const/tag.mjs";
 import Theme from "./theme.mjs";
-import cliExit from "../utils/cliExit.mjs";
-import cliPrint from "../utils/cliPrint.mjs";
-import funcNameExtract from "../utils/funcNameExtract.mjs";
-import isInteger from "../utils/isInteger.mjs";
-import objectClass from "../utils/objectClass.mjs";
-import objectDeCycle from "../utils/objectDeCycle.mjs";
-import objectPick from "../utils/objectPick.mjs";
-import objectSize from "../utils/objectSize.mjs";
-import objectType from "../utils/objectType.mjs";
-import processExit from "../utils/processExit.mjs";
-import prototypeName from "../utils/prototypeName.mjs";
-import stringClearReference from "../utils/stringClearReference.mjs";
+import cliExit from "../../utils/cliExit.mjs";
+import cliPrint from "../../utils/node/cliPrint.mjs";
+import funcNameExtract from "../../utils/funcNameExtract.mjs";
+import isInteger from "../../utils/isInteger.mjs";
+import objectClass from "../../utils/objectClass.mjs";
+import objectDeCycle from "../../utils/objectDeCycle.mjs";
+import objectPick from "../../utils/objectPick.mjs";
+import objectSize from "../../utils/objectSize.mjs";
+import objectType from "../../utils/objectType.mjs";
+import processExit from "../../utils/processExit.mjs";
+import prototypeName from "../../utils/prototypeName.mjs";
+import stringClearReference from "../../utils/stringClearReference.mjs";
 
 export default class Consono {
   #arrayMaxElements;
@@ -104,7 +104,7 @@ export default class Consono {
     let print = "";
     let startsWith = "";
     let endsWith = "";
-    let iterationLimit = Number.MAX_SAFE_INTEGER;
+    let iterationLimit;
     const type = objectType(value);
     switch (type) {
       case "array": {
@@ -213,7 +213,7 @@ ${this.#theme.plain("{")}\n`;
     switch (type) {
       case "set": {
         const iterateSet = Array.from(value);
-        for (const itemKey in iterateSet) {
+        for (let itemKey = 0; itemKey < iterateSet.length; itemKey++) {
           const originalValue = iterateSet[itemKey];
           const formattedValue = this.formatValue(indent, originalValue);
           print += this.formatAssign("set", indent, itemKey, formattedValue);
@@ -238,7 +238,10 @@ ${this.#theme.plain("{")}\n`;
       default: {
         const keys = Object.keys(value)
           .sort((alpha, beta) => alpha.localeCompare(beta))
-          .reduce((previous, current) => (previous[current] = void 0) || previous, {});
+          .reduce((previous, current) => {
+            previous[current] = undefined;
+            return previous;
+          }, {});
         for (const key in keys) {
           if (!Object.prototype.hasOwnProperty.call(value, key)) {
             continue;
@@ -364,7 +367,6 @@ ${this.#theme.plain("{")}\n`;
     switch (type) {
       case "array":
       case "object":
-        type = "";
         if (this.#currentDepth === this.#depth) {
           const size = objectSize(originalValue);
           let printSize = "";
@@ -381,8 +383,12 @@ ${this.#theme.plain(")")}`;
           value = `${this.#theme.keyword("object")} ${this.#theme.keyword(objectClass(originalValue))} ${printSize}`;
         } else {
           this.#currentDepth += 1;
-          const indentToPrint =
-            type === "array" ? `${this.#theme.comment(indent)}` : `${indent}${this.#theme.comment(this.#indent)}`;
+          let indentToPrint;
+          if (type === "array") {
+            indentToPrint = `${this.#theme.comment(indent)}`;
+          } else {
+            indentToPrint = `${indent}${this.#theme.comment(this.#indent)}`;
+          }
           value = this.toPrintable(originalValue, indentToPrint, describe, subType);
           this.#currentDepth -= 1;
         }
@@ -603,7 +609,7 @@ ${this.#theme.argument("shown")}${this.#theme.plain("=")}${this.#theme.number(
     } else {
       value = `${value}${this.#theme.plain(")")}`;
     }
-    stringClearReference(printString);
+    stringClearReference(printString || text);
     return ["string", value];
   }
   /**

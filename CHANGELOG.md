@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.0 Apr 06, 2020
+
+-   ⚡️ Change default export format
+
 ## 1.3.6 Apr 04, 2020
 
 -   ⬆️ Dependencies updated. Major change `chalk@4.0.0`.

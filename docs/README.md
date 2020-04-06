@@ -7,6 +7,7 @@ The most correct, informative, appealing and configurable variable inspector for
 [![stars](https://badgen.net/github/stars/r37r0m0d3l/consono?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/consono)
 [![types](https://badgen.net/npm/types/consono?&icon=typescript&label=types&color=1E90FF)](https://github.com/r37r0m0d3l/consono)
 [![build](https://badgen.net/travis/r37r0m0d3l/consono?&icon=travis&label=build)](https://github.com/r37r0m0d3l/consono)
+[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/consono?&icon=lgtm&label=lgtm:js/ts&color=00C853&v=1.4.0)](https://github.com/r37r0m0d3l/consono)
 
 ---
 
