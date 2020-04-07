@@ -196,7 +196,7 @@ const {
 Import as ECMAScript module.
 
 ```javascript
-import { consono } from "consono/es";
+import { consono } from "consono";
 ```
 
 UNPKG CDN.
