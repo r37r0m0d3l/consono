@@ -12,7 +12,7 @@ import processExit from "../../utils/processExit.mjs";
  * @param {boolean|number=} exitCode
  * @returns {string|undefined}
  */
-export default function consonoExit(variable, options = true, theme, exitCode = 0) {
+export default function consonoExit(variable, options = true, theme = "light", exitCode = 0) {
   const createdOptions = Consono.createOptions({ ...options, exit: exitCode });
   const instance = new Consono(createdOptions, theme);
   if (createdOptions.console) {

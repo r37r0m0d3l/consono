@@ -2,6 +2,7 @@ import chalk from "chalk";
 
 import THEME_DARK from "../../const/theme_dark.mjs";
 import THEME_LIGHT from "../../const/theme_light.mjs";
+import { THEME_DEFAULT } from "../../const/theme_default";
 
 export default class Theme {
   /**
@@ -9,7 +10,7 @@ export default class Theme {
    * @param {number=3} level
    * @param {Object|string=} theme
    */
-  constructor(level = 3, theme) {
+  constructor(level = 3, theme = THEME_DEFAULT) {
     this.cli = new chalk.Instance({ level: Math.min(level, chalk.supportsColor.level) });
     let rgb;
     switch (true) {

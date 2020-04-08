@@ -2,6 +2,7 @@ import Consono from "../../core/node/consono.mjs";
 import cliExit from "../../utils/cliExit.mjs";
 import cliPrint from "../../utils/node/cliPrint.mjs";
 import processExit from "../../utils/processExit.mjs";
+import { THEME_DEFAULT } from "../../const/theme_default";
 
 /**
  * @name consonoExit
@@ -12,7 +13,7 @@ import processExit from "../../utils/processExit.mjs";
  * @param {boolean|number=} exitCode
  * @returns {string|undefined}
  */
-export default function consonoExit(variable, options = true, theme, exitCode = 0) {
+export default function consonoExit(variable, options = true, theme = THEME_DEFAULT, exitCode = 0) {
   const createdOptions = Consono.createOptions({ ...options, exit: exitCode });
   const instance = new Consono(createdOptions, theme);
   if (createdOptions.console) {

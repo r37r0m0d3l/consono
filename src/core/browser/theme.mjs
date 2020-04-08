@@ -1,3 +1,5 @@
+import { THEME_DEFAULT } from "../../const/theme_default";
+
 const Reset = "\x1b[0m";
 
 const FgBlack = "\x1b[30m";
@@ -40,7 +42,7 @@ export default class Theme {
    * @param {Object|string=} theme
    */
   // eslint-disable-next-line no-unused-vars
-  constructor(level = 3, theme) {
+  constructor(level = 3, theme = THEME_DEFAULT) {
     let rgb;
     switch (true) {
       case theme === "dark":
