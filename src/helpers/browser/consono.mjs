@@ -19,9 +19,9 @@ export default function consono(variable, options = true, theme) {
       cliExit();
     }
     if (createdOptions.immediate) {
-      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
+      setTimeout(() => cliPrint(instance.toPrintable(variable) /*, createdOptions.stdout*/), 0);
     } else {
-      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
+      cliPrint(instance.toPrintable(variable) /*, createdOptions.stdout*/);
     }
     processExit(createdOptions.exit);
   }

@@ -676,9 +676,9 @@ ${this.#theme.plain(",")}\n`;
         cliExit();
       }
       if (this.#immediate) {
-        setTimeout(() => cliPrint(this.toPrintable(variable), this.#stdout), 0);
+        setTimeout(() => cliPrint(this.toPrintable(variable) /*, this.#stdout*/), 0);
       } else {
-        cliPrint(this.toPrintable(variable), this.#stdout);
+        cliPrint(this.toPrintable(variable) /*, this.#stdout*/);
       }
       processExit(this.#exit);
     }
@@ -703,9 +703,9 @@ ${this.#theme.plain(",")}\n`;
           cliExit();
         }
         if (createdOptions.immediate) {
-          setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
+          setTimeout(() => cliPrint(instance.toPrintable(variable) /*, createdOptions.stdout*/), 0);
         } else {
-          cliPrint(instance.toPrintable(variable), createdOptions.stdout);
+          cliPrint(instance.toPrintable(variable) /*, createdOptions.stdout*/);
         }
         processExit(createdOptions.exit);
       }
