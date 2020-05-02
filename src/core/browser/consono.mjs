@@ -43,7 +43,7 @@ export default class Consono {
    * @param {Object=} options
    * @param {Object|string=} theme
    */
-  constructor(options = {}, theme= THEME_DEFAULT) {
+  constructor(options = {}, theme = THEME_DEFAULT) {
     this.setOptions(options);
     this.setTheme(theme);
   }
