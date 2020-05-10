@@ -1,5 +1,9 @@
-eslint:
-  enabled: true
-  config:
-    extensions:
-      - .mjs
+plugins:
+  eslint:
+    channel: eslint-6
+    config:
+      config: .eslintrc.json
+      extensions:
+        - .mjs
+      ignore_warnings: true
+    enabled: true
