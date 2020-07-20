@@ -4,4 +4,4 @@
 
 -   [ ] Console methods https://github.com/vadimdemedes/patch-console
 
--   [ ] https://github.com/lukeed/kleur
+-   [ ] Replace chalk with https://github.com/lukeed/kleur
