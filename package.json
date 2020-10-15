@@ -28,7 +28,7 @@
     "jest": "26.1.0",
     "npm-check": "5.9.2",
     "prettier": "2.0.5",
-    "remark-cli": "8.0.0",
+    "remark-cli": "9.0.0",
     "remark-lint": "7.0.1",
     "remark-preset-lint-consistent": "3.0.1",
     "remark-preset-lint-markdown-style-guide": "3.0.1",
