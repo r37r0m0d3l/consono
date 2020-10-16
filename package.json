@@ -14,7 +14,7 @@
   },
   "description": "The most correct, informative, appealing and configurable variable inspector for JavaScript",
   "devDependencies": {
-    "@babel/core": "7.10.4",
+    "@babel/core": "7.12.1",
     "@babel/plugin-proposal-class-properties": "7.10.4",
     "@babel/plugin-proposal-private-methods": "7.10.4",
     "@babel/preset-env": "7.10.4",
