@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.2
+
+-   ⬆️ Dev dependencies updated.
+
 ## 1.4.1
 
 -   ⬆️ Dependencies updated.
