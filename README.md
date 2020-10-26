@@ -15,10 +15,6 @@ The most correct, informative, appealing and configurable variable inspector for
 
 ---
 
-*If you use this project don't forget to give a ⭐ [star](https://github.com/r37r0m0d3l/consono) ⭐ to it on GitHub!*
-
----
-
 ## 🔋 Motivation
 
 Motivation and differences from other libraries.

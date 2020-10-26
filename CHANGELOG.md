@@ -2,6 +2,12 @@
 
 ---
 
+## 1.4.3
+
+-   ✅️ Update ES modules definition.
+
+-   ⬆️ Dev dependencies updated.
+
 ## 1.4.2
 
 -   ⬆️ Dev dependencies updated.
