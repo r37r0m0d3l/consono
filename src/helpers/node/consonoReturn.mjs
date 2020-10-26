@@ -2,7 +2,7 @@ import Consono from "../../core/node/consono.mjs";
 import cliExit from "../../utils/cliExit.mjs";
 import cliPrint from "../../utils/node/cliPrint.mjs";
 import processExit from "../../utils/processExit.mjs";
-import { THEME_DEFAULT } from "../../const/theme_default";
+import { THEME_DEFAULT } from "../../const/theme_default.mjs";
 
 /**
  * @name consonoReturn

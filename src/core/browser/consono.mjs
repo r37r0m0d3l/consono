@@ -14,7 +14,7 @@ import objectType from "../../utils/objectType.mjs";
 import processExit from "../../utils/processExit.mjs";
 import prototypeName from "../../utils/prototypeName.mjs";
 import stringClearReference from "../../utils/stringClearReference.mjs";
-import { THEME_DEFAULT } from "../../const/theme_default";
+import { THEME_DEFAULT } from "../../const/theme_default.mjs";
 
 export default class Consono {
   #arrayMaxElements;
