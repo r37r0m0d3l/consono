@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.4
+
+-   ✅️ Update ES modules definition.
+
 ## 1.4.3
 
 -   ✅️ Update ES modules definition.

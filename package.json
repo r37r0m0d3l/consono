@@ -99,11 +99,11 @@
     "docs:serve": "docsify serve docs",
     "lint": "eslint ./src/**/*.mjs",
     "lint:md": "remark .",
-    "package:upgrade": "npm-check --update",
+    "package:upgrade": "npx npm-check --update",
     "test": "jest",
     "test:coverage": "jest --collect-coverage"
   },
   "type": "module",
   "types": "./dist/consono.d.ts",
-  "version": "1.4.3"
+  "version": "1.4.4"
 }
