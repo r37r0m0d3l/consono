@@ -19,7 +19,7 @@ Motivation and differences from other libraries.
 -   🎚️ **Configurable coloring** of variables.
 -   Can print to terminal or 🌈 **return formatted and colored** string for later use ([How to get result string of console.log in javascript code? You can't.](https://stackoverflow.com/questions/17904957/how-to-get-result-string-of-console-log-in-javascript-code)).
 -   🔀 **Turn on/off** output colorization. It even works on Windows - use [Windows Terminal](https://github.com/microsoft/terminal).
--   **Configurable indent** - tabs vs spaces holy war 👼🏻 ⚔️ 🇻🇦.
+-   **Configurable indent** - tabs 🆚 spaces holy war 👼🏻 ⚔️ 🇻🇦.
 -   Availability to set the 🕳️ **depth** for *object* inspection.
 -   Configurable #️⃣ **max items** for *array*, *map*, *object*, *set*.
 -   ✂️**Limit string length** when printing for better readability.
