@@ -1,20 +1,20 @@
-import OPTIONS_DEFAULT from "../../const/options_default.mjs";
-import OPTIONS_KEYS from "../../const/options_keys.mjs";
-import TAG from "../../const/tag.mjs";
-import Theme from "./theme.mjs";
-import cliExit from "../../utils/cliExit.mjs";
-import cliPrint from "../../utils/node/cliPrint.mjs";
-import funcNameExtract from "../../utils/funcNameExtract.mjs";
-import isInteger from "../../utils/isInteger.mjs";
-import objectClass from "../../utils/objectClass.mjs";
-import objectDeCycle from "../../utils/objectDeCycle.mjs";
-import objectPick from "../../utils/objectPick.mjs";
-import objectSize from "../../utils/objectSize.mjs";
-import objectType from "../../utils/objectType.mjs";
-import processExit from "../../utils/processExit.mjs";
-import prototypeName from "../../utils/prototypeName.mjs";
-import stringClearReference from "../../utils/stringClearReference.mjs";
-import { THEME_DEFAULT } from "../../const/theme_default.mjs";
+import OPTIONS_DEFAULT from "../../const/options_default.js";
+import OPTIONS_KEYS from "../../const/options_keys.js";
+import TAG from "../../const/tag.js";
+import Theme from "./theme.js";
+import cliExit from "../../utils/cliExit.js";
+import cliPrint from "../../utils/browser/cliPrint.js";
+import funcNameExtract from "../../utils/funcNameExtract.js";
+import isInteger from "../../utils/isInteger.js";
+import objectClass from "../../utils/objectClass.js";
+import objectDeCycle from "../../utils/objectDeCycle.js";
+import objectPick from "../../utils/objectPick.js";
+import objectSize from "../../utils/objectSize.js";
+import objectType from "../../utils/objectType.js";
+import processExit from "../../utils/processExit.js";
+import prototypeName from "../../utils/prototypeName.js";
+import stringClearReference from "../../utils/stringClearReference.js";
+import { THEME_DEFAULT } from "../../const/theme_default.js";
 
 export default class Consono {
   #arrayMaxElements;
@@ -677,9 +677,9 @@ ${this.#theme.plain(",")}\n`;
         cliExit();
       }
       if (this.#immediate) {
-        setTimeout(() => cliPrint(this.toPrintable(variable), this.#stdout), 0);
+        setTimeout(() => cliPrint(this.toPrintable(variable) /*, this.#stdout*/), 0);
       } else {
-        cliPrint(this.toPrintable(variable), this.#stdout);
+        cliPrint(this.toPrintable(variable) /*, this.#stdout*/);
       }
       processExit(this.#exit);
     }
@@ -704,9 +704,9 @@ ${this.#theme.plain(",")}\n`;
           cliExit();
         }
         if (createdOptions.immediate) {
-          setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
+          setTimeout(() => cliPrint(instance.toPrintable(variable) /*, createdOptions.stdout*/), 0);
         } else {
-          cliPrint(instance.toPrintable(variable), createdOptions.stdout);
+          cliPrint(instance.toPrintable(variable) /*, createdOptions.stdout*/);
         }
         processExit(createdOptions.exit);
       }

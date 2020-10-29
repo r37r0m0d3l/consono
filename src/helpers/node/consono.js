@@ -1,8 +1,8 @@
-import Consono from "../../core/browser/consono.mjs";
-import cliExit from "../../utils/cliExit.mjs";
-import cliPrint from "../../utils/browser/cliPrint.mjs";
-import processExit from "../../utils/processExit.mjs";
-import { THEME_DEFAULT } from "../../const/theme_default.mjs";
+import Consono from "../../core/node/consono.js";
+import cliExit from "../../utils/cliExit.js";
+import cliPrint from "../../utils/node/cliPrint.js";
+import processExit from "../../utils/processExit.js";
+import { THEME_DEFAULT } from "../../const/theme_default.js";
 
 /**
  * @name consono
@@ -20,9 +20,9 @@ export default function consono(variable, options = true, theme = THEME_DEFAULT)
       cliExit();
     }
     if (createdOptions.immediate) {
-      setTimeout(() => cliPrint(instance.toPrintable(variable) /*, createdOptions.stdout*/), 0);
+      setTimeout(() => cliPrint(instance.toPrintable(variable), createdOptions.stdout), 0);
     } else {
-      cliPrint(instance.toPrintable(variable) /*, createdOptions.stdout*/);
+      cliPrint(instance.toPrintable(variable), createdOptions.stdout);
     }
     processExit(createdOptions.exit);
   }

@@ -1,4 +1,4 @@
-import prototypeName from "./prototypeName.mjs";
+import prototypeName from "./prototypeName.js";
 
 export default function objectType(value) {
   const type = prototypeName(value).toLowerCase().split("[object ").pop().split("]").shift();

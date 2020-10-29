@@ -1,8 +1,8 @@
-import Consono from "../../core/node/consono.mjs";
-import cliExit from "../../utils/cliExit.mjs";
-import cliPrint from "../../utils/node/cliPrint.mjs";
-import processExit from "../../utils/processExit.mjs";
-import { THEME_DEFAULT } from "../../const/theme_default.mjs";
+import Consono from "../../core/node/consono.js";
+import cliExit from "../../utils/cliExit.js";
+import cliPrint from "../../utils/node/cliPrint.js";
+import processExit from "../../utils/processExit.js";
+import { THEME_DEFAULT } from "../../const/theme_default.js";
 
 /**
  * @name consonoReturn

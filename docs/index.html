@@ -2,16 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <title>Consono - The most correct, informative, appealing and configurable variable inspector for JavaScript</title>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta
-      name="description"
-      content="The most correct, informative, appealing and configurable variable inspector for JavaScript"
-    />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
+
+    <meta name="description" content="The most correct, informative, appealing and configurable variable inspector for JavaScript" />
+    <meta name="msapplication-TileColor" content="#ffff33" />
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffff33" />
+    <meta name="title" content="Consono - variable inspector for JavaScript">
+    <meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1,maximum-scale=5,minimum-scale=1" />
+
+    <meta property="og:description" content="Syntactic sugar for asynchronous functions, promises, generators.">
+    <meta property="og:image" content="https://of.js.org/images/of.png">
+    <meta property="og:image:alt" content="OF.JS.ORG">
+    <meta property="og:image:height" content="504">
+    <meta property="og:image:secure_url" content="https://of.js.org/images/of.png" />
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="968">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:site_name" content="OF.JS.ORG">
+    <meta property="og:title" content="OF - Promise wrapper with sugar">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://of.js.org/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@r37r0m0d3l">
+    <meta name="twitter:description" content="Syntactic sugar for asynchronous functions, promises, generators.">
+    <meta name="twitter:domain" content="of.js.org">
+    <meta name="twitter:image" content="https://of.js.org/images/of.png">
+    <meta name="twitter:site" content="@r37r0m0d3l">
+    <meta name="twitter:title" content="OF - Promise wrapper with sugar">
+    <meta name="twitter:url" content="https://of.js.org/">
+
     <link rel="shortcut icon" href="/icons/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/icons/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png" />
@@ -28,17 +52,35 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
     <link rel="manifest" href="/manifest.json" />
-    <meta name="msapplication-TileColor" content="#ffff33" />
-    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png" />
-    <meta name="theme-color" content="#ffff33" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" />
     <style>
+      @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,700&display=swap&subset=cyrillic,cyrillic-ext,latin-ext');
       :root {
         --base-font-size: 18px;
-        --base-line-height: 1.05;
+        --base-line-height: 1.25;
         --content-max-width: 90%;
         --sidebar-nav-link-border-color--active: #000;
         --sidebar-nav-link-color--active: #000;
+        --sidebar-nav-link-font-weight: normal;
+      }
+      *,
+      body * {
+        /*letter-spacing: .05rem;*/
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+      }
+      @font-face {
+        font-display: swap;
+        font-family: system;
+        src: local('.SFNSText-Light'), local('.HelveticaNeueDeskInterface-Light'),
+        local('.LucidaGrandeUI'), local('Ubuntu Light'), local('Segoe UI Light'),
+        local('Roboto-Light'), local('DroidSans'), local('Tahoma');
+      }
+      *,
+      body,
+      body * {
+        font-family: 'Source Code Pro', 'system', monospace !important;
       }
     </style>
   </head>

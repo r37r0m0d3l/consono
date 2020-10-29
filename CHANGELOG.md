@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.5
+
+-   🐛️ Safe text coloring on all cli types.
+
 ## 1.4.4
 
 -   ✅️ Update ES modules definition.

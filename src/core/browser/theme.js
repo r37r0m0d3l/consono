@@ -1,4 +1,4 @@
-import { THEME_DEFAULT } from "../../const/theme_default.mjs";
+import { THEME_DEFAULT } from "../../const/theme_default.js";
 
 const Reset = "\x1b[0m";
 

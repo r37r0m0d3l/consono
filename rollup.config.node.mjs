@@ -4,7 +4,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 
-const INPUT_NAME = "index.node.mjs";
+const INPUT_NAME = "index.node.js";
 const OUTPUT_NAME = "consono";
 
 export default {

@@ -1,5 +1,5 @@
-import TAG from "../const/tag.mjs";
-import prototypeName from "./prototypeName.mjs";
+import TAG from "../const/tag.js";
+import prototypeName from "./prototypeName.js";
 
 export default function objectDeCycle(object) {
   const objects = [];

@@ -1,8 +1,8 @@
-import * as chalk from "chalk";
+import chalk from "chalk";
 
-import THEME_DARK from "../../const/theme_dark.mjs";
-import THEME_LIGHT from "../../const/theme_light.mjs";
-import { THEME_DEFAULT } from "../../const/theme_default.mjs";
+import THEME_DARK from "../../const/theme_dark.js";
+import THEME_LIGHT from "../../const/theme_light.js";
+import { THEME_DEFAULT } from "../../const/theme_default.js";
 
 export default class Theme {
   /**
@@ -48,6 +48,11 @@ export default class Theme {
     red = Theme.toRGB(red);
     green = Theme.toRGB(green);
     blue = Theme.toRGB(blue);
-    return (value) => this.cli.rgb(red, green, blue)(value.toString());
+    return (value) => {
+      if (!this.cli || !this.cli.rgb) {
+        return value.toString();
+      }
+      return this.cli.rgb(red, green, blue)(value.toString());
+    };
   }
 }
