@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.6
+
+-   📚 Documentation updated.
+
 ## 1.4.5
 
 -   🐛️ Safe text coloring on all cli types.
