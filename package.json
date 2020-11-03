@@ -105,5 +105,5 @@
   },
   "type": "module",
   "types": "./dist/consono.d.ts",
-  "version": "1.4.6"
+  "version": "1.4.7"
 }

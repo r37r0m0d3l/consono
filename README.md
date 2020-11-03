@@ -42,37 +42,19 @@ Motivation and differences from other libraries.
 
 ## 🧬 Examples
 
-<table><thead><tr><td width="33%">
-
 ```javascript
 consono(undefined);
 consono(null);
 ```
 
-</td><td width="67%">
-
-![Nil](/docs/img/light/001.png?raw=true "Nil")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![Nil](docs/img/light/001.png?raw=true "Nil")
 
 ```javascript
 consono(true);
 consono(false);
 ```
 
-</td><td width="67%">
-
-![Boolean](/docs/img/light/002.png?raw=true "Boolean")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![Boolean](docs/img/light/002.png?raw=true "Boolean")
 
 ```javascript
 consono(Infinity);
@@ -83,59 +65,27 @@ consono(1.5);
 consono(BigInt(9007199254740991));
 ```
 
-</td><td width="67%">
-
-![Number](/docs/img/light/003.png?raw=true "Number")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="100%">
+![Number](docs/img/light/003.png?raw=true "Number")
 
 ```javascript
 consono(new Date());
 ```
 
-</td></tr><tr><td width="100%">
-
-![Date](/docs/img/light/004.png?raw=true "Date")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="100%">
+![Date](docs/img/light/004.png?raw=true "Date")
 
 ```javascript
 consono("Hello, world 😀😁😂🤣😃😄😅😆😉😊", { stringMaxLength: 17 });
 consono(Symbol("🌈"));
 ```
 
-</td></tr><tr><td width="100%">
-
-![String](/docs/img/light/005.png?raw=true "String")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![String](docs/img/light/005.png?raw=true "String")
 
 ```javascript
 consono(/[0-9]+/);
 consono(/\w+/giu);
 ```
 
-</td><td width="67%">
-
-![RegExp](/docs/img/light/006.png?raw=true "RegExp")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![RegExp](docs/img/light/006.png?raw=true "RegExp")
 
 ```javascript
 consono(function() {});
@@ -143,15 +93,7 @@ consono(function helloWorld() {});
 consono(() => {});
 ```
 
-</td><td width="67%">
-
-![Function](/docs/img/light/007.png?raw=true "Function")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![Function](docs/img/light/007.png?raw=true "Function")
 
 ```javascript
 consono(new Promise(() => {}));
@@ -160,75 +102,30 @@ consono(async () => {});
 consono(function* gen() { yield 1; });
 ```
 
-</td><td width="67%">
-
-![Async](/docs/img/light/008.png?raw=true "Async")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![Async](docs/img/light/008.png?raw=true "Async")
 
 ```javascript
 consono([1, 2, 3]);
 consono(Int8Array.from([1, 2, 3]));
 ```
 
-</td><td width="67%">
-
-![Array](/docs/img/light/009.png?raw=true "Array")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![Array](docs/img/light/009.png?raw=true "Array")
 
 ```javascript
 consono(new ArrayBuffer(8));
 consono(new SharedArrayBuffer(16));
 ```
 
-</td><td width="67%">
-
-![Array Buffer](/docs/img/light/010.png?raw=true "Array Buffer")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![Array Buffer](docs/img/light/010.png?raw=true "Array Buffer")
 
 ```javascript
 consono(new Set(["a", true, { prop: 1 }]));
+consono(new Map([["first", "a"], [true, "b"]]));
+consono(new WeakMap());
 consono(new WeakSet());
 ```
 
-</td><td width="67%">
-
-![Set](/docs/img/light/set.png?raw=true "Set")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
-
-```javascript
-consono(new Map([["first", "a"], [true, "b"]]));
-consono(new WeakMap());
-```
-
-</td><td width="67%">
-
-![Map](/docs/img/light/map.png?raw=true "Map")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![Collection](docs/img/light/011.png?raw=true "Collection")
 
 ```javascript
 consono({});
@@ -237,15 +134,7 @@ class MyClass {} const myClass = new MyClass(); myClass.deeper = new
 MyClass(); consono(myClass);
 ```
 
-</td><td width="67%">
-
-![Object](/docs/img/light/012.png?raw=true "Object")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![Object](docs/img/light/012.png?raw=true "Object")
 
 ```javascript
 consono(new Error("Standard error"));
@@ -256,41 +145,19 @@ consono(new SyntaxError("Not a source code"));
 consono(new TypeError("Value is not of the expected type"));
 ```
 
-</td><td width="67%">
-
-![Error](/docs/img/light/013.png?raw=true "Error")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="33%">
+![Error](docs/img/light/013.png?raw=true "Error")
 
 ```javascript
 (function(a, b) { consono(arguments); })(true, false);
 ```
 
-</td><td width="67%">
-
-![Arguments](/docs/img/light/014.png?raw=true "Arguments")
-
-</td></tr></thead><tbody></table>
-
----
-
-<table><thead><tr><td width="100%">
+![Arguments](docs/img/light/014.png?raw=true "Arguments")
 
 ```javascript
 consono(global || globalThis, { objectMaxProps: 3 });
 ```
 
-</td></tr><tr><td width="100%">
-
-![Global](/docs/img/light/015.png?raw=true "Global")
-
-</td></tr></thead><tbody></table>
-
----
+![Global](docs/img/light/015.png?raw=true "Global")
 
 ## 📦 Installation
 

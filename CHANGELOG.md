@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.7
+
+-   📚 Documentation updated.
+
 ## 1.4.6
 
 -   📚 Documentation updated.
