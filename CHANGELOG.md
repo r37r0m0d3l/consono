@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.8
+
+-   🐛 Fix NodeJS 8 and Internet Explorer 11 support. They are not supported, but the bug has been fixed.
+
 ## 1.4.7
 
 -   📚 Documentation updated.

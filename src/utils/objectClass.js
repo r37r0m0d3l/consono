@@ -1,3 +1,6 @@
 export default function objectClass(value) {
-  return value.constructor.name;
+  if (value && "constructor" in value && "name" in value.constructor) {
+    return value.constructor.name;
+  }
+  return "";
 }
