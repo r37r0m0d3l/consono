@@ -39,7 +39,7 @@
     "rollup-plugin-terser": "7.0.2"
   },
   "engines": {
-    "node": ">=12.9.0"
+    "node": ">=8.0.0"
   },
   "engineStrict": true,
   "exports": {
@@ -105,5 +105,5 @@
   },
   "type": "module",
   "types": "./dist/consono.d.ts",
-  "version": "1.4.8"
+  "version": "1.4.9"
 }

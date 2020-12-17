@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.9
+
+-   ⬇️ The minimum required Node JS version is now 8.0.0.
+
 ## 1.4.8
 
 -   🐛 Fix NodeJS 8 and Internet Explorer 11 support. They are not supported, but the bug has been fixed.
