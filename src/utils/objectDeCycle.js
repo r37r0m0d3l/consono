@@ -1,6 +1,17 @@
 import TAG from "../const/tag.js";
 import prototypeName from "./prototypeName.js";
 
+function looseClone(object) {
+  if (object == null || typeof object !== "object") {
+    return object;
+  }
+  const inExactInstance = new object.constructor();
+  for (let key in object) {
+    inExactInstance[key] = looseClone(object[key]);
+  }
+  return inExactInstance;
+}
+
 export default function objectDeCycle(object) {
   const objects = [];
   const paths = [];
@@ -30,7 +41,11 @@ export default function objectDeCycle(object) {
           newIterable[index] = deReCycle(value[index], `${path}["${index}"]`);
         }
       } else {
-        newIterable = Object.create(object);
+        if (Object.isFrozen(object)) {
+          newIterable = looseClone(object);
+        } else {
+          newIterable = Object.create(object);
+        }
         for (name in value) {
           if (Object.prototype.hasOwnProperty.call(value, name)) {
             newIterable[name] = deReCycle(value[name], `${path}[${JSON.stringify(name)}]`);

@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.10
+
+-   ⬇️ Fixed exception with frozen object
+
 ## 1.4.9
 
 -   ⬇️ The minimum required Node JS version is now 8.0.0.
