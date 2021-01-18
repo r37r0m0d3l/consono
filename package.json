@@ -19,7 +19,7 @@
     "@babel/plugin-proposal-private-methods": "7.12.1",
     "@babel/preset-env": "7.12.11",
     "@rollup/plugin-commonjs": "17.0.0",
-    "@rollup/plugin-node-resolve": "11.0.1",
+    "@rollup/plugin-node-resolve": "11.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "eslint": "7.17.0",
