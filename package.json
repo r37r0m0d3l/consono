@@ -17,7 +17,7 @@
     "@babel/core": "7.12.10",
     "@babel/plugin-proposal-class-properties": "7.12.1",
     "@babel/plugin-proposal-private-methods": "7.12.1",
-    "@babel/preset-env": "7.12.11",
+    "@babel/preset-env": "7.13.0",
     "@rollup/plugin-commonjs": "17.0.0",
     "@rollup/plugin-node-resolve": "11.0.1",
     "babel-core": "7.0.0-bridge.0",
