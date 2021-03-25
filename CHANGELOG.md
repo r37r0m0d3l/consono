@@ -2,6 +2,14 @@
 
 ---
 
+## 1.4.11
+
+-   ➕ Added shortcuts `consonoJSON`.
+
+-   ✅️ Update ES modules definition.
+
+-   ⬆️ Dev dependencies updated.
+
 ## 1.4.10
 
 -   ⬇️ Fixed exception with frozen object

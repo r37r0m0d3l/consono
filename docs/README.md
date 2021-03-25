@@ -303,19 +303,19 @@ yarn add consono
 The default is a function for printing variable.
 
 ```javascript
-const { consono } = require("consono");
+import { consono } from "consono";
 ```
 
 Require multiple items: function, constructor, options object, theme objects.
 
 ```javascript
-const {
+import {
   Consono,
   consono,
   options,
   THEME_DARK,
   THEME_LIGHT,
-} = require("consono");
+} from "consono";
 ```
 
 Import as ECMAScript module.
@@ -335,7 +335,7 @@ UNPKG CDN.
 ## ⚙️ Options
 
 ```javascript
-const { Consono } = require("consono");
+import { Consono } from "consono";
 const options = {
   clear: true,
   quotesEnd: `”`,
@@ -350,7 +350,7 @@ consono.log("Cleared before output. Different quotes. And cut to 54!");
 ```
 
 ```javascript
-const { Consono } = require("consono");
+import { Consono } from "consono";
 const theme = {
   argument: [253, 151, 31],
   boolean: [174, 129, 255],
@@ -367,14 +367,14 @@ consono.log("Themed");
 ```
 
 ```javascript
-const { Consono, options } = require("consono");
+import { Consono, options } from "consono";
 options.colorize = false;
 const consono = new Consono(options);
 consono.log("Text without colorization");
 ```
 
 ```javascript
-const { consono } = require("consono");
+import { consono } from "consono";
 console.debug(
   consono("Outputs a message only at the debug log level.", false)
 );
@@ -390,7 +390,7 @@ consono("This is log function with your own options");
 ## 🔖 Log function
 
 ```javascript
-const { consono } = require("consono");
+import { consono } from "consono";
 const map = new Map();
 map.add("key", true);
 consono(map);
@@ -453,6 +453,7 @@ consono("Some variable", defaultOptions);
 
 ```javascript
 consonoExit("Some value", null, null, 15); // Exit code - 15
+consonoJSON("Some value"); // No colorization, no description, only printing
 consonoPlain("Some value"); // No colorization
 consonoReturn("Some value"); // Return only, no `console.log`
 ```

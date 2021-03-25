@@ -1,20 +1,109 @@
+/**
+ * @typedef IConsonoOptions
+ * @type {object}
+ * @property {number} [arrayMaxElements=99] Maximum number of elements in array to show.
+ * @property {string} [assignSymbol='→'] Assign symbol.
+ * @property {boolean} [clear=false] Clear console before output.
+ * @property {boolean} [colorize=true] Colorize the output.
+ * @property {boolean} [console=true] Output to console.
+ * @property {number} [depth=20] Default depth of object.
+ * @property {boolean|number} [exit=false] Number greater than zero - exit status with passed error code. 'false' - do nothing. 'true' - exit status ok.
+ * @property {boolean} [immediate=false] Call console.log immediately.
+ * @property {string} [indent='ˑˑ'] Print indentation.
+ * @property {number} [mapMaxEntries=99] Maximum number of entries in map to show.
+ * @property {number} [objectMaxProps=99] Maximum number of properties in object to show.
+ * @property {string} [quotesEnd='"'] Quote end.
+ * @property {string} [quotesStart='"'] Quote start.
+ * @property {boolean} [returns=true] Return inspected variable as string.
+ * @property {number} [setMaxValues=99] Maximum number of values in set to show.
+ * @property {boolean} [stdout=false] Call `process.stdout.write` instead of `console.log`.
+ * @property {number} [stringMaxLength=360] Maximum length of string to show.
+ */
 export interface IConsonoOptions {
+  /**
+   * @description Maximum number of elements in array to show.
+   * @default 99
+   */
   arrayMaxElements?: number;
+  /**
+   * @description Assign symbol.
+   * @default "→"
+   */
   assignSymbol?: string;
+  /**
+   * @description Clear console before output.
+   * @default false
+   */
   clear?: boolean;
+  /**
+   * @description Colorize the output.
+   * @default true
+   */
   colorize?: boolean;
+  /**
+   * @description Output to console.
+   * @default true
+   */
   console?: boolean;
+  /**
+   * @description Default depth of object.
+   * @default 20
+   */
   depth?: number;
+  /**
+   * @description Number greater than zero - exit status with passed error code. 'false' - do nothing. 'true' - exit status ok.
+   * @default false
+   */
   exit?: boolean | number;
+  /**
+   * @description Call console.log immediately.
+   * @default false
+   */
   immediate?: boolean;
+  /**
+   * @description Print indentation.
+   * @default "ˑˑ"
+   */
   indent?: string;
+  /**
+   * @description Maximum number of entries in map to show.
+   * @default 99
+   */
   mapMaxEntries?: number;
+  /**
+   * @description Maximum number of properties in object to show.
+   * @default 99
+   */
   objectMaxProps?: number;
+  /**
+   * @description Quote end.
+   * @default `"`
+   */
   quotesEnd?: string;
+  /**
+   * @description Quote start.
+   * @default `"`
+   */
   quotesStart?: string;
+  /**
+   * @description Return inspected variable as string.
+   * @default true
+   */
   returns?: boolean;
+  /**
+   * @description Maximum number of values in set to show.
+   * @default 99
+   */
   setMaxValues?: number;
+  /**
+   * @description Call `process.stdout.write` instead of `console.log`.
+   * @default false
+   */
   stdout?: boolean;
+  /**
+   * @description Maximum length of string to show.
+   * @default 360
+   */
   stringMaxLength?: number;
 }
 
@@ -61,6 +150,15 @@ export declare function consonoExit(
   theme?: "dark" | "light" | IConsonoTheme,
   exitCode?: boolean | number,
 ): string | void;
+
+/**
+ * @name consonoJSON
+ * @description Print variable as JSON without highlighting
+ * @param {*} variable
+ * @param {boolean|Object} [options=true]
+ * @returns {string|undefined}
+ */
+export declare function consonoJSON(variable: any, options?: boolean | IConsonoOptions): string | void;
 
 /**
  * @name consonoPlain
