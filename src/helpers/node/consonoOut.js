@@ -3,14 +3,14 @@ import cliExit from "../../utils/cliExit.js";
 import processExit from "../../utils/processExit.js";
 
 /**
- * @name consonoJSON
- * @description Print variable as JSON without highlighting. Uses `console.dir`.
+ * @name consonoOut
+ * @description Print variable as JSON without highlighting. Uses `process.stdout.write`.
  * @param {*} variable
  * @param {boolean|Object} [options=true]
  * @returns {string|undefined}
- * @since 1.4.11
+ * @since 1.4.12
  */
-export default function consonoJSON(variable, options = true) {
+export default function consonoOut(variable, options) {
   let out;
   if (variable === undefined) {
     out = undefined;
@@ -25,17 +25,19 @@ export default function consonoJSON(variable, options = true) {
     if (createdOptions.immediate) {
       setTimeout(() => {
         if (out === undefined) {
-          console.dir(undefined);
+          process.stdout.write(undefined);
         } else {
-          console.dir(out);
+          process.stdout.write(out);
         }
+        process.stdout.write("\n");
       }, 0);
     } else {
       if (out === undefined) {
-        console.dir(undefined);
+        process.stdout.write(undefined);
       } else {
-        console.dir(out);
+        process.stdout.write(out);
       }
+      process.stdout.write("\n");
     }
     processExit(createdOptions.exit);
   }

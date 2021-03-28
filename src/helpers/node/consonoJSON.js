@@ -4,10 +4,11 @@ import processExit from "../../utils/processExit.js";
 
 /**
  * @name consonoJSON
- * @description Print variable as JSON without highlighting
+ * @description Print variable as JSON without highlighting. Uses `console.dir`.
  * @param {*} variable
  * @param {boolean|Object} [options=true]
  * @returns {string|undefined}
+ * @since 1.4.11
  */
 export default function consonoJSON(variable, options) {
   let out;
@@ -16,7 +17,7 @@ export default function consonoJSON(variable, options) {
   } else {
     out = JSON.parse(JSON.stringify(variable), null, 2);
   }
-  const createdOptions = Consono.createOptions({ ...options, colorize: false });
+  const createdOptions = Consono.createOptions({ ...options });
   if (createdOptions.console) {
     if (createdOptions.clear) {
       cliExit();

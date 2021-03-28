@@ -4,8 +4,9 @@ import THEME_LIGHT from "./const/theme_light.js";
 import consono from "./helpers/node/consono.js";
 import consonoExit from "./helpers/node/consonoExit.js";
 import consonoJSON from "./helpers/node/consonoJSON.js";
+import consonoOut from "./helpers/node/consonoOut.js";
 import consonoPlain from "./helpers/node/consonoPlain.js";
 import consonoReturn from "./helpers/node/consonoReturn.js";
 import options from "./const/options_default.js";
 
-export { Consono, THEME_DARK, THEME_LIGHT, consono, consonoExit, consonoJSON, consonoPlain, consonoReturn, options };
+export { Consono, THEME_DARK, THEME_LIGHT, consono, consonoExit, consonoJSON, consonoOut, consonoPlain, consonoReturn, options };

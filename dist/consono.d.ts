@@ -153,12 +153,23 @@ export declare function consonoExit(
 
 /**
  * @name consonoJSON
- * @description Print variable as JSON without highlighting
+ * @description Print variable as JSON without highlighting. Uses `console.dir`.
  * @param {*} variable
  * @param {boolean|Object} [options=true]
  * @returns {string|undefined}
+ * @since 1.4.11
  */
 export declare function consonoJSON(variable: any, options?: boolean | IConsonoOptions): string | void;
+
+/**
+ * @name consonoOut
+ * @description Print variable as JSON without highlighting. Uses `process.stdout.write`.
+ * @param {*} variable
+ * @param {boolean|Object} [options=true]
+ * @returns {string|undefined}
+ * @since 1.4.12
+ */
+export declare function consonoOut(variable: any, options?: boolean | IConsonoOptions): string | void;
 
 /**
  * @name consonoPlain

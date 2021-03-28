@@ -453,7 +453,8 @@ consono("Some variable", defaultOptions);
 
 ```javascript
 consonoExit("Some value", null, null, 15); // Exit code - 15
-consonoJSON("Some value"); // No colorization, no description, only printing
+consonoJSON("Some value"); // // No colorization, no description, only printing with `console.dir`
+consonoOut("Some value"); // No colorization, no description, only printing with `process.stdout.write`
 consonoPlain("Some value"); // No colorization
 consonoReturn("Some value"); // Return only, no `console.log`
 ```

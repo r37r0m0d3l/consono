@@ -2,6 +2,14 @@
 
 ---
 
+## 1.4.12
+
+-   ➕ Added shortcut `consonoOut`.
+
+-   ✅️ Update ES modules definition.
+
+-   ⬆️ Dev dependencies updated.
+
 ## 1.4.11
 
 -   ➕ Added shortcuts `consonoJSON`.
