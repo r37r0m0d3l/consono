@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.13
+
+-   🔨 Pretty print for `consonoOut`.
+
 ## 1.4.12
 
 -   ➕ Added shortcut `consonoOut`.

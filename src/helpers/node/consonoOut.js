@@ -15,7 +15,7 @@ export default function consonoOut(variable, options) {
   if (variable === undefined) {
     out = undefined;
   } else {
-    out = JSON.parse(JSON.stringify(variable), null, 2);
+    out = JSON.stringify(JSON.parse(JSON.stringify(variable)), null, 2);
   }
   const createdOptions = Consono.createOptions({ ...options });
   if (createdOptions.console) {

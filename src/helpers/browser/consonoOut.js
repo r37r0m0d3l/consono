@@ -15,7 +15,7 @@ export default function consonoOut(variable, options) {
   if (variable === undefined) {
     out = undefined;
   } else {
-    out = JSON.parse(JSON.stringify(variable), null, 2);
+    out = JSON.stringify(JSON.parse(JSON.stringify(variable)), null, 2);
   }
   const createdOptions = Consono.createOptions({ ...options });
   if (createdOptions.console) {
@@ -25,19 +25,17 @@ export default function consonoOut(variable, options) {
     if (createdOptions.immediate) {
       setTimeout(() => {
         if (out === undefined) {
-          process.stdout.write(undefined);
+          console.log(undefined);
         } else {
-          process.stdout.write(out);
+          console.log(out);
         }
-        process.stdout.write("\n");
       }, 0);
     } else {
       if (out === undefined) {
-        process.stdout.write(undefined);
+        console.log(undefined);
       } else {
-        process.stdout.write(out);
+        console.log(out);
       }
-      process.stdout.write("\n");
     }
     processExit(createdOptions.exit);
   }
