@@ -171,10 +171,15 @@ export declare function consonoJSON(
  * @description Print variable as JSON without highlighting. Uses `process.stdout.write`.
  * @param {*} variable
  * @param {boolean|Object} [options=true]
+ * @param {boolean} [sortKeys=true]
  * @returns {string|undefined}
  * @since 1.4.12
  */
-export declare function consonoOut(variable: any, options?: boolean | IConsonoOptions): string | void;
+export declare function consonoOut(
+  variable: any,
+  options?: boolean | IConsonoOptions,
+  sortKeys?: boolean,
+): string | void;
 
 /**
  * @name consonoPlain

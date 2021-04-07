@@ -8,7 +8,7 @@ export default function objectKeysSort(instance, isDeep = true) {
   if (!instance || typeof instance !== "object" || Array.isArray(instance)) {
     return instance;
   }
-  const keys = Object.keys(instance);
+  const keys = Object.keys(instance).sort((alpha, beta) => alpha.localeCompare(beta));
   if (!keys.length) {
     return instance;
   }
