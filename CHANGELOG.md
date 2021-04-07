@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.14
+
+-   🔨 Add sort option for `consonoJSON`.
+
 ## 1.4.13
 
 -   🔨 Pretty print for `consonoOut`.

@@ -156,10 +156,15 @@ export declare function consonoExit(
  * @description Print variable as JSON without highlighting. Uses `console.dir`.
  * @param {*} variable
  * @param {boolean|Object} [options=true]
+ * @param {boolean} [sortKeys=true]
  * @returns {string|undefined}
  * @since 1.4.11
  */
-export declare function consonoJSON(variable: any, options?: boolean | IConsonoOptions): string | void;
+export declare function consonoJSON(
+  variable: any,
+  options?: boolean | IConsonoOptions,
+  sortKeys?: boolean,
+): string | void;
 
 /**
  * @name consonoOut
