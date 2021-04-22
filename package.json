@@ -10,7 +10,7 @@
     }
   ],
   "dependencies": {
-    "chalk": "4.1.0"
+    "chalk": "4.1.1"
   },
   "description": "The most correct, informative, appealing and configurable variable inspector for JavaScript",
   "devDependencies": {
