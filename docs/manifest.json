@@ -1,7 +1,7 @@
 {
   "author": "r37r0m0d3l",
   "default_locale": "en",
-  "description": "Consono - The most correct, informative, appealing and configurable variable inspector for Node",
+  "description": "Consono - The most correct, informative, appealing, and configurable variable inspector for JavaScript.",
   "homepage_url": "https://consono.js.org",
   "icons": [
     {
@@ -48,5 +48,5 @@
     "keyword": "npm"
   },
   "short_name": "Consono",
-  "version": "1.0.210327"
+  "version": "1.4.16"
 }

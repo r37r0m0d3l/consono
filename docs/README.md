@@ -1,6 +1,6 @@
 # 🕵️ Consono 🕵️‍♀️
 
-The most correct, informative, appealing and configurable variable inspector for JavaScript
+The most correct, informative, appealing, and configurable variable inspector for JavaScript.
 
 [![npm](https://badgen.net/npm/v/consono?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/consono)
 [![downloads](https://badgen.net/npm/dt/consono?&icon=terminal&label=downloads&color=009688)](https://github.com/r37r0m0d3l/consono)
@@ -15,26 +15,33 @@ The most correct, informative, appealing and configurable variable inspector for
 
 Motivation and differences from other libraries.
 
--   ☀️ **Light** and 🌑 **dark** themes for terminal output ([prefers-color-scheme: Hello darkness, my old friend](https://web.dev/prefers-color-scheme/)).
+-   ☀️ **Light** and 🌑 **dark** themes for terminal output.
+  -   [prefers-color-scheme: Hello darkness, my old friend](https://web.dev/prefers-color-scheme/)
 -   🎚️ **Configurable coloring** of variables.
--   Can print to terminal or 🌈 **return formatted and colored** string for later use ([How to get result string of console.log in javascript code? You can't.](https://stackoverflow.com/questions/17904957/how-to-get-result-string-of-console-log-in-javascript-code)).
--   🔀 **Turn on/off** output colorization. It even works on Windows - use [Windows Terminal](https://github.com/microsoft/terminal).
+-   Can print to terminal or 🌈 **return formatted and colored** string for later use.
+  -   [How to get result string of console.log in javascript code? You can't.](https://stackoverflow.com/questions/17904957/how-to-get-result-string-of-console-log-in-javascript-code)
+-   🔀 **Turn on/off** output colorization.
+  -   It even works on Windows - use [Windows Terminal](https://github.com/microsoft/terminal).
 -   **Configurable indent** - tabs 🆚 spaces holy war 👼🏻 ⚔️ 🇻🇦.
 -   Availability to set the 🕳️ **depth** for *object* inspection.
 -   Configurable #️⃣ **max items** for *array*, *map*, *object*, *set*.
 -   ✂️**Limit string length** when printing for better readability.
--   Inspect both string 📐 **character count** and 📏 **string length** ([It’s Not Wrong that "🤦🏼‍♂️".length == 7](https://hsivonen.fi/string-length/)).
--   Inspect ➕0️ **positive zeroes** and ➖0️ **negative zeroes** ([JavaScript’s two zeros](https://2ality.com/2012/03/signedzero)).
+-   Inspect both string 📐 **character count** and 📏 **string length**.
+  -   [It’s Not Wrong that "🤦🏼‍♂️".length == 7](https://hsivonen.fi/string-length/).
+-   Inspect ➕0️ **positive zeroes** and ➖0️ **negative zeroes**.
+  -   [JavaScript’s two zeros](https://2ality.com/2012/03/signedzero).
 -   Inspect 🔍 **items count** for collection-like variables *array*, *map*, *object*, *set*.
 -   Actually 🔬 **can inspect** *arguments*, *set* and *map*.
 -   Can print 📛 **function names** or mark them as **anonymous**.
 -   Handles 🔄 **circular references**.
--   Has 📘 **TypeScript** declaration file ([Writing Declaration Files for @types](https://devblogs.microsoft.com/typescript/writing-dts-files-for-types/)).
--   Avoids 🔱😈🔥 **dependency hell** ([Wikipedia article](https://en.wikipedia.org/wiki/Dependency_hell)).
+-   Has 📘 **TypeScript** declaration file.
+  -   [Writing Declaration Files for @types](https://devblogs.microsoft.com/typescript/writing-dts-files-for-types/).
+-   Avoids 🔱😈🔥 **dependency hell**.
+  -   [Wikipedia article](https://en.wikipedia.org/wiki/Dependency_hell).
 -   Can 🧹 **clear terminal** before output.
 -   Can 💥 **exit** Node.js process after output.
 -   Import as 🆕 **ECMAScript module**.
--   And so on and so forth ♾️
+-   And so on and so forth ♾️.
 
 ## 🧬 Examples
 
@@ -291,11 +298,7 @@ consono(global || globalThis, { objectMaxProps: 3 });
 ## 📦 Installation
 
 ```bash
-npm install consono
-```
-
-```bash
-yarn add consono
+npm -s install consono
 ```
 
 ## ⌨️ Include
@@ -306,7 +309,7 @@ The default is a function for printing variable.
 import { consono } from "consono";
 ```
 
-Require multiple items: function, constructor, options object, theme objects.
+Import multiple items: function, constructor, options object, theme objects.
 
 ```javascript
 import {
@@ -316,12 +319,6 @@ import {
   THEME_DARK,
   THEME_LIGHT,
 } from "consono";
-```
-
-Import as ECMAScript module.
-
-```javascript
-import { consono } from "consono";
 ```
 
 UNPKG CDN.
@@ -452,11 +449,16 @@ consono("Some variable", defaultOptions);
 ## 🔮 Shortcuts
 
 ```javascript
-consonoExit("Some value", null, null, 15); // Exit code - 15
-consonoJSON("Some value"); // // No colorization, no description, only printing with `console.dir`
-consonoOut("Some value"); // No colorization, no description, only printing with `process.stdout.write`
-consonoPlain("Some value"); // No colorization
-consonoReturn("Some value"); // Return only, no `console.log`
+// Exit code - 15
+consonoExit("Some value", null, null, 15);
+// No colorization, no description, only printing with `console.dir`
+consonoJSON("Some value");
+// No colorization, no description, only printing with `process.stdout.write`
+consonoOut("Some value");
+// No colorization
+consonoPlain("Some value");
+// Return only, no `console.log`
+consonoReturn("Some value");
 ```
 
 ## 👀 Discover more

@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
 
-    <title>Consono - The most correct, informative, appealing and configurable variable inspector for JavaScript</title>
+    <title>Consono - The most correct, informative, appealing, and configurable variable inspector for JavaScript.</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <meta name="description" content="The most correct, informative, appealing and configurable variable inspector for JavaScript" />
+    <meta name="description" content="The most correct, informative, appealing, and configurable variable inspector for JavaScript." />
     <meta name="msapplication-TileColor" content="#ffff33" />
     <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png" />
     <meta name="theme-color" content="#ffff33" />
@@ -68,6 +68,10 @@
         --sidebar-nav-link-text-decoration-color: #000;
         --sidebar-width: 370px;
       }
+      a,
+      a:visited {
+        color: #000000;
+      }
       *,
       body * {
         /*letter-spacing: .05rem;*/
@@ -95,6 +99,11 @@
         border-style: none;
       }
     </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementsByClassName("github-corner")[0].setAttribute("rel", "noopener");
+      });
+    </script>
   </head>
   <body>
     <div id="app"></div>
@@ -109,7 +118,7 @@
           errorText: "Error",
           successText: "Copied",
         },
-        themeColor: "#000000",
+        themeColor: "#1f282d",
       };
     </script>
     <script src="https://unpkg.com/docsify/lib/docsify.min.js"></script>

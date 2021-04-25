@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.16
+
+-   ⬆️ Dependencies updated.
+
 ## 1.4.15
 
 -   🔨 Add sort option for `consonoOut`.
