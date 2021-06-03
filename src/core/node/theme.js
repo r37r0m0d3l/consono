@@ -49,10 +49,19 @@ export default class Theme {
     green = Theme.toRGB(green);
     blue = Theme.toRGB(blue);
     return (value) => {
-      if (!this.cli || !this.cli.rgb) {
+      if (this.cli && this.cli.rgb) {
+        try {
+          return this.cli.rgb(red, green, blue)(value.toString());
+        } catch (_error) {
+          return value.toString();
+        }
+      } else {
         return value.toString();
       }
-      return this.cli.rgb(red, green, blue)(value.toString());
+      // if (!this.cli || !this.cli.rgb) {
+      //   return value.toString();
+      // }
+      // return this.cli.rgb(red, green, blue)(value.toString());
     };
   }
 }

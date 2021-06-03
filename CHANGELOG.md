@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.17
+
+-   🐛 Fix NodeJS throwing exception when is not possible to print colored output.
+
 ## 1.4.16
 
 -   ⬆️ Dependencies updated.
