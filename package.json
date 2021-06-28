@@ -29,7 +29,7 @@
     "eslint-plugin-prettier": "3.4.0",
     "jest": "27.0.3",
     "npm-check": "5.9.2",
-    "prettier": "2.3.0",
+    "prettier": "2.3.2",
     "remark-cli": "9.0.0",
     "remark-lint": "8.0.0",
     "remark-preset-lint-consistent": "4.0.0",
