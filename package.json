@@ -24,7 +24,7 @@
     "babel-eslint": "10.1.0",
     "docsify": "4.12.1",
     "docsify-cli": "4.4.3",
-    "eslint": "7.27.0",
+    "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.0",
     "jest": "27.0.3",
