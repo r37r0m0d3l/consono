@@ -22,7 +22,7 @@
     "@rollup/plugin-node-resolve": "13.0.4",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
-    "docsify": "4.12.1",
+    "docsify": "4.12.2",
     "docsify-cli": "4.4.3",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
